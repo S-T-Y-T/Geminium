@@ -1,0 +1,13 @@
+{
+  "name": "geminium-docs",
+  "private": true,
+  "description": "Генератор дизайн-документа Geminium (схемы SVG→PNG и DOCX)",
+  "scripts": {
+    "diagrams": "node diagrams.js",
+    "build": "node diagrams.js && node build.js"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "docx": "9.15.0"
+  }
+}
