@@ -22,6 +22,7 @@ namespace Geminium.Core.Data
         public CalendarSettings Calendar { get; }
         public WorkScheduleSettings DefaultWorkSchedule { get; }
         public TimePacingSettings Pacing { get; }
+        public long StartingCash { get; }
 
         public DataCatalog(GameData data)
         {
@@ -40,6 +41,7 @@ namespace Geminium.Core.Data
             Calendar = data.Calendar;
             DefaultWorkSchedule = data.DefaultWorkSchedule;
             Pacing = data.Pacing;
+            StartingCash = data.StartingCash;
         }
 
         public MaterialDef Material(string id) => Find(materials, id, "сырья");

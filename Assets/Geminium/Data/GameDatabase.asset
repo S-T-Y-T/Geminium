@@ -334,3 +334,4 @@ MonoBehaviour:
       NonWorkingSpeedup: 60
       MaxTicksPerAdvance: 20000
       AutoPauseAtMonthEnd: 1
+    StartingCash: 80000000

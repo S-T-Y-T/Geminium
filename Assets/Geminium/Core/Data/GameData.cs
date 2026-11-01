@@ -17,5 +17,8 @@ namespace Geminium.Core.Data
         public CalendarSettings Calendar = new CalendarSettings();
         public WorkScheduleSettings DefaultWorkSchedule = new WorkScheduleSettings();
         public TimePacingSettings Pacing = new TimePacingSettings();
+
+        // Стартовый капитал каждой компании, сумы (GDD 4.2: минимальная линия на один продукт + 3 месяца зарплат).
+        public long StartingCash = 80000000;
     }
 }

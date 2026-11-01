@@ -104,6 +104,8 @@ namespace Geminium.Core.Data
                 catch (ArgumentException e) { errors.Add("График работы: " + e.Message); }
             }
 
+            if (data.StartingCash <= 0) errors.Add("Стартовый капитал должен быть больше нуля.");
+
             if (data.Pacing == null) errors.Add("Не заданы параметры темпа игры.");
             else if (data.Pacing.SecondsPerShiftAtX1 <= 0 || data.Pacing.NonWorkingSpeedup < 1 || data.Pacing.MaxTicksPerAdvance < 1)
                 errors.Add("Темп игры: неверные параметры.");
