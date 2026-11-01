@@ -16,6 +16,14 @@
 - `Docs/src/README.md` — как обновить GDD (DOCX + PDF). Изменил решение — обнови `build.js` и перегенерируй документ.
 - `simdocs/Модель симулятор.docx` — исходное ТЗ автора. Остальные файлы в `simdocs/` — снимки веб-тренажёра «Lean», это только референс механик цеха.
 
+## Проверка
+
+- Unity: `C:/Program Files/Unity/Hub/Editor/6000.6.0f1/Editor/Unity.exe`. Запуск без окна работает, только когда редактор автора закрыт (нет `Temp/UnityLockfile`).
+- Тесты: `-batchmode -nographics -projectPath <проект> -runTests -testPlatform EditMode -testResults <файл.xml>`. Прогоняй после каждого изменения кода.
+- Прогон Лаборатории: `-executeMethod Geminium.EditorTools.GeminiumTools.RunLabFromCommandLine -geminiumMonths 36 -geminiumOut <файл.csv> -quit`.
+- Новое поле данных: добавь его в C# со значением по умолчанию и в `Assets/Geminium/Data/GameDatabase.asset`, иначе число останется только в коде.
+- Сторонние пакеты с GitHub автозащита запускать не даёт — ставь их вместе с автором в его редакторе.
+
 ## Правила архитектуры
 
 - Ядро симуляции — чистый C# в asmdef с `noEngineReferences`. Оно запускается без графики для Лаборатории сценариев и обучения ботов.
