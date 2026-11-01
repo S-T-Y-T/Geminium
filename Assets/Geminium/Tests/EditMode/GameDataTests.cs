@@ -68,7 +68,7 @@ namespace Geminium.Tests.EditMode
         public void OperatorIsRequiredOnlyForUnlockedProducts()
         {
             var data = ValidData();
-            data.Professions.Clear();
+            data.Professions.RemoveAll(p => p.Id == "cutter");
             AssertHasError(data, "нет профессии, которая работает в зоне Cutting");
 
             data.Products[0].UnlockedByDefault = false;

@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b59034a20f4feb9d280438e70edec7c0, type: 3}
   m_Name: GameDatabase
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Data:
     Materials:
     - Id: cotton
@@ -21,6 +21,7 @@ MonoBehaviour:
       BasePrice: 25000
       Volatility: 0.1
       UnitsPerCell: 200
+      MarketSupplyPerMonth: 20000
     - Id: polyester
       Group: 0
       Unit: 0
@@ -28,6 +29,7 @@ MonoBehaviour:
       BasePrice: 18000
       Volatility: 0.1
       UnitsPerCell: 200
+      MarketSupplyPerMonth: 15000
     - Id: eva_foam
       Group: 1
       Unit: 0
@@ -35,6 +37,7 @@ MonoBehaviour:
       BasePrice: 60000
       Volatility: 0.15
       UnitsPerCell: 40
+      MarketSupplyPerMonth: 3000
     - Id: pu_foam
       Group: 1
       Unit: 0
@@ -42,6 +45,7 @@ MonoBehaviour:
       BasePrice: 75000
       Volatility: 0.15
       UnitsPerCell: 40
+      MarketSupplyPerMonth: 2500
     - Id: eco_leather
       Group: 1
       Unit: 0
@@ -49,6 +53,7 @@ MonoBehaviour:
       BasePrice: 55000
       Volatility: 0.12
       UnitsPerCell: 100
+      MarketSupplyPerMonth: 4000
     - Id: pvc
       Group: 1
       Unit: 0
@@ -56,6 +61,7 @@ MonoBehaviour:
       BasePrice: 30000
       Volatility: 0.12
       UnitsPerCell: 100
+      MarketSupplyPerMonth: 5000
     - Id: velcro
       Group: 2
       Unit: 1
@@ -63,6 +69,7 @@ MonoBehaviour:
       BasePrice: 6000
       Volatility: 0.08
       UnitsPerCell: 500
+      MarketSupplyPerMonth: 20000
     - Id: elastic_band
       Group: 2
       Unit: 1
@@ -70,6 +77,7 @@ MonoBehaviour:
       BasePrice: 4000
       Volatility: 0.08
       UnitsPerCell: 500
+      MarketSupplyPerMonth: 25000
     - Id: reinforced_thread
       Group: 2
       Unit: 2
@@ -77,6 +85,7 @@ MonoBehaviour:
       BasePrice: 15000
       Volatility: 0.08
       UnitsPerCell: 300
+      MarketSupplyPerMonth: 3000
     - Id: sensor_module
       Group: 3
       Unit: 2
@@ -84,6 +93,188 @@ MonoBehaviour:
       BasePrice: 450000
       Volatility: 0.2
       UnitsPerCell: 100
+      MarketSupplyPerMonth: 500
+    Suppliers:
+    - Id: cotton_tashkent
+      MaterialId: cotton
+      Origin: 0
+      PriceDeviation: 0
+      Reliability: 0.92
+      QualityMin: 55
+      QualityMax: 75
+      MinBatch: 50
+      LeadTimeDays: 2
+    - Id: cotton_fergana
+      MaterialId: cotton
+      Origin: 0
+      PriceDeviation: -0.05
+      Reliability: 0.85
+      QualityMin: 45
+      QualityMax: 70
+      MinBatch: 100
+      LeadTimeDays: 3
+    - Id: polyester_local
+      MaterialId: polyester
+      Origin: 0
+      PriceDeviation: 0.05
+      Reliability: 0.88
+      QualityMin: 50
+      QualityMax: 70
+      MinBatch: 50
+      LeadTimeDays: 3
+    - Id: polyester_import
+      MaterialId: polyester
+      Origin: 1
+      PriceDeviation: -0.08
+      Reliability: 0.8
+      QualityMin: 60
+      QualityMax: 85
+      MinBatch: 200
+      LeadTimeDays: 10
+    - Id: eva_import_a
+      MaterialId: eva_foam
+      Origin: 1
+      PriceDeviation: 0
+      Reliability: 0.85
+      QualityMin: 60
+      QualityMax: 85
+      MinBatch: 20
+      LeadTimeDays: 12
+    - Id: eva_import_b
+      MaterialId: eva_foam
+      Origin: 1
+      PriceDeviation: -0.1
+      Reliability: 0.75
+      QualityMin: 45
+      QualityMax: 70
+      MinBatch: 40
+      LeadTimeDays: 15
+    - Id: pu_import_a
+      MaterialId: pu_foam
+      Origin: 1
+      PriceDeviation: 0
+      Reliability: 0.85
+      QualityMin: 60
+      QualityMax: 85
+      MinBatch: 20
+      LeadTimeDays: 12
+    - Id: pu_import_b
+      MaterialId: pu_foam
+      Origin: 1
+      PriceDeviation: 0.08
+      Reliability: 0.92
+      QualityMin: 70
+      QualityMax: 90
+      MinBatch: 10
+      LeadTimeDays: 8
+    - Id: eco_leather_local
+      MaterialId: eco_leather
+      Origin: 0
+      PriceDeviation: 0
+      Reliability: 0.88
+      QualityMin: 50
+      QualityMax: 70
+      MinBatch: 30
+      LeadTimeDays: 3
+    - Id: eco_leather_import
+      MaterialId: eco_leather
+      Origin: 1
+      PriceDeviation: 0.1
+      Reliability: 0.9
+      QualityMin: 70
+      QualityMax: 90
+      MinBatch: 50
+      LeadTimeDays: 10
+    - Id: pvc_local
+      MaterialId: pvc
+      Origin: 0
+      PriceDeviation: 0
+      Reliability: 0.9
+      QualityMin: 50
+      QualityMax: 75
+      MinBatch: 30
+      LeadTimeDays: 2
+    - Id: pvc_import
+      MaterialId: pvc
+      Origin: 1
+      PriceDeviation: -0.05
+      Reliability: 0.8
+      QualityMin: 60
+      QualityMax: 80
+      MinBatch: 100
+      LeadTimeDays: 12
+    - Id: velcro_import
+      MaterialId: velcro
+      Origin: 1
+      PriceDeviation: 0
+      Reliability: 0.88
+      QualityMin: 60
+      QualityMax: 85
+      MinBatch: 100
+      LeadTimeDays: 10
+    - Id: velcro_trader
+      MaterialId: velcro
+      Origin: 0
+      PriceDeviation: 0.12
+      Reliability: 0.95
+      QualityMin: 55
+      QualityMax: 75
+      MinBatch: 50
+      LeadTimeDays: 2
+    - Id: elastic_local
+      MaterialId: elastic_band
+      Origin: 0
+      PriceDeviation: 0
+      Reliability: 0.9
+      QualityMin: 50
+      QualityMax: 75
+      MinBatch: 100
+      LeadTimeDays: 2
+    - Id: elastic_import
+      MaterialId: elastic_band
+      Origin: 1
+      PriceDeviation: -0.05
+      Reliability: 0.82
+      QualityMin: 60
+      QualityMax: 85
+      MinBatch: 300
+      LeadTimeDays: 10
+    - Id: thread_local
+      MaterialId: reinforced_thread
+      Origin: 0
+      PriceDeviation: 0
+      Reliability: 0.92
+      QualityMin: 55
+      QualityMax: 75
+      MinBatch: 10
+      LeadTimeDays: 2
+    - Id: thread_import
+      MaterialId: reinforced_thread
+      Origin: 1
+      PriceDeviation: 0.05
+      Reliability: 0.88
+      QualityMin: 70
+      QualityMax: 90
+      MinBatch: 20
+      LeadTimeDays: 10
+    - Id: sensor_import_a
+      MaterialId: sensor_module
+      Origin: 1
+      PriceDeviation: 0
+      Reliability: 0.85
+      QualityMin: 70
+      QualityMax: 95
+      MinBatch: 5
+      LeadTimeDays: 20
+    - Id: sensor_import_b
+      MaterialId: sensor_module
+      Origin: 1
+      PriceDeviation: -0.1
+      Reliability: 0.75
+      QualityMin: 55
+      QualityMax: 80
+      MinBatch: 10
+      LeadTimeDays: 25
     Machines:
     - Id: cutting_knife_table
       Zone: 1
@@ -321,6 +512,88 @@ MonoBehaviour:
     - Id: sales_manager
       BaseMonthlyWage: 6000000
       OperatedZone: 0
+    Events:
+    - Id: eva_price_spike
+      MonthlyProbability: 0.06
+      MinDurationMonths: 1
+      MaxDurationMonths: 3
+      SeasonStartMonth: 0
+      SeasonEndMonth: 0
+      Effect: 1
+      Magnitude: 0.3
+      Target: eva_foam
+    - Id: cotton_price_spike
+      MonthlyProbability: 0.06
+      MinDurationMonths: 1
+      MaxDurationMonths: 3
+      SeasonStartMonth: 0
+      SeasonEndMonth: 0
+      Effect: 1
+      Magnitude: 0.3
+      Target: cotton
+    - Id: supplier_force_majeure
+      MonthlyProbability: 0.08
+      MinDurationMonths: 1
+      MaxDurationMonths: 1
+      SeasonStartMonth: 0
+      SeasonEndMonth: 0
+      Effect: 6
+      Magnitude: 0.3
+      Target: 
+    - Id: bad_raw_batch
+      MonthlyProbability: 0.05
+      MinDurationMonths: 1
+      MaxDurationMonths: 1
+      SeasonStartMonth: 0
+      SeasonEndMonth: 0
+      Effect: 7
+      Magnitude: -25
+      Target: 
+    - Id: currency_shock
+      MonthlyProbability: 0.03
+      MinDurationMonths: 3
+      MaxDurationMonths: 6
+      SeasonStartMonth: 0
+      SeasonEndMonth: 0
+      Effect: 2
+      Magnitude: 0.15
+      Target: 
+    - Id: digital_uzbekistan_program
+      MonthlyProbability: 0.08
+      MinDurationMonths: 3
+      MaxDurationMonths: 6
+      SeasonStartMonth: 0
+      SeasonEndMonth: 0
+      Effect: 8
+      Magnitude: 0.5
+      Target: 
+    - Id: power_restrictions
+      MonthlyProbability: 0.05
+      MinDurationMonths: 1
+      MaxDurationMonths: 1
+      SeasonStartMonth: 0
+      SeasonEndMonth: 0
+      Effect: 5
+      Magnitude: -0.15
+      Target: 
+    - Id: flu_epidemic
+      MonthlyProbability: 0.15
+      MinDurationMonths: 1
+      MaxDurationMonths: 1
+      SeasonStartMonth: 12
+      SeasonEndMonth: 2
+      Effect: 5
+      Magnitude: -0.15
+      Target: 
+    - Id: sports_boom
+      MonthlyProbability: 0.05
+      MinDurationMonths: 2
+      MaxDurationMonths: 3
+      SeasonStartMonth: 0
+      SeasonEndMonth: 0
+      Effect: 3
+      Magnitude: 0.2
+      Target: 
     Calendar:
       StartYear: 2027
       StartMonth: 1
@@ -335,3 +608,63 @@ MonoBehaviour:
       MaxTicksPerAdvance: 20000
       AutoPauseAtMonthEnd: 1
     StartingCash: 80000000
+    Economy:
+      InitialIndex: 1
+      IndexReversion: 0.1
+      IndexVolatility: 0.06
+      IndexMin: 0.5
+      IndexMax: 1.5
+      InitialInflation: 0.085
+      InflationTarget: 0.05
+      InflationReversion: 0.08
+      InflationIndexSensitivity: 0.01
+      InflationVolatility: 0.004
+      KeyRateNeutral: 0.1
+      KeyRateInflationSensitivity: 1
+      KeyRateMin: 0.05
+      KeyRateMax: 0.3
+      SeasonalityAmplitude: 0.3
+      SeasonalityPeakMonth: 9
+      ElasticityCrisisSensitivity: 1
+      CapitalizationMultiplierMonths: 60
+    Market:
+      QualityWeight: 1
+      ReputationWeight: 0.5
+      PriceElasticity: 1.5
+      MarketSizeElasticity: 0.5
+      DefaultReputation: 50
+    Finance:
+      ProfitTaxRate: 0.15
+      SocialTaxRate: 0.12
+      BankMargin: 0.04
+      TrustDiscount: 0.06
+      OverdraftMargin: 0.1
+      DepreciationMonths: 60
+      MaxLoanTermMonths: 36
+      MaxDebt: 300000000
+      NegativeCashMonthsToBankrupt: 2
+      MaxOverdueMonths: 1
+    Supply:
+      LoyaltyDiscountPerMillion: 0.001
+      MaxLoyaltyDiscount: 0.1
+      WeeklyDiscount: 0.05
+      TwiceWeeklyDiscount: 0.02
+      DailyDiscount: 0
+      PriceRatioMin: 0.5
+      PriceRatioMax: 2
+      MaxDelayDays: 5
+      FailureShare: 0.2
+    Warehouse:
+      StartingCells: 60
+      DailyRent: 150000
+      DailyCostPerOccupiedCell: 2000
+      OverflowPenaltyPerUnit: 500
+      CellsPerRack: 10
+      RackPrice: 2500000
+    Production:
+      DefaultSkill: 50
+      DefaultMachineCondition: 100
+      WearExponent: 2
+      EnergyPricePerKwh: 1000
+      LaborProfessionId: laborer
+      BaseLaborers: 1

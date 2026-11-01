@@ -24,18 +24,48 @@ namespace Geminium.Core.Data
             var materialIds = CheckIds(data.Materials, m => m.Id, "Сырьё", errors);
             CheckIds(data.Machines, m => m.Id, "Станок", errors);
             CheckIds(data.Products, p => p.Id, "Продукт", errors);
-            CheckIds(data.Professions, p => p.Id, "Профессия", errors);
+            var professionIds = CheckIds(data.Professions, p => p.Id, "Профессия", errors);
+            var productIds = new HashSet<string>((data.Products ?? new List<ProductDef>()).Where(p => p != null && p.Id != null).Select(p => p.Id));
+            CheckIds(data.Suppliers, s => s.Id, "Поставщик", errors);
+            CheckIds(data.Events, e => e.Id, "Событие", errors);
 
             var materials = (data.Materials ?? new List<MaterialDef>()).Where(m => m != null).ToList();
             var machines = (data.Machines ?? new List<MachineDef>()).Where(m => m != null).ToList();
             var products = (data.Products ?? new List<ProductDef>()).Where(p => p != null).ToList();
             var professions = (data.Professions ?? new List<ProfessionDef>()).Where(p => p != null).ToList();
+            var suppliers = (data.Suppliers ?? new List<SupplierDef>()).Where(s => s != null).ToList();
+            var events = (data.Events ?? new List<EventDef>()).Where(e => e != null).ToList();
 
             foreach (var m in materials)
             {
                 if (m.BasePrice <= 0) errors.Add($"Сырьё «{m.Id}»: цена должна быть больше нуля.");
                 if (m.Volatility < 0 || m.Volatility > 1) errors.Add($"Сырьё «{m.Id}»: волатильность — от 0 до 1.");
                 if (m.UnitsPerCell <= 0) errors.Add($"Сырьё «{m.Id}»: единиц в ячейке склада должно быть больше нуля.");
+                if (m.MarketSupplyPerMonth <= 0) errors.Add($"Сырьё «{m.Id}»: предложение рынка должно быть больше нуля.");
+            }
+
+            foreach (var s in suppliers)
+            {
+                if (!materialIds.Contains(s.MaterialId ?? "")) errors.Add($"Поставщик «{s.Id}»: нет сырья «{s.MaterialId}».");
+                if (s.Origin == MaterialOrigin.LocalAndImport) errors.Add($"Поставщик «{s.Id}»: укажите Local или Import.");
+                if (s.PriceDeviation <= -1) errors.Add($"Поставщик «{s.Id}»: отклонение цены должно быть больше −1.");
+                if (s.Reliability < 0 || s.Reliability > 1) errors.Add($"Поставщик «{s.Id}»: надёжность — от 0 до 1.");
+                if (s.QualityMin < 0 || s.QualityMax > 100 || s.QualityMin > s.QualityMax) errors.Add($"Поставщик «{s.Id}»: качество — 0 ≤ мин ≤ макс ≤ 100.");
+                if (s.MinBatch <= 0) errors.Add($"Поставщик «{s.Id}»: минимальная партия должна быть больше нуля.");
+                if (s.LeadTimeDays < 0) errors.Add($"Поставщик «{s.Id}»: срок поставки не может быть отрицательным.");
+            }
+
+            foreach (var e in events)
+            {
+                if (e.MonthlyProbability < 0 || e.MonthlyProbability > 1) errors.Add($"Событие «{e.Id}»: вероятность — от 0 до 1.");
+                if (e.MinDurationMonths < 1 || e.MaxDurationMonths < e.MinDurationMonths) errors.Add($"Событие «{e.Id}»: длительность — 1 ≤ мин ≤ макс.");
+                if (e.SeasonStartMonth < 0 || e.SeasonStartMonth > 12 || e.SeasonEndMonth < 0 || e.SeasonEndMonth > 12 || (e.SeasonStartMonth == 0) != (e.SeasonEndMonth == 0))
+                    errors.Add($"Событие «{e.Id}»: сезон — месяцы 1–12 или оба 0 (круглый год).");
+                if (e.Effect == EventEffect.None) errors.Add($"Событие «{e.Id}»: не указан эффект.");
+                bool materialTarget = e.Effect == EventEffect.MaterialPrice;
+                bool productTarget = e.Effect == EventEffect.Demand;
+                if (!string.IsNullOrEmpty(e.Target) && !(materialTarget && materialIds.Contains(e.Target)) && !(productTarget && productIds.Contains(e.Target)))
+                    errors.Add($"Событие «{e.Id}»: цель «{e.Target}» не подходит к эффекту {e.Effect}.");
             }
 
             foreach (var m in machines)
@@ -87,6 +117,16 @@ namespace Geminium.Core.Data
             foreach (var p in professions)
                 if (p.BaseMonthlyWage <= 0) errors.Add($"Профессия «{p.Id}»: зарплата должна быть больше нуля.");
 
+            // У каждого сырья из открытых рецептов должен быть хотя бы один поставщик.
+            var suppliedMaterials = new HashSet<string>(suppliers.Select(s => s.MaterialId));
+            foreach (var p in products.Where(p => p.UnlockedByDefault && p.Operations != null))
+                foreach (var input in p.Operations.Where(o => o?.Inputs != null).SelectMany(o => o.Inputs))
+                    if (input != null && materialIds.Contains(input.MaterialId ?? "") && !suppliedMaterials.Contains(input.MaterialId))
+                        errors.Add($"Продукт «{p.Id}»: у сырья «{input.MaterialId}» нет поставщика.");
+
+            if (data.Production != null && data.Production.BaseLaborers > 0 && !professionIds.Contains(data.Production.LaborProfessionId ?? ""))
+                errors.Add($"Производство: нет профессии «{data.Production.LaborProfessionId}» для разнорабочих.");
+
             CheckSettings(data, errors);
             return errors;
         }
@@ -105,6 +145,43 @@ namespace Geminium.Core.Data
             }
 
             if (data.StartingCash <= 0) errors.Add("Стартовый капитал должен быть больше нуля.");
+
+            var economy = data.Economy;
+            if (economy == null) errors.Add("Не заданы параметры экономики.");
+            else if (economy.IndexMin <= 0 || economy.IndexMin > economy.IndexMax || economy.InitialIndex < economy.IndexMin || economy.InitialIndex > economy.IndexMax
+                     || economy.KeyRateMin < 0 || economy.KeyRateMin > economy.KeyRateMax || economy.SeasonalityAmplitude < 0 || economy.SeasonalityAmplitude >= 1
+                     || economy.SeasonalityPeakMonth < 1 || economy.SeasonalityPeakMonth > 12 || economy.CapitalizationMultiplierMonths < 0)
+                errors.Add("Экономика: неверные параметры (индекс, ставка, сезонность или мультипликатор).");
+
+            var market = data.Market;
+            if (market == null) errors.Add("Не заданы параметры рынка.");
+            else if (market.QualityWeight < 0 || market.ReputationWeight < 0 || market.QualityWeight + market.ReputationWeight <= 0
+                     || market.PriceElasticity < 0 || market.MarketSizeElasticity < 0 || market.DefaultReputation < 0 || market.DefaultReputation > 100)
+                errors.Add("Рынок: неверные параметры.");
+
+            var finance = data.Finance;
+            if (finance == null) errors.Add("Не заданы параметры финансов.");
+            else if (finance.ProfitTaxRate < 0 || finance.ProfitTaxRate >= 1 || finance.SocialTaxRate < 0 || finance.SocialTaxRate >= 1
+                     || finance.DepreciationMonths < 1 || finance.MaxLoanTermMonths < 1 || finance.MaxDebt < 0
+                     || finance.NegativeCashMonthsToBankrupt < 1 || finance.MaxOverdueMonths < 0)
+                errors.Add("Финансы: неверные параметры.");
+
+            var supply = data.Supply;
+            if (supply == null) errors.Add("Не заданы параметры снабжения.");
+            else if (supply.MaxLoyaltyDiscount < 0 || supply.MaxLoyaltyDiscount >= 1 || supply.PriceRatioMin <= 0 || supply.PriceRatioMin > supply.PriceRatioMax
+                     || supply.MaxDelayDays < 0 || supply.FailureShare < 0 || supply.FailureShare > 1)
+                errors.Add("Снабжение: неверные параметры.");
+
+            var warehouse = data.Warehouse;
+            if (warehouse == null) errors.Add("Не заданы параметры склада.");
+            else if (warehouse.StartingCells < 0 || warehouse.CellsPerRack < 1 || warehouse.RackPrice <= 0 || warehouse.DailyRent < 0)
+                errors.Add("Склад: неверные параметры.");
+
+            var production = data.Production;
+            if (production == null) errors.Add("Не заданы параметры производства.");
+            else if (production.DefaultSkill < 0 || production.DefaultSkill > 100 || production.DefaultMachineCondition < 0 || production.DefaultMachineCondition > 100
+                     || production.EnergyPricePerKwh < 0 || production.BaseLaborers < 0)
+                errors.Add("Производство: неверные параметры.");
 
             if (data.Pacing == null) errors.Add("Не заданы параметры темпа игры.");
             else if (data.Pacing.SecondsPerShiftAtX1 <= 0 || data.Pacing.NonWorkingSpeedup < 1 || data.Pacing.MaxTicksPerAdvance < 1)

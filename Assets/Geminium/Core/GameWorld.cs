@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Geminium.Core.Companies;
 using Geminium.Core.Data;
+using Geminium.Core.Economy;
+using Geminium.Core.Finance;
+using Geminium.Core.Market;
+using Geminium.Core.Production;
+using Geminium.Core.Supply;
 using Geminium.Core.Time;
+using Geminium.Core.Warehouse;
 
 namespace Geminium.Core
 {
-    // Игровой мир: данные, симуляция и компании. С него начинается любая партия —
+    // Игровой мир: данные, симуляция, подсистемы и компании. С него начинается любая партия —
     // и в игре, и в прогоне Лаборатории без графики.
+    // Порядок подсистем важен: контроллеры → экономика → снабжение → производство → рынок → склад → финансы.
+    // Так решения применяются раньше расчётов, а финансы подводят месяц последними.
     public sealed class GameWorld
     {
         private static readonly Regex IdFormat = new Regex("^[a-z][a-z0-9_]*$");
@@ -18,12 +26,25 @@ namespace Geminium.Core
         public Simulation Simulation { get; }
         public IReadOnlyList<Company> Companies => companies;
 
+        public EconomySystem Economy { get; }
+        public SupplySystem Supply { get; }
+        public ProductionSystem Production { get; }
+        public MarketSystem Market { get; }
+        public WarehouseSystem Warehouse { get; }
+        public FinanceSystem Finance { get; }
+
         public GameWorld(DataCatalog catalog, ulong seed)
         {
             Catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
             Simulation = new Simulation(seed, new GameCalendar(catalog.Calendar));
-            // Первая подсистема: контроллеры решают раньше, чем считаются рынок и производство.
+
             Simulation.AddSystem(new ControllerSystem(this));
+            Simulation.AddSystem(Economy = new EconomySystem(catalog));
+            Simulation.AddSystem(Supply = new SupplySystem(this));
+            Simulation.AddSystem(Production = new ProductionSystem(this));
+            Simulation.AddSystem(Market = new MarketSystem(this));
+            Simulation.AddSystem(Warehouse = new WarehouseSystem(this));
+            Simulation.AddSystem(Finance = new FinanceSystem(this));
         }
 
         // Добавить компанию. Все стартуют одинаково: стартовый капитал из данных, цены — эталонные.
@@ -55,13 +76,14 @@ namespace Geminium.Core
         {
             if (company == null) throw new ArgumentNullException(nameof(company));
             if (command == null) throw new ArgumentNullException(nameof(command));
+            if (company.IsBankrupt) return "Компания обанкротилась.";
 
-            string error = command.Validate(company, Catalog);
+            string error = command.Validate(company, this);
             if (error != null) return error;
 
             Simulation.Scheduler.Schedule(Simulation.Now, () =>
             {
-                if (command.Validate(company, Catalog) == null) command.Apply(company, this);
+                if (!company.IsBankrupt && command.Validate(company, this) == null) command.Apply(company, this);
             });
             return null;
         }
@@ -75,12 +97,14 @@ namespace Geminium.Core
 
             protected internal override void OnMonthStarted(int monthIndex)
             {
-                foreach (var company in world.companies) company.Controller.OnMonthStarted(monthIndex);
+                foreach (var company in world.companies)
+                    if (!company.IsBankrupt) company.Controller.OnMonthStarted(monthIndex);
             }
 
             protected internal override void OnDayStarted(long dayIndex)
             {
-                foreach (var company in world.companies) company.Controller.OnDayStarted(dayIndex);
+                foreach (var company in world.companies)
+                    if (!company.IsBankrupt) company.Controller.OnDayStarted(dayIndex);
             }
         }
     }

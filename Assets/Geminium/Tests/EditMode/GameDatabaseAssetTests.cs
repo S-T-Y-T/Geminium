@@ -26,6 +26,8 @@ namespace Geminium.Tests.EditMode
             Assert.AreEqual(10, catalog.Machines.Count);
             Assert.AreEqual(5, catalog.Products.Count);
             Assert.AreEqual(7, catalog.Professions.Count);
+            Assert.AreEqual(20, catalog.Suppliers.Count);
+            Assert.AreEqual(9, catalog.Events.Count);
         }
 
         [Test]

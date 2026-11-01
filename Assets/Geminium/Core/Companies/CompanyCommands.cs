@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Geminium.Core.Data;
 using Geminium.Core.Time;
 
@@ -10,16 +11,15 @@ namespace Geminium.Core.Companies
     public abstract class CompanyCommand
     {
         // null — команда допустима; иначе понятный текст ошибки.
-        public abstract string Validate(Company company, DataCatalog catalog);
+        public abstract string Validate(Company company, GameWorld world);
 
         internal abstract void Apply(Company company, GameWorld world);
 
-        protected static string CheckProduct(DataCatalog catalog, string productId)
-        {
-            foreach (var product in catalog.Products)
-                if (product.Id == productId) return null;
-            return $"Нет продукта «{productId}».";
-        }
+        protected static string CheckProduct(DataCatalog catalog, string productId) =>
+            catalog.Products.Any(p => p.Id == productId) ? null : $"Нет продукта «{productId}».";
+
+        protected static string CheckCash(Company company, long cost) =>
+            company.Cash >= cost ? null : $"Не хватает денег: нужно {cost:N0} сум, на счёте {company.Cash:N0}.";
     }
 
     // Розничная цена продукта (канал B2C).
@@ -34,8 +34,8 @@ namespace Geminium.Core.Companies
             Price = price;
         }
 
-        public override string Validate(Company company, DataCatalog catalog) =>
-            CheckProduct(catalog, ProductId) ?? (Price <= 0 ? "Цена должна быть больше нуля." : null);
+        public override string Validate(Company company, GameWorld world) =>
+            CheckProduct(world.Catalog, ProductId) ?? (Price <= 0 ? "Цена должна быть больше нуля." : null);
 
         internal override void Apply(Company company, GameWorld world) => company.SetRetailPrice(ProductId, Price);
     }
@@ -52,8 +52,14 @@ namespace Geminium.Core.Companies
             Units = units;
         }
 
-        public override string Validate(Company company, DataCatalog catalog) =>
-            CheckProduct(catalog, ProductId) ?? (Units < 0 ? "План не может быть отрицательным." : null);
+        public override string Validate(Company company, GameWorld world)
+        {
+            string error = CheckProduct(world.Catalog, ProductId);
+            if (error != null) return error;
+            if (Units < 0) return "План не может быть отрицательным.";
+            if (Units > 0 && !world.Catalog.Product(ProductId).UnlockedByDefault) return $"Продукт «{ProductId}» ещё не открыт.";
+            return null;
+        }
 
         internal override void Apply(Company company, GameWorld world) => company.SetMonthlyPlan(ProductId, Units);
     }
@@ -75,7 +81,7 @@ namespace Geminium.Core.Companies
             };
         }
 
-        public override string Validate(Company company, DataCatalog catalog)
+        public override string Validate(Company company, GameWorld world)
         {
             if (settings == null) return "График не задан.";
             try
@@ -90,5 +96,112 @@ namespace Geminium.Core.Companies
         }
 
         internal override void Apply(Company company, GameWorld world) => company.Schedule = new WorkSchedule(settings);
+    }
+
+    // Купить станок (GDD 7.6.2). На этапе 1 станок сразу работает в своей зоне.
+    public sealed class BuyMachineCommand : CompanyCommand
+    {
+        public string MachineId { get; }
+
+        public BuyMachineCommand(string machineId) { MachineId = machineId; }
+
+        public override string Validate(Company company, GameWorld world)
+        {
+            if (!world.Catalog.Machines.Any(m => m.Id == MachineId)) return $"Нет станка «{MachineId}».";
+            return CheckCash(company, world.Catalog.Machine(MachineId).Price);
+        }
+
+        internal override void Apply(Company company, GameWorld world)
+        {
+            long price = world.Catalog.Machine(MachineId).Price;
+            company.Pay(LedgerCategory.Equipment, price);
+            company.machines.Add(new OwnedEquipment(MachineId, price, world.Simulation.MonthIndex));
+        }
+    }
+
+    // Купить стеллажи — расширить склад (GDD 7.5).
+    public sealed class BuyRacksCommand : CompanyCommand
+    {
+        public int Count { get; }
+
+        public BuyRacksCommand(int count) { Count = count; }
+
+        public override string Validate(Company company, GameWorld world) =>
+            Count < 1 ? "Нужно купить хотя бы один стеллаж." : CheckCash(company, world.Catalog.Warehouse.RackPrice * Count);
+
+        internal override void Apply(Company company, GameWorld world) => world.Warehouse.AddRacks(company, Count);
+    }
+
+    // Разовый заказ сырья у поставщика (GDD 7.4). Оплата — при поставке.
+    public sealed class PlaceOrderCommand : CompanyCommand
+    {
+        public string SupplierId { get; }
+        public double Quantity { get; }
+
+        public PlaceOrderCommand(string supplierId, double quantity)
+        {
+            SupplierId = supplierId;
+            Quantity = quantity;
+        }
+
+        public override string Validate(Company company, GameWorld world)
+        {
+            if (!world.Catalog.Suppliers.Any(s => s.Id == SupplierId)) return $"Нет поставщика «{SupplierId}».";
+            var supplier = world.Catalog.Supplier(SupplierId);
+            return Quantity < supplier.MinBatch ? $"Минимальная партия у «{SupplierId}» — {supplier.MinBatch}." : null;
+        }
+
+        internal override void Apply(Company company, GameWorld world) =>
+            world.Supply.PlaceOrder(company, world.Catalog.Supplier(SupplierId), Quantity, DeliveryFrequency.None);
+    }
+
+    // Регулярная поставка: количество за раз и частота. Количество 0 или частота None — отменить.
+    public sealed class SetSupplyScheduleCommand : CompanyCommand
+    {
+        public string SupplierId { get; }
+        public double Quantity { get; }
+        public DeliveryFrequency Frequency { get; }
+
+        public SetSupplyScheduleCommand(string supplierId, double quantity, DeliveryFrequency frequency)
+        {
+            SupplierId = supplierId;
+            Quantity = quantity;
+            Frequency = frequency;
+        }
+
+        public override string Validate(Company company, GameWorld world)
+        {
+            if (!world.Catalog.Suppliers.Any(s => s.Id == SupplierId)) return $"Нет поставщика «{SupplierId}».";
+            var supplier = world.Catalog.Supplier(SupplierId);
+            bool cancel = Quantity <= 0 || Frequency == DeliveryFrequency.None;
+            return !cancel && Quantity < supplier.MinBatch ? $"Минимальная партия у «{SupplierId}» — {supplier.MinBatch}." : null;
+        }
+
+        internal override void Apply(Company company, GameWorld world) =>
+            world.Supply.SetSchedule(company, world.Catalog.Supplier(SupplierId), Quantity, Frequency);
+    }
+
+    // Взять кредит (GDD 7.8): ставка зависит от ключевой ставки и кредитного рейтинга.
+    public sealed class TakeLoanCommand : CompanyCommand
+    {
+        public long Amount { get; }
+        public int TermMonths { get; }
+
+        public TakeLoanCommand(long amount, int termMonths)
+        {
+            Amount = amount;
+            TermMonths = termMonths;
+        }
+
+        public override string Validate(Company company, GameWorld world)
+        {
+            var finance = world.Catalog.Finance;
+            if (Amount <= 0) return "Сумма кредита должна быть больше нуля.";
+            if (TermMonths < 1 || TermMonths > finance.MaxLoanTermMonths) return $"Срок кредита — от 1 до {finance.MaxLoanTermMonths} месяцев.";
+            if (company.Debt + Amount > finance.MaxDebt) return $"Банк не даст больше: предел долга {finance.MaxDebt:N0} сум.";
+            return null;
+        }
+
+        internal override void Apply(Company company, GameWorld world) => world.Finance.IssueLoan(company, Amount, TermMonths);
     }
 }

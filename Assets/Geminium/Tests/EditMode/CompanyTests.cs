@@ -42,33 +42,36 @@ namespace Geminium.Tests.EditMode
         public void Ledger_TracksBalanceAndTotalsByCategoryAndPeriod()
         {
             var ledger = new Ledger();
-            ledger.Record(new SimTime(0), LedgerCategory.StartingCapital, 1000);
-            ledger.Record(new SimTime(10), LedgerCategory.Wages, -300);
-            ledger.Record(new SimTime(20), LedgerCategory.Wages, -200);
+            ledger.Record(new SimTime(0), 0, LedgerCategory.StartingCapital, 1000);
+            ledger.Record(new SimTime(10), 0, LedgerCategory.Wages, -300);
+            ledger.Record(new SimTime(20), 1, LedgerCategory.Wages, -200);
 
             Assert.AreEqual(500, ledger.Balance);
-            Assert.AreEqual(-500, ledger.Total(LedgerCategory.Wages, new SimTime(0), new SimTime(100)));
-            Assert.AreEqual(-300, ledger.Total(LedgerCategory.Wages, new SimTime(0), new SimTime(20)));
-            Assert.Throws<ArgumentException>(() => ledger.Record(new SimTime(5), LedgerCategory.Other, 1));
+            Assert.AreEqual(-300, ledger.MonthTotal(0, LedgerCategory.Wages));
+            Assert.AreEqual(-200, ledger.MonthTotal(1, LedgerCategory.Wages));
+            Assert.AreEqual(0, ledger.MonthTotal(1, LedgerCategory.Rent));
+            Assert.Throws<ArgumentException>(() => ledger.Record(new SimTime(5), 1, LedgerCategory.Other, 1));
         }
 
         [Test]
         public void Inventory_AveragesQualityAndRefusesToGiveMoreThanItHas()
         {
             var inventory = new Inventory();
-            inventory.AddMaterial("cotton", 10, 80);
-            inventory.AddMaterial("cotton", 30, 40);
+            inventory.AddMaterial("cotton", 10, 80, 100);
+            inventory.AddMaterial("cotton", 30, 40, 200);
             Assert.AreEqual(40, inventory.MaterialQuantity("cotton"), 1e-9);
             Assert.AreEqual(50, inventory.MaterialQuality("cotton"), 1e-9);
 
-            Assert.IsTrue(inventory.TryTakeMaterial("cotton", 15.5, out double quality));
+            Assert.AreEqual(40 * 175, inventory.TotalValue());
+            Assert.IsTrue(inventory.TryTakeMaterial("cotton", 15.5, out double quality, out double unitCost));
             Assert.AreEqual(50, quality, 1e-9);
+            Assert.AreEqual(175, unitCost, 1e-9);
             Assert.AreEqual(24.5, inventory.MaterialQuantity("cotton"), 1e-9);
-            Assert.IsFalse(inventory.TryTakeMaterial("cotton", 100, out _));
+            Assert.IsFalse(inventory.TryTakeMaterial("cotton", 100, out _, out _));
             Assert.AreEqual(24.5, inventory.MaterialQuantity("cotton"), 1e-9);
 
-            inventory.AddProducts("dobok", 5, 70);
-            Assert.IsTrue(inventory.TryTakeProducts("dobok", 5, out _));
+            inventory.AddProducts("dobok", 5, 70, 1000);
+            Assert.IsTrue(inventory.TryTakeProducts("dobok", 5, out _, out _));
             Assert.AreEqual(0, inventory.ProductUnits("dobok"));
             CollectionAssert.IsEmpty(inventory.Products);
         }

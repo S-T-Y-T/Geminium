@@ -18,6 +18,37 @@ namespace Geminium.Core.Data
         public long BasePrice;     // базовая биржевая цена за единицу, P_base
         public double Volatility;  // волатильность биржевой цены, σ (0–1)
         public int UnitsPerCell;   // сколько единиц помещается в одну ячейку склада
+        public double MarketSupplyPerMonth; // свободное предложение рынка в месяц, S (биржевая цена)
+    }
+
+    // Поставщик одного вида сырья (GDD 7.4).
+    [Serializable]
+    public sealed class SupplierDef
+    {
+        public string Id;
+        public string MaterialId;
+        public MaterialOrigin Origin;    // Local или Import (импорт зависит от курса)
+        public double PriceDeviation;    // δ — отклонение от биржевой цены, например −0,05 или +0,1
+        public double Reliability;       // доля поставок без проблем, 0–1
+        public double QualityMin;        // скрытое качество партии — от QualityMin до QualityMax (0–100)
+        public double QualityMax;
+        public double MinBatch;          // минимальная партия, единиц
+        public int LeadTimeDays;         // срок поставки, дней
+    }
+
+    // Событие ИИ-ядра (GDD 7.1): с вероятностью раз в месяц начинается и действует несколько месяцев.
+    [Serializable]
+    public sealed class EventDef
+    {
+        public string Id;
+        public double MonthlyProbability;
+        public int MinDurationMonths = 1;
+        public int MaxDurationMonths = 1;
+        public int SeasonStartMonth;     // 1–12; 0 — круглый год
+        public int SeasonEndMonth;       // включительно; сезон может переходить через Новый год (12–2)
+        public EventEffect Effect;
+        public double Magnitude;         // для множителей: +0,3 = +30%; для качества партии — пункты
+        public string Target;            // Id сырья или продукта; пусто — действует на всё
     }
 
     // Модель станка (GDD 7.6.2).
