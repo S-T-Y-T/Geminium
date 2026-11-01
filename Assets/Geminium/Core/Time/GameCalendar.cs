@@ -2,7 +2,7 @@ using System;
 
 namespace Geminium.Core.Time
 {
-    // Параметры календаря. Стартовые значения из GDD; в пункте 1.4 переедут в файлы данных.
+    // Параметры календаря. Рабочие значения — в GameDatabase.asset, здесь значения по умолчанию.
     [Serializable]
     public sealed class CalendarSettings
     {

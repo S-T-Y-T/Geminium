@@ -2,7 +2,7 @@ using System;
 
 namespace Geminium.Core.Time
 {
-    // Параметры графика работы компании (GDD 7.7). В пункте 1.4 переедут в файлы данных.
+    // Параметры графика работы компании (GDD 7.7). Рабочие значения — в GameDatabase.asset, здесь значения по умолчанию.
     [Serializable]
     public sealed class WorkScheduleSettings
     {

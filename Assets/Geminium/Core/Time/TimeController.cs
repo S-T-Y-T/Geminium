@@ -2,7 +2,7 @@ using System;
 
 namespace Geminium.Core.Time
 {
-    // Параметры темпа игры (GDD, раздел 5). В пункте 1.4 переедут в файлы данных.
+    // Параметры темпа игры (GDD, раздел 5). Рабочие значения — в GameDatabase.asset, здесь значения по умолчанию.
     [Serializable]
     public sealed class TimePacingSettings
     {

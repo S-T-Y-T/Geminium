@@ -1,0 +1,336 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59034a20f4feb9d280438e70edec7c0, type: 3}
+  m_Name: GameDatabase
+  m_EditorClassIdentifier: 
+  Data:
+    Materials:
+    - Id: cotton
+      Group: 0
+      Unit: 0
+      Origin: 0
+      BasePrice: 25000
+      Volatility: 0.1
+      UnitsPerCell: 200
+    - Id: polyester
+      Group: 0
+      Unit: 0
+      Origin: 2
+      BasePrice: 18000
+      Volatility: 0.1
+      UnitsPerCell: 200
+    - Id: eva_foam
+      Group: 1
+      Unit: 0
+      Origin: 1
+      BasePrice: 60000
+      Volatility: 0.15
+      UnitsPerCell: 40
+    - Id: pu_foam
+      Group: 1
+      Unit: 0
+      Origin: 1
+      BasePrice: 75000
+      Volatility: 0.15
+      UnitsPerCell: 40
+    - Id: eco_leather
+      Group: 1
+      Unit: 0
+      Origin: 2
+      BasePrice: 55000
+      Volatility: 0.12
+      UnitsPerCell: 100
+    - Id: pvc
+      Group: 1
+      Unit: 0
+      Origin: 2
+      BasePrice: 30000
+      Volatility: 0.12
+      UnitsPerCell: 100
+    - Id: velcro
+      Group: 2
+      Unit: 1
+      Origin: 1
+      BasePrice: 6000
+      Volatility: 0.08
+      UnitsPerCell: 500
+    - Id: elastic_band
+      Group: 2
+      Unit: 1
+      Origin: 0
+      BasePrice: 4000
+      Volatility: 0.08
+      UnitsPerCell: 500
+    - Id: reinforced_thread
+      Group: 2
+      Unit: 2
+      Origin: 2
+      BasePrice: 15000
+      Volatility: 0.08
+      UnitsPerCell: 300
+    - Id: sensor_module
+      Group: 3
+      Unit: 2
+      Origin: 1
+      BasePrice: 450000
+      Volatility: 0.2
+      UnitsPerCell: 100
+    Machines:
+    - Id: cutting_knife_table
+      Zone: 1
+      Tier: 1
+      Power: 1
+      EnergyKw: 0.2
+      DurabilityOperations: 5000
+      Price: 3000000
+      SizeX: 2
+      SizeY: 1
+    - Id: cutting_band
+      Zone: 1
+      Tier: 2
+      Power: 1.6
+      EnergyKw: 1.5
+      DurabilityOperations: 4000
+      Price: 25000000
+      SizeX: 2
+      SizeY: 2
+    - Id: cutting_laser
+      Zone: 1
+      Tier: 3
+      Power: 2.5
+      EnergyKw: 4
+      DurabilityOperations: 3500
+      Price: 120000000
+      SizeX: 3
+      SizeY: 2
+    - Id: sewing_straight
+      Zone: 2
+      Tier: 1
+      Power: 1
+      EnergyKw: 0.4
+      DurabilityOperations: 4000
+      Price: 4000000
+      SizeX: 1
+      SizeY: 1
+    - Id: sewing_overlock
+      Zone: 2
+      Tier: 2
+      Power: 1.4
+      EnergyKw: 0.6
+      DurabilityOperations: 3500
+      Price: 9000000
+      SizeX: 1
+      SizeY: 1
+    - Id: sewing_automatic
+      Zone: 2
+      Tier: 3
+      Power: 2.2
+      EnergyKw: 1.2
+      DurabilityOperations: 3000
+      Price: 45000000
+      SizeX: 2
+      SizeY: 1
+    - Id: molding_hand_press
+      Zone: 3
+      Tier: 1
+      Power: 1
+      EnergyKw: 0.5
+      DurabilityOperations: 3000
+      Price: 6000000
+      SizeX: 1
+      SizeY: 1
+    - Id: molding_thermo_press
+      Zone: 3
+      Tier: 2
+      Power: 1.5
+      EnergyKw: 3
+      DurabilityOperations: 2500
+      Price: 30000000
+      SizeX: 2
+      SizeY: 1
+    - Id: molding_vacuum
+      Zone: 3
+      Tier: 3
+      Power: 2.3
+      EnergyKw: 6
+      DurabilityOperations: 2200
+      Price: 95000000
+      SizeX: 2
+      SizeY: 2
+    - Id: electronics_bench
+      Zone: 4
+      Tier: 1
+      Power: 1
+      EnergyKw: 0.3
+      DurabilityOperations: 6000
+      Price: 15000000
+      SizeX: 2
+      SizeY: 1
+    Products:
+    - Id: dobok
+      BasePrice: 450000
+      BaseDemandPerMonth: 2000
+      BaseDefectChance: 0.04
+      UnitsPerCell: 20
+      UnlockedByDefault: 1
+      Operations:
+      - Zone: 1
+        BaseTimeMinutes: 25
+        Inputs:
+        - MaterialId: cotton
+          Amount: 2.5
+      - Zone: 2
+        BaseTimeMinutes: 60
+        Inputs:
+        - MaterialId: reinforced_thread
+          Amount: 0.1
+    - Id: helmet
+      BasePrice: 350000
+      BaseDemandPerMonth: 800
+      BaseDefectChance: 0.06
+      UnitsPerCell: 10
+      UnlockedByDefault: 1
+      Operations:
+      - Zone: 3
+        BaseTimeMinutes: 30
+        Inputs:
+        - MaterialId: eva_foam
+          Amount: 0.35
+      - Zone: 1
+        BaseTimeMinutes: 10
+        Inputs:
+        - MaterialId: eco_leather
+          Amount: 0.3
+      - Zone: 2
+        BaseTimeMinutes: 35
+        Inputs:
+        - MaterialId: velcro
+          Amount: 0.3
+        - MaterialId: reinforced_thread
+          Amount: 0.05
+    - Id: hogu
+      BasePrice: 600000
+      BaseDemandPerMonth: 600
+      BaseDefectChance: 0.07
+      UnitsPerCell: 8
+      UnlockedByDefault: 1
+      Operations:
+      - Zone: 1
+        BaseTimeMinutes: 20
+        Inputs:
+        - MaterialId: pvc
+          Amount: 0.6
+        - MaterialId: polyester
+          Amount: 0.4
+      - Zone: 3
+        BaseTimeMinutes: 40
+        Inputs:
+        - MaterialId: pu_foam
+          Amount: 0.5
+      - Zone: 2
+        BaseTimeMinutes: 50
+        Inputs:
+        - MaterialId: velcro
+          Amount: 0.6
+        - MaterialId: elastic_band
+          Amount: 1
+        - MaterialId: reinforced_thread
+          Amount: 0.08
+    - Id: shin_forearm_guards
+      BasePrice: 250000
+      BaseDemandPerMonth: 1200
+      BaseDefectChance: 0.05
+      UnitsPerCell: 25
+      UnlockedByDefault: 1
+      Operations:
+      - Zone: 3
+        BaseTimeMinutes: 25
+        Inputs:
+        - MaterialId: eva_foam
+          Amount: 0.4
+      - Zone: 2
+        BaseTimeMinutes: 30
+        Inputs:
+        - MaterialId: polyester
+          Amount: 0.3
+        - MaterialId: elastic_band
+          Amount: 1.2
+        - MaterialId: velcro
+          Amount: 0.4
+    - Id: e_vest
+      BasePrice: 4500000
+      BaseDemandPerMonth: 50
+      BaseDefectChance: 0.1
+      UnitsPerCell: 8
+      UnlockedByDefault: 0
+      Operations:
+      - Zone: 1
+        BaseTimeMinutes: 20
+        Inputs:
+        - MaterialId: pvc
+          Amount: 0.6
+        - MaterialId: polyester
+          Amount: 0.4
+      - Zone: 3
+        BaseTimeMinutes: 40
+        Inputs:
+        - MaterialId: pu_foam
+          Amount: 0.5
+      - Zone: 2
+        BaseTimeMinutes: 50
+        Inputs:
+        - MaterialId: velcro
+          Amount: 0.6
+        - MaterialId: elastic_band
+          Amount: 1
+        - MaterialId: reinforced_thread
+          Amount: 0.08
+      - Zone: 4
+        BaseTimeMinutes: 45
+        Inputs:
+        - MaterialId: sensor_module
+          Amount: 1
+    Professions:
+    - Id: laborer
+      BaseMonthlyWage: 3000000
+      OperatedZone: 0
+    - Id: cutter
+      BaseMonthlyWage: 4000000
+      OperatedZone: 1
+    - Id: seamstress
+      BaseMonthlyWage: 3800000
+      OperatedZone: 2
+    - Id: molder
+      BaseMonthlyWage: 4200000
+      OperatedZone: 3
+    - Id: mechanic
+      BaseMonthlyWage: 5500000
+      OperatedZone: 0
+    - Id: qc_inspector
+      BaseMonthlyWage: 4500000
+      OperatedZone: 0
+    - Id: sales_manager
+      BaseMonthlyWage: 6000000
+      OperatedZone: 0
+    Calendar:
+      StartYear: 2027
+      StartMonth: 1
+    DefaultWorkSchedule:
+      WorkingDaysPerWeek: 5
+      ShiftsPerDay: 1
+      ShiftLengthMinutes: 480
+      FirstShiftStartMinute: 480
+    Pacing:
+      SecondsPerShiftAtX1: 40
+      NonWorkingSpeedup: 60
+      MaxTicksPerAdvance: 20000
+      AutoPauseAtMonthEnd: 1
