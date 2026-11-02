@@ -128,8 +128,14 @@ namespace Geminium.Core.Market
             {
                 if (sales[i] <= 0) continue;
                 var c = companies[i];
-                c.Inventory.TryTakeProducts(product.Id, sales[i], out _, out double unitCost);
+                c.Inventory.TryTakeProducts(product.Id, sales[i], out _, out double unitCost, out long defects);
                 c.Receive(LedgerCategory.SalesRetail, sales[i] * c.RetailPrice(product.Id));
+                if (defects > 0)
+                {
+                    // Брак, не пойманный ОТК, покупатели возвращают: деньги назад плюс экспертиза (GDD 7.2).
+                    c.Pay(LedgerCategory.Returns, defects * (c.RetailPrice(product.Id) + catalog.Quality.ReturnFee));
+                    c.CurrentMonth.ReturnedUnits += defects;
+                }
                 c.CurrentMonth.CostOfGoodsSold += (long)Math.Round(sales[i] * unitCost);
                 MonthStats.Add(c.CurrentMonth.Sold, product.Id, sales[i]);
                 MonthStats.Add(month.SoldByCompany, c.Id, sales[i]);

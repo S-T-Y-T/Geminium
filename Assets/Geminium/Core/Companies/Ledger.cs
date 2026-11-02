@@ -25,6 +25,8 @@ namespace Geminium.Core.Companies
         LoanRepayment = 14,    // погашение тела кредита
         Penalties = 15,        // штрафы и неустойки
         SocialTax = 16,        // социальный налог с фонда оплаты труда
+        Returns = 17,          // возвраты брака покупателями и экспертиза
+        Training = 18,         // обучение сотрудников
     }
 
     public readonly struct LedgerEntry

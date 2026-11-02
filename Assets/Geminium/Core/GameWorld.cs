@@ -7,6 +7,7 @@ using Geminium.Core.Economy;
 using Geminium.Core.Finance;
 using Geminium.Core.Market;
 using Geminium.Core.Production;
+using Geminium.Core.Staff;
 using Geminium.Core.Supply;
 using Geminium.Core.Time;
 using Geminium.Core.Warehouse;
@@ -15,8 +16,9 @@ namespace Geminium.Core
 {
     // Игровой мир: данные, симуляция, подсистемы и компании. С него начинается любая партия —
     // и в игре, и в прогоне Лаборатории без графики.
-    // Порядок подсистем важен: контроллеры → экономика → снабжение → производство → рынок → склад → финансы.
-    // Так решения применяются раньше расчётов, а финансы подводят месяц последними.
+    // Порядок подсистем важен: экономика → персонал (рынок труда) → контроллеры → снабжение → производство →
+    // рынок → склад → финансы. Контроллеры решают, уже видя новый месяц и кандидатов; их команды применяются
+    // до расчётов минуты; финансы подводят месяц последними.
     public sealed class GameWorld
     {
         private static readonly Regex IdFormat = new Regex("^[a-z][a-z0-9_]*$");
@@ -27,6 +29,7 @@ namespace Geminium.Core
         public IReadOnlyList<Company> Companies => companies;
 
         public EconomySystem Economy { get; }
+        public StaffSystem Staff { get; }
         public SupplySystem Supply { get; }
         public ProductionSystem Production { get; }
         public MarketSystem Market { get; }
@@ -38,8 +41,9 @@ namespace Geminium.Core
             Catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
             Simulation = new Simulation(seed, new GameCalendar(catalog.Calendar));
 
-            Simulation.AddSystem(new ControllerSystem(this));
             Simulation.AddSystem(Economy = new EconomySystem(catalog));
+            Simulation.AddSystem(Staff = new StaffSystem(this));
+            Simulation.AddSystem(new ControllerSystem(this));
             Simulation.AddSystem(Supply = new SupplySystem(this));
             Simulation.AddSystem(Production = new ProductionSystem(this));
             Simulation.AddSystem(Market = new MarketSystem(this));
@@ -80,6 +84,7 @@ namespace Geminium.Core
 
             string error = command.Validate(company, this);
             if (error != null) return error;
+            command.OnAccepted(company, this);
 
             Simulation.Scheduler.Schedule(Simulation.Now, () =>
             {

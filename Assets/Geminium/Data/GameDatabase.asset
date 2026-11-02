@@ -655,16 +655,70 @@ MonoBehaviour:
       MaxDelayDays: 5
       FailureShare: 0.2
     Warehouse:
-      StartingCells: 60
+      StartingCells: 20
       DailyRent: 150000
       DailyCostPerOccupiedCell: 2000
       OverflowPenaltyPerUnit: 500
       CellsPerRack: 10
       RackPrice: 2500000
     Production:
-      DefaultSkill: 50
-      DefaultMachineCondition: 100
       WearExponent: 2
       EnergyPricePerKwh: 1000
-      LaborProfessionId: laborer
-      BaseLaborers: 1
+      MismatchEfficiency: 0.6
+      DefaultTransportBatch: 5
+      MaxTransportBatch: 20
+      FlushMinutes: 120
+      RequestIntervalMinutes: 10
+    Floor:
+      BuildingWidth: 32
+      BuildingHeight: 20
+      CellSizeMeters: 2
+      ExpansionColumns: 8
+      MaxExpansions: 2
+      ExpansionMonthlyRent: 5000000
+      WalkMetersPerMinute: 40
+      LoadMinutes: 1
+      RearFeedExtraMinutes: 0.5
+      RelocationCostShare: 0.05
+      QcTablePrice: 3000000
+      DeskPrice: 1000000
+    Maintenance:
+      DefaultIntervalOperations: 400
+      PlannedCostShare: 0.01
+      PlannedMinutes: 120
+      UnplannedCostShare: 0.05
+      UnplannedMinutes: 480
+      NoMechanicFactor: 2
+      ConditionAfterRepair: 80
+    Staff:
+      LaborerProfessionId: laborer
+      MechanicProfessionId: mechanic
+      QcInspectorProfessionId: qc_inspector
+      CandidatesPerProfession: 4
+      CandidateExperienceMean: 35
+      CandidateExperienceSd: 20
+      WageExperienceFactor: 0.004
+      FatiguePerHour: 8
+      FatigueRecoveryPerHour: 6
+      ExperiencePerHour: 0.02
+      MaxOvertimeHours: 4
+      OvertimePayFactor: 1.5
+      OvertimeFatigueFactor: 1.5
+      OvertimeDaysTolerance: 8
+      MoralePerExcessOvertimeDay: 1.5
+      MoralePerBreakdown: 2
+      MoraleWageGapFactor: 0.5
+      MoraleRecoveryPerMonth: 2
+      StartingMorale: 70
+      QuitMorale: 25
+      SeveranceMonths: 1
+      TrainingCost: 1500000
+      TrainingExperienceGain: 10
+    Quality:
+      OutputQcDetection: 0.9
+      QcUnitsPerHour: 60
+      InputQcThreshold: 40
+      RepairMinutes: 20
+      RepairQualityPenalty: 10
+      DiscountPriceShare: 0.4
+      ReturnFee: 15000

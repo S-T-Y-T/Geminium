@@ -62,7 +62,7 @@ namespace Geminium.Core.Finance
                 company.Pay(LedgerCategory.Interest, (long)Math.Round(-company.Cash * (Economy.KeyRate + settings.OverdraftMargin) / 12));
 
             long depreciation = 0, equipmentValue = 0;
-            foreach (var item in company.Machines.Concat(company.Racks))
+            foreach (var item in company.Floor.Objects)
             {
                 int age = month - item.PurchaseMonth;
                 if (age < settings.DepreciationMonths) depreciation += (long)Math.Round((double)item.PurchasePrice / settings.DepreciationMonths);
@@ -79,7 +79,8 @@ namespace Geminium.Core.Finance
                 Rent = Spent(LedgerCategory.Rent),
                 Energy = Spent(LedgerCategory.Energy),
                 Penalties = Spent(LedgerCategory.Penalties),
-                OtherExpenses = Spent(LedgerCategory.Maintenance) + Spent(LedgerCategory.Marketing) + Spent(LedgerCategory.Other),
+                OtherExpenses = Spent(LedgerCategory.Maintenance) + Spent(LedgerCategory.Marketing) + Spent(LedgerCategory.Other)
+                                + Spent(LedgerCategory.Returns) + Spent(LedgerCategory.Training),
                 Interest = Spent(LedgerCategory.Interest),
                 Depreciation = depreciation,
             };
@@ -91,7 +92,7 @@ namespace Geminium.Core.Finance
 
             report.Cash = company.Cash;
             report.Debt = company.Debt;
-            report.InventoryValue = company.Inventory.TotalValue();
+            report.InventoryValue = company.Inventory.TotalValue() + world.Production.WipValue(company);
             report.MachinesValue = equipmentValue;
             report.Reputation = company.Reputation;
 
@@ -156,6 +157,22 @@ namespace Geminium.Core.Finance
             report.UnitsSold = stats.Sold.Values.Sum();
             report.LostSales = stats.LostSales.Values.Sum();
             report.OverflowDays = stats.OverflowDays;
+            report.LogisticsKm = stats.LogisticsMeters / 1000;
+            report.DowntimeNoOperatorHours = stats.DowntimeMinutes[0] / 60.0;
+            report.DowntimeNoMaterialsHours = stats.DowntimeMinutes[1] / 60.0;
+            report.DowntimeBrokenHours = stats.DowntimeMinutes[2] / 60.0;
+            report.DowntimeMaintenanceHours = stats.DowntimeMinutes[3] / 60.0;
+            report.Breakdowns = stats.Breakdowns;
+            report.Maintenances = stats.Maintenances;
+            report.DetectedDefects = stats.DetectedDefects;
+            report.ScrappedUnits = stats.ScrappedUnits;
+            report.ReturnedUnits = stats.ReturnedUnits;
+            report.RejectedBatches = stats.RejectedBatches;
+            report.Workers = company.Workers.Count;
+            report.AverageMorale = company.Workers.Count > 0 ? company.Workers.Average(w => w.Morale) : 0;
+            report.Hires = stats.Hires;
+            report.Quits = stats.Quits;
+            report.OvertimeHours = stats.OvertimeHours;
             foreach (var product in catalog.Products)
             {
                 stats.Sold.TryGetValue(product.Id, out long sold);

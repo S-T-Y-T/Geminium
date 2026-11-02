@@ -6,7 +6,7 @@ namespace Geminium.Core.Warehouse
 {
     // Склад (GDD 7.5). Каждый день в конце: аренда + обслуживание занятых ячеек, штраф за единицы,
     // которые не поместились. Ячейки заполняются по порядку: сначала сырьё, потом продукция, внутри — по Id.
-    // На этапе 1 склад — только ёмкость (ячейки), стеллажи без расстановки по цеху.
+    // Вместимость — площадка у ворот плюс стеллажи, расставленные в цехе. Аренда пристроек — тоже здесь.
     public sealed class WarehouseSystem : SimulationSystem
     {
         private readonly GameWorld world;
@@ -42,6 +42,7 @@ namespace Geminium.Core.Warehouse
 
             foreach (var pair in company.Inventory.Materials) Place(pair.Value, catalog.Material(pair.Key).UnitsPerCell);
             foreach (var pair in company.Inventory.Products) Place(pair.Value, catalog.Product(pair.Key).UnitsPerCell);
+            foreach (var pair in company.Inventory.DefectiveStockItems) Place(pair.Value, catalog.Product(pair.Key).UnitsPerCell);
             return (used, overflow);
         }
 
@@ -53,21 +54,14 @@ namespace Geminium.Core.Warehouse
                 if (company.IsBankrupt) continue;
                 var (occupied, overflow) = Occupancy(company);
                 long cost = Formulas.WarehouseDailyCost(settings.DailyRent, occupied, settings.DailyCostPerOccupiedCell);
-                company.Pay(LedgerCategory.Rent, (long)Math.Round(cost * priceLevel));
+                double expansions = company.Floor.Expansions * catalog.Floor.ExpansionMonthlyRent / 30.4;
+                company.Pay(LedgerCategory.Rent, (long)Math.Round((cost + expansions) * priceLevel));
                 if (overflow > 0)
                 {
                     company.Pay(LedgerCategory.Penalties, (long)Math.Round(overflow * settings.OverflowPenaltyPerUnit));
                     company.CurrentMonth.OverflowDays++;
                 }
             }
-        }
-
-        internal void AddRacks(Company company, int count)
-        {
-            long price = settings.RackPrice * count;
-            company.Pay(LedgerCategory.Equipment, price);
-            company.racks.Add(new OwnedEquipment("rack", price, Simulation.MonthIndex));
-            company.WarehouseCells += count * settings.CellsPerRack;
         }
     }
 }

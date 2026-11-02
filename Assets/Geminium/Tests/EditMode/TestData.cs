@@ -8,7 +8,7 @@ namespace Geminium.Tests.EditMode
     internal static class TestData
     {
         // Минимальный корректный набор: хлопок с одним поставщиком, два раскройных станка,
-        // добок из одной операции раскроя, раскройщик и разнорабочий.
+        // добок из одной операции раскроя, раскройщик, разнорабочий, наладчик и контролёр.
         public static GameData Minimal() => new GameData
         {
             Materials = { new MaterialDef { Id = "cotton", BasePrice = 25000, Volatility = 0.1, UnitsPerCell = 200, MarketSupplyPerMonth = 20000 } },
@@ -37,6 +37,8 @@ namespace Geminium.Tests.EditMode
             {
                 new ProfessionDef { Id = "cutter", BaseMonthlyWage = 4000000, OperatedZone = ProductionZone.Cutting },
                 new ProfessionDef { Id = "laborer", BaseMonthlyWage = 3000000 },
+                new ProfessionDef { Id = "mechanic", BaseMonthlyWage = 5500000 },
+                new ProfessionDef { Id = "qc_inspector", BaseMonthlyWage = 4500000 },
             },
             StartingCash = 80000000,
         };

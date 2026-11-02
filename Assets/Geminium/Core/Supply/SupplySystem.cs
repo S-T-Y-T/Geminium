@@ -153,6 +153,17 @@ namespace Geminium.Core.Supply
 
             var supplier = delivery.Supplier;
             double quality = Formulas.Clamp(random.Range(supplier.QualityMin, supplier.QualityMax) + Economy.Additive(EventEffect.BatchQuality), 0, 100);
+            if (company.InputQcEnabled && company.HasQcStation && company.CountWorkers(catalog.Staff.QcInspectorProfessionId) > 0
+                && quality < catalog.Quality.InputQcThreshold)
+            {
+                // Входной контроль вернул партию: поставщик заменяет её без оплаты сейчас (GDD 7.4).
+                company.CurrentMonth.RejectedBatches++;
+                var replacement = new PendingDelivery(company, supplier, delivery.Quantity, delivery.UnitPrice,
+                    Simulation.Now.DayIndex + Math.Max(1, supplier.LeadTimeDays));
+                pending.Add(replacement);
+                Simulation.Scheduler.Schedule(new SimTime(replacement.DueDay * SimTime.MinutesPerDay), () => Deliver(replacement));
+                return;
+            }
             long cost = (long)Math.Round(delivery.Quantity * delivery.UnitPrice);
             company.Pay(LedgerCategory.MaterialPurchases, cost);
             company.Inventory.AddMaterial(supplier.MaterialId, delivery.Quantity, quality, delivery.UnitPrice);

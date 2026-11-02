@@ -17,15 +17,25 @@ namespace Geminium.Core.Companies
             public double Quantity;
             public double Quality;
             public double UnitCost;
+            public double HiddenDefects; // брак, который не нашёл ОТК (только у продукции)
         }
 
         private readonly SortedDictionary<string, Lot> materials = new SortedDictionary<string, Lot>(StringComparer.Ordinal);
         private readonly SortedDictionary<string, Lot> products = new SortedDictionary<string, Lot>(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, Lot> defective = new SortedDictionary<string, Lot>(StringComparer.Ordinal);
 
         public double MaterialQuantity(string materialId) => Get(materials, materialId)?.Quantity ?? 0;
         public double MaterialQuality(string materialId) => Get(materials, materialId)?.Quality ?? 0;
         public long ProductUnits(string productId) => (long)Math.Round(Get(products, productId)?.Quantity ?? 0);
         public double ProductQuality(string productId) => Get(products, productId)?.Quality ?? 0;
+        public long HiddenDefects(string productId) => (long)Math.Round(Get(products, productId)?.HiddenDefects ?? 0);
+        public long DefectiveStock(string productId) => (long)Math.Round(Get(defective, productId)?.Quantity ?? 0);
+
+        // Найденный ОТК брак, который решили хранить (занимает склад).
+        public IEnumerable<KeyValuePair<string, long>> DefectiveStockItems
+        {
+            get { foreach (var pair in defective) yield return new KeyValuePair<string, long>(pair.Key, (long)Math.Round(pair.Value.Quantity)); }
+        }
 
         public IEnumerable<KeyValuePair<string, double>> Materials
         {
@@ -43,6 +53,7 @@ namespace Geminium.Core.Companies
             double value = 0;
             foreach (var lot in materials.Values) value += lot.Quantity * lot.UnitCost;
             foreach (var lot in products.Values) value += lot.Quantity * lot.UnitCost;
+            foreach (var lot in defective.Values) value += lot.Quantity * lot.UnitCost;
             return (long)Math.Round(value);
         }
 
@@ -52,11 +63,28 @@ namespace Geminium.Core.Companies
         public bool TryTakeMaterial(string materialId, double quantity, out double quality, out double unitCost) =>
             TryTake(materials, materialId, quantity, out quality, out unitCost);
 
-        public void AddProducts(string productId, long units, double quality, double unitCost) =>
+        public void AddProducts(string productId, long units, double quality, double unitCost, long hiddenDefects = 0)
+        {
             Add(products, productId, units, quality, unitCost);
+            if (hiddenDefects > 0) products[productId].HiddenDefects += Math.Min(hiddenDefects, units);
+        }
+
+        public void AddDefectiveStock(string productId, long units, double unitCost) => Add(defective, productId, units, 0, unitCost);
 
         public bool TryTakeProducts(string productId, long units, out double quality, out double unitCost) =>
-            TryTake(products, productId, units, out quality, out unitCost);
+            TryTakeProducts(productId, units, out quality, out unitCost, out _);
+
+        // Скрытый брак уходит вместе с продажей пропорционально его доле в партии.
+        public bool TryTakeProducts(string productId, long units, out double quality, out double unitCost, out long hiddenDefects)
+        {
+            hiddenDefects = 0;
+            var lot = Get(products, productId);
+            double share = lot != null && lot.Quantity > 0 ? lot.HiddenDefects / lot.Quantity : 0;
+            if (!TryTake(products, productId, units, out quality, out unitCost)) return false;
+            hiddenDefects = Math.Min(units, (long)Math.Round(units * share));
+            if (lot != null && products.ContainsKey(productId)) lot.HiddenDefects = Math.Max(0, lot.HiddenDefects - hiddenDefects);
+            return true;
+        }
 
         private static Lot Get(SortedDictionary<string, Lot> lots, string id) =>
             id != null && lots.TryGetValue(id, out var lot) ? lot : null;

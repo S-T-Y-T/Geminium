@@ -3,22 +3,6 @@ using System.Collections.Generic;
 
 namespace Geminium.Core.Companies
 {
-    // Купленное оборудование: станок или стеллаж. На этапе 1 станки не изнашиваются
-    // (заглушка производства), остаточная стоимость убывает линейно (GDD 7.8, Приложение Д).
-    public sealed class OwnedEquipment
-    {
-        public string EquipmentId { get; }  // Id станка из данных или "rack" для стеллажа
-        public long PurchasePrice { get; }
-        public int PurchaseMonth { get; }
-
-        public OwnedEquipment(string equipmentId, long purchasePrice, int purchaseMonth)
-        {
-            EquipmentId = equipmentId;
-            PurchasePrice = purchasePrice;
-            PurchaseMonth = purchaseMonth;
-        }
-    }
-
     // Кредит: равные доли тела в конце каждого месяца, проценты на остаток (GDD 7.8).
     public sealed class Loan
     {
@@ -40,7 +24,7 @@ namespace Geminium.Core.Companies
         }
     }
 
-    // Накопители текущего месяца: их заполняют производство и рынок, финансы закрывают месяц.
+    // Накопители текущего месяца: их заполняют подсистемы, финансы закрывают месяц.
     public sealed class MonthStats
     {
         public long CostOfGoodsSold;
@@ -51,6 +35,17 @@ namespace Geminium.Core.Companies
         public readonly SortedDictionary<string, long> Sold = new SortedDictionary<string, long>(StringComparer.Ordinal);
         public readonly SortedDictionary<string, long> LostSales = new SortedDictionary<string, long>(StringComparer.Ordinal);
         public int OverflowDays;
+        public double LogisticsMeters;
+        public readonly long[] DowntimeMinutes = new long[4];   // по DowntimeCause
+        public int Breakdowns;
+        public int Maintenances;
+        public long DetectedDefects;
+        public long ScrappedUnits;
+        public long ReturnedUnits;
+        public int RejectedBatches;
+        public int Hires;
+        public int Quits;
+        public double OvertimeHours;
 
         internal static void Add(SortedDictionary<string, long> counter, string id, long amount)
         {
@@ -68,10 +63,21 @@ namespace Geminium.Core.Companies
             Sold.Clear();
             LostSales.Clear();
             OverflowDays = 0;
+            LogisticsMeters = 0;
+            Array.Clear(DowntimeMinutes, 0, DowntimeMinutes.Length);
+            Breakdowns = 0;
+            Maintenances = 0;
+            DetectedDefects = 0;
+            ScrappedUnits = 0;
+            ReturnedUnits = 0;
+            RejectedBatches = 0;
+            Hires = 0;
+            Quits = 0;
+            OvertimeHours = 0;
         }
     }
 
-    // Итоги месяца компании: P&L, баланс, капитализация (GDD 7.8, 7.10). Основа KPI для Лаборатории.
+    // Итоги месяца компании: P&L, баланс, капитализация и операционные KPI (GDD 7.8, 7.10, 10).
     public sealed class MonthlyReport
     {
         public int Month;
@@ -82,7 +88,7 @@ namespace Geminium.Core.Companies
         public long Rent;
         public long Energy;
         public long Penalties;
-        public long OtherExpenses;      // маркетинг, ТО, прочее
+        public long OtherExpenses;      // ТО и ремонт, возвраты, обучение, маркетинг, прочее
         public long Interest;
         public long Depreciation;
         public long PreTaxProfit;
@@ -90,8 +96,8 @@ namespace Geminium.Core.Companies
         public long NetIncome;
         public long Cash;
         public long Debt;
-        public long InventoryValue;
-        public long MachinesValue;
+        public long InventoryValue;     // склад + незавершённое производство
+        public long MachinesValue;      // оборудование по остаточной стоимости
         public long Capitalization;
         public double CreditRating;
         public double Reputation;
@@ -101,6 +107,22 @@ namespace Geminium.Core.Companies
         public long UnitsSold;
         public long LostSales;
         public int OverflowDays;
+        public double LogisticsKm;
+        public double DowntimeNoOperatorHours;
+        public double DowntimeNoMaterialsHours;
+        public double DowntimeBrokenHours;
+        public double DowntimeMaintenanceHours;
+        public int Breakdowns;
+        public int Maintenances;
+        public long DetectedDefects;
+        public long ScrappedUnits;
+        public long ReturnedUnits;
+        public int RejectedBatches;
+        public int Workers;
+        public double AverageMorale;
+        public int Hires;
+        public int Quits;
+        public double OvertimeHours;
         public readonly SortedDictionary<string, long> SoldByProduct = new SortedDictionary<string, long>(StringComparer.Ordinal);
         public readonly SortedDictionary<string, long> LostSalesByProduct = new SortedDictionary<string, long>(StringComparer.Ordinal);
         public readonly SortedDictionary<string, double> MarketShareByProduct = new SortedDictionary<string, double>(StringComparer.Ordinal);

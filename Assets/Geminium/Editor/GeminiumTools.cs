@@ -44,6 +44,63 @@ namespace Geminium.EditorTools
             return outputPath;
         }
 
+        // Снимок цеха в PNG для документов (TODO 2.8): стандартная партия, N месяцев, цех компании №company.
+        // Unity.exe -batchmode -projectPath <проект> -executeMethod Geminium.EditorTools.GeminiumTools.CaptureFloorFromCommandLine
+        //           [-geminiumMonths 3] [-geminiumCompany 0] [-geminiumSpaghetti] [-geminiumOut путь.png] -quit
+        // Без -nographics: снимку нужна видеокарта.
+        public static void CaptureFloorFromCommandLine()
+        {
+            int months = int.Parse(Argument("-geminiumMonths") ?? "3");
+            int company = int.Parse(Argument("-geminiumCompany") ?? "0");
+            bool spaghetti = Array.IndexOf(Environment.GetCommandLineArgs(), "-geminiumSpaghetti") >= 0;
+            CaptureFloor(1, months, company, spaghetti, Argument("-geminiumOut"));
+        }
+
+        public static string CaptureFloor(ulong seed, int months, int companyIndex, bool spaghetti, string outputPath)
+        {
+            var database = AssetDatabase.LoadAssetAtPath<GameDatabase>(DatabasePath);
+            var world = ScenarioRunner.CreateStandardWorld(database.CreateCatalog(), seed);
+            world.Simulation.RunMonths(months);
+            world.Simulation.RunMinutes(10 * 60); // 10:00 — середина первой смены, люди на местах
+
+            EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            var floor = world.Companies[companyIndex].Floor;
+            const int cellPixels = 40;
+            int width = (floor.Width + 2) * cellPixels, height = (floor.Height + 2) * cellPixels;
+            var camera = new GameObject("Camera").AddComponent<Camera>();
+            camera.orthographic = true;
+            camera.orthographicSize = (floor.Height + 2) / 2f;
+            camera.transform.position = new Vector3(floor.Width / 2f, floor.Height / 2f, -10);
+            camera.clearFlags = CameraClearFlags.SolidColor;
+            camera.backgroundColor = new Color(0.36f, 0.38f, 0.42f);
+            var view = new GameObject("Floor").AddComponent<FloorView>();
+            view.World = world;
+            view.CompanyIndex = companyIndex;
+            view.ShowSpaghetti = spaghetti;
+            view.Render();
+
+            var target = new RenderTexture(width, height, 24);
+            camera.targetTexture = target;
+            camera.aspect = width / (float)height;
+            // Первый кадр — пробный: в нём только что созданные спрайты рисуются с чужой текстурой.
+            camera.Render();
+            camera.Render();
+            RenderTexture.active = target;
+            var image = new Texture2D(width, height, TextureFormat.RGB24, false);
+            image.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+            image.Apply();
+            RenderTexture.active = null;
+            camera.targetTexture = null;
+
+            string company = world.Companies[companyIndex].Id;
+            outputPath ??= Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Reports",
+                $"floor_{company}_{months}m{(spaghetti ? "_spaghetti" : "")}.png");
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+            File.WriteAllBytes(outputPath, image.EncodeToPNG());
+            Debug.Log($"Geminium: снимок цеха {company} сохранён в {outputPath}");
+            return outputPath;
+        }
+
         // Отладочная сцена: камера + объект Simulation с DebugSimulationRunner и ссылкой на GameDatabase.
         [MenuItem("Geminium/Создать отладочную сцену")]
         public static void BuildDebugScene()

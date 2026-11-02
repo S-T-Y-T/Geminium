@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Geminium.Core.Data;
 using Geminium.Core.Time;
@@ -15,11 +16,32 @@ namespace Geminium.Core.Companies
 
         internal abstract void Apply(Company company, GameWorld world);
 
+        // Команда принята в очередь (например, кандидат резервируется, чтобы его не наняли другие).
+        internal virtual void OnAccepted(Company company, GameWorld world) { }
+
         protected static string CheckProduct(DataCatalog catalog, string productId) =>
             catalog.Products.Any(p => p.Id == productId) ? null : $"Нет продукта «{productId}».";
 
         protected static string CheckCash(Company company, long cost) =>
             company.Cash >= cost ? null : $"Не хватает денег: нужно {cost:N0} сум, на счёте {company.Cash:N0}.";
+    }
+
+    // Пакет команд, зависящих друг от друга (например, «покрасить зоны → поставить станки»).
+    // Каждая подкоманда проверяется в момент применения, по очереди, и пропускается, если недопустима
+    // (в том числе если на неё не хватает денег).
+    public sealed class BatchCommand : CompanyCommand
+    {
+        public IReadOnlyList<CompanyCommand> Commands { get; }
+
+        public BatchCommand(IEnumerable<CompanyCommand> commands) { Commands = commands.ToList(); }
+
+        public override string Validate(Company company, GameWorld world) => Commands.Count == 0 ? "Пакет пуст." : null;
+
+        internal override void Apply(Company company, GameWorld world)
+        {
+            foreach (var command in Commands)
+                if (command.Validate(company, world) == null) command.Apply(company, world);
+        }
     }
 
     // Розничная цена продукта (канал B2C).
@@ -96,40 +118,6 @@ namespace Geminium.Core.Companies
         }
 
         internal override void Apply(Company company, GameWorld world) => company.Schedule = new WorkSchedule(settings);
-    }
-
-    // Купить станок (GDD 7.6.2). На этапе 1 станок сразу работает в своей зоне.
-    public sealed class BuyMachineCommand : CompanyCommand
-    {
-        public string MachineId { get; }
-
-        public BuyMachineCommand(string machineId) { MachineId = machineId; }
-
-        public override string Validate(Company company, GameWorld world)
-        {
-            if (!world.Catalog.Machines.Any(m => m.Id == MachineId)) return $"Нет станка «{MachineId}».";
-            return CheckCash(company, world.Catalog.Machine(MachineId).Price);
-        }
-
-        internal override void Apply(Company company, GameWorld world)
-        {
-            long price = world.Catalog.Machine(MachineId).Price;
-            company.Pay(LedgerCategory.Equipment, price);
-            company.machines.Add(new OwnedEquipment(MachineId, price, world.Simulation.MonthIndex));
-        }
-    }
-
-    // Купить стеллажи — расширить склад (GDD 7.5).
-    public sealed class BuyRacksCommand : CompanyCommand
-    {
-        public int Count { get; }
-
-        public BuyRacksCommand(int count) { Count = count; }
-
-        public override string Validate(Company company, GameWorld world) =>
-            Count < 1 ? "Нужно купить хотя бы один стеллаж." : CheckCash(company, world.Catalog.Warehouse.RackPrice * Count);
-
-        internal override void Apply(Company company, GameWorld world) => world.Warehouse.AddRacks(company, Count);
     }
 
     // Разовый заказ сырья у поставщика (GDD 7.4). Оплата — при поставке.

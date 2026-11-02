@@ -124,8 +124,9 @@ namespace Geminium.Core.Data
                     if (input != null && materialIds.Contains(input.MaterialId ?? "") && !suppliedMaterials.Contains(input.MaterialId))
                         errors.Add($"Продукт «{p.Id}»: у сырья «{input.MaterialId}» нет поставщика.");
 
-            if (data.Production != null && data.Production.BaseLaborers > 0 && !professionIds.Contains(data.Production.LaborProfessionId ?? ""))
-                errors.Add($"Производство: нет профессии «{data.Production.LaborProfessionId}» для разнорабочих.");
+            if (data.Staff != null)
+                foreach (var id in new[] { data.Staff.LaborerProfessionId, data.Staff.MechanicProfessionId, data.Staff.QcInspectorProfessionId })
+                    if (!professionIds.Contains(id ?? "")) errors.Add($"Персонал: нет профессии «{id}».");
 
             CheckSettings(data, errors);
             return errors;
@@ -179,9 +180,34 @@ namespace Geminium.Core.Data
 
             var production = data.Production;
             if (production == null) errors.Add("Не заданы параметры производства.");
-            else if (production.DefaultSkill < 0 || production.DefaultSkill > 100 || production.DefaultMachineCondition < 0 || production.DefaultMachineCondition > 100
-                     || production.EnergyPricePerKwh < 0 || production.BaseLaborers < 0)
+            else if (production.EnergyPricePerKwh < 0 || production.MismatchEfficiency <= 0 || production.MismatchEfficiency > 1
+                     || production.DefaultTransportBatch < 1 || production.MaxTransportBatch < production.DefaultTransportBatch
+                     || production.FlushMinutes < 1 || production.RequestIntervalMinutes < 1)
                 errors.Add("Производство: неверные параметры.");
+
+            var floor = data.Floor;
+            if (floor == null) errors.Add("Не заданы параметры цеха.");
+            else if (floor.BuildingWidth < 8 || floor.BuildingHeight < 8 || floor.CellSizeMeters <= 0 || floor.ExpansionColumns < 1 || floor.MaxExpansions < 0
+                     || floor.WalkMetersPerMinute <= 0 || floor.LoadMinutes < 0 || floor.RearFeedExtraMinutes < 0 || floor.RelocationCostShare < 0)
+                errors.Add("Цех: неверные параметры.");
+
+            var maintenance = data.Maintenance;
+            if (maintenance == null) errors.Add("Не заданы параметры обслуживания.");
+            else if (maintenance.DefaultIntervalOperations < 1 || maintenance.PlannedMinutes < 0 || maintenance.UnplannedMinutes < 1
+                     || maintenance.NoMechanicFactor < 1 || maintenance.ConditionAfterRepair <= 0 || maintenance.ConditionAfterRepair > 100)
+                errors.Add("Обслуживание: неверные параметры.");
+
+            var staff = data.Staff;
+            if (staff == null) errors.Add("Не заданы параметры персонала.");
+            else if (staff.CandidatesPerProfession < 0 || staff.FatiguePerHour < 0 || staff.FatigueRecoveryPerHour < 0 || staff.MaxOvertimeHours < 0
+                     || staff.OvertimePayFactor < 1 || staff.StartingMorale < 0 || staff.StartingMorale > 100 || staff.QuitMorale < 0 || staff.QuitMorale >= staff.StartingMorale)
+                errors.Add("Персонал: неверные параметры.");
+
+            var quality = data.Quality;
+            if (quality == null) errors.Add("Не заданы параметры качества.");
+            else if (quality.OutputQcDetection < 0 || quality.OutputQcDetection > 1 || quality.QcUnitsPerHour < 1 || quality.InputQcThreshold < 0
+                     || quality.InputQcThreshold > 100 || quality.RepairMinutes < 1 || quality.DiscountPriceShare < 0 || quality.DiscountPriceShare > 1)
+                errors.Add("Качество: неверные параметры.");
 
             if (data.Pacing == null) errors.Add("Не заданы параметры темпа игры.");
             else if (data.Pacing.SecondsPerShiftAtX1 <= 0 || data.Pacing.NonWorkingSpeedup < 1 || data.Pacing.MaxTicksPerAdvance < 1)

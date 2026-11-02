@@ -83,15 +83,89 @@ namespace Geminium.Core.Data
         public long RackPrice = 2500000;
     }
 
-    // Производство. На этапе 1 — заглушка: выпуск = мощность станков × рабочее время (TODO 1.11).
+    // Производство на пространственном цехе (GDD 7.6).
     [Serializable]
     public sealed class ProductionSettings
     {
-        public double DefaultSkill = 50;             // навык рабочих до появления персонала (этап 2)
-        public double DefaultMachineCondition = 100; // станки пока не изнашиваются
         public double WearExponent = 2;              // k в M(Cond) — рост брака при износе
         public long EnergyPricePerKwh = 1000;        // тариф для юрлиц, сумы/кВт·ч
-        public string LaborProfessionId = "laborer"; // разнорабочие на складе
-        public int BaseLaborers = 1;
+        public double MismatchEfficiency = 0.6;      // k_fit, если профессия не совпадает с зоной станка
+        public int DefaultTransportBatch = 5;        // транспортная партия по умолчанию, штук
+        public int MaxTransportBatch = 20;
+        public int FlushMinutes = 120;               // неполную партию везут, если она ждёт дольше
+        public int RequestIntervalMinutes = 10;      // как часто цех формирует заявки на перевозку
+    }
+
+    // Здание и логистика (GDD 7.6.1, 7.6.6).
+    [Serializable]
+    public sealed class FloorSettings
+    {
+        public int BuildingWidth = 32;               // клеток
+        public int BuildingHeight = 20;
+        public double CellSizeMeters = 2;
+        public int ExpansionColumns = 8;             // сколько столбцов клеток даёт одно расширение
+        public int MaxExpansions = 2;
+        public long ExpansionMonthlyRent = 5000000;  // аренда одного расширения в месяц
+        public double WalkMetersPerMinute = 40;      // скорость разнорабочего с опытом 50
+        public double LoadMinutes = 1;               // погрузка или разгрузка партии
+        public double RearFeedExtraMinutes = 0.5;    // t_feed: подача сзади удлиняет каждую операцию
+        public double RelocationCostShare = 0.05;    // перенос станка — доля его цены
+        public long QcTablePrice = 3000000;
+        public long DeskPrice = 1000000;
+    }
+
+    // Износ и обслуживание станков (GDD 7.6.5).
+    [Serializable]
+    public sealed class MaintenanceSettings
+    {
+        public int DefaultIntervalOperations = 400;  // регламент ТО по умолчанию
+        public double PlannedCostShare = 0.01;       // плановое ТО — доля цены станка
+        public int PlannedMinutes = 120;
+        public double UnplannedCostShare = 0.05;     // внеплановый ремонт после поломки
+        public int UnplannedMinutes = 480;
+        public double NoMechanicFactor = 2;          // без наладчика ремонт дольше и дороже (сторонний сервис)
+        public double ConditionAfterRepair = 80;
+    }
+
+    // Персонал и рынок труда (GDD 7.7).
+    [Serializable]
+    public sealed class StaffSettings
+    {
+        public string LaborerProfessionId = "laborer";
+        public string MechanicProfessionId = "mechanic";
+        public string QcInspectorProfessionId = "qc_inspector";
+        public int CandidatesPerProfession = 4;      // кандидатов каждой профессии в месяц при нормальной экономике
+        public double CandidateExperienceMean = 35;
+        public double CandidateExperienceSd = 20;
+        public double WageExperienceFactor = 0.004;  // ожидаемая зарплата = база × (0,8 + опыт × k) × уровень цен
+        public double FatiguePerHour = 8;
+        public double FatigueRecoveryPerHour = 6;
+        public double ExperiencePerHour = 0.02;
+        public int MaxOvertimeHours = 4;
+        public double OvertimePayFactor = 1.5;
+        public double OvertimeFatigueFactor = 1.5;
+        public int OvertimeDaysTolerance = 8;        // переработки сверх этого числа дней в месяц снижают мораль
+        public double MoralePerExcessOvertimeDay = 1.5;
+        public double MoralePerBreakdown = 2;
+        public double MoraleWageGapFactor = 0.5;     // пунктов морали за каждый % отставания зарплаты от рынка
+        public double MoraleRecoveryPerMonth = 2;
+        public double StartingMorale = 70;
+        public double QuitMorale = 25;               // ниже — увольняется
+        public double SeveranceMonths = 1;
+        public long TrainingCost = 1500000;
+        public double TrainingExperienceGain = 10;
+    }
+
+    // Контроль качества и брак (GDD 7.6.6, 7.4).
+    [Serializable]
+    public sealed class QualitySettings
+    {
+        public double OutputQcDetection = 0.9;       // доля брака, которую находит выходной ОТК
+        public int QcUnitsPerHour = 60;              // сколько единиц контролёр проверяет за час
+        public double InputQcThreshold = 40;         // партии сырья хуже этого качества возвращаются поставщику
+        public int RepairMinutes = 20;               // ремонт бракованной единицы на швейном станке
+        public double RepairQualityPenalty = 10;
+        public double DiscountPriceShare = 0.4;      // уценённый брак продаётся за эту долю цены
+        public long ReturnFee = 15000;               // экспертиза по каждому возврату
     }
 }

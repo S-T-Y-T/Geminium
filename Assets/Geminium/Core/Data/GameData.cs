@@ -29,5 +29,9 @@ namespace Geminium.Core.Data
         public SupplySettings Supply = new SupplySettings();
         public WarehouseSettings Warehouse = new WarehouseSettings();
         public ProductionSettings Production = new ProductionSettings();
+        public FloorSettings Floor = new FloorSettings();
+        public MaintenanceSettings Maintenance = new MaintenanceSettings();
+        public StaffSettings Staff = new StaffSettings();
+        public QualitySettings Quality = new QualitySettings();
     }
 }

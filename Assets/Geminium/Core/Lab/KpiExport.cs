@@ -8,7 +8,8 @@ namespace Geminium.Core.Lab
 {
     // Выгрузка KPI в CSV для Excel (GDD 10): строка на компанию и месяц.
     // Разделитель «;» и десятичная запятая — так файл без настройки открывает русский Excel.
-    // Колонки: месяц, макроэкономика, P&L, баланс, капитализация, выпуск и продажи, доли и цены сырья.
+    // Колонки: месяц, макроэкономика, P&L, баланс, капитализация, выпуск и продажи, логистика, простои,
+    // качество, персонал, доли рынка и цены сырья.
     public static class KpiExport
     {
         private static readonly CultureInfo Russian = CultureInfo.GetCultureInfo("ru-RU");
@@ -27,6 +28,9 @@ namespace Geminium.Core.Lab
                 "pretax_profit", "profit_tax", "net_income", "cash", "debt", "inventory_value", "equipment_value", "capitalization",
                 "credit_rating", "reputation", "bankrupt",
                 "units_produced", "units_defective", "units_sold", "lost_sales", "overflow_days",
+                "logistics_km", "downtime_no_operator_h", "downtime_no_materials_h", "downtime_broken_h", "downtime_maintenance_h",
+                "breakdowns", "maintenances", "detected_defects", "scrapped_units", "returned_units", "rejected_batches",
+                "workers", "average_morale", "hires", "quits", "overtime_hours",
             };
             header.AddRange(products.Select(p => "sold_" + p));
             header.AddRange(products.Select(p => "share_pct_" + p));
@@ -56,6 +60,10 @@ namespace Geminium.Core.Lab
                         Num(r.PreTaxProfit), Num(r.ProfitTax), Num(r.NetIncome), Num(r.Cash), Num(r.Debt), Num(r.InventoryValue),
                         Num(r.MachinesValue), Num(r.Capitalization), Num(r.CreditRating), Num(r.Reputation), r.Bankrupt ? "1" : "0",
                         Num(r.UnitsProduced), Num(r.UnitsDefective), Num(r.UnitsSold), Num(r.LostSales), Num(r.OverflowDays),
+                        Num(r.LogisticsKm), Num(r.DowntimeNoOperatorHours), Num(r.DowntimeNoMaterialsHours), Num(r.DowntimeBrokenHours),
+                        Num(r.DowntimeMaintenanceHours), Num(r.Breakdowns), Num(r.Maintenances), Num(r.DetectedDefects), Num(r.ScrappedUnits),
+                        Num(r.ReturnedUnits), Num(r.RejectedBatches), Num(r.Workers), Num(r.AverageMorale), Num(r.Hires), Num(r.Quits),
+                        Num(r.OvertimeHours),
                     };
                     row.AddRange(products.Select(p => Num(r.SoldByProduct.TryGetValue(p, out long sold) ? sold : 0)));
                     row.AddRange(products.Select(p => Num((r.MarketShareByProduct.TryGetValue(p, out double share) ? share : 0) * 100)));

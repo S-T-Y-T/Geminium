@@ -2,59 +2,15 @@ using NUnit.Framework;
 using Geminium.Core;
 using Geminium.Core.Companies;
 using Geminium.Core.Data;
+using Geminium.Core.Factory;
 
 namespace Geminium.Tests.EditMode
 {
-    // Производство-заглушка (TODO 1.11), рынок B2C (GDD 7.2) и склад (GDD 7.5).
+    // Рынок B2C (GDD 7.2) и склад (GDD 7.5).
     public class ProductionMarketTests
     {
         private static GameWorld CalmWorld(System.Action<GameData> tweak = null) =>
             TestData.World(d => { TestData.Calm(d); tweak?.Invoke(d); });
-
-        [Test]
-        public void BuyMachine_PaysAndRejectsWhenCashIsShort()
-        {
-            var world = CalmWorld();
-            var player = new PlayerController();
-            var company = world.AddCompany("player", player);
-
-            Assert.IsNull(player.Submit(new BuyMachineCommand("cutting_band")));
-            world.Simulation.Step();
-            Assert.AreEqual(1, company.Machines.Count);
-            Assert.AreEqual(-25000000, company.Ledger.MonthTotal(0, LedgerCategory.Equipment));
-            StringAssert.StartsWith("Не хватает денег", player.Submit(new BuyRacksCommand(1000)));
-        }
-
-        [Test]
-        public void Production_FollowsPlanMaterialsAndPaysWages()
-        {
-            var world = CalmWorld();
-            var player = new PlayerController();
-            var company = world.AddCompany("player", player);
-            player.Submit(new BuyMachineCommand("cutting_band"));
-            player.Submit(new PlaceOrderCommand("cotton_test", 1000));
-            player.Submit(new SetMonthlyPlanCommand("dobok", 100));
-            world.Simulation.RunMonths(1);
-
-            var report = company.Reports[0];
-            Assert.AreEqual(100, report.UnitsProduced + report.UnitsDefective);
-            Assert.AreEqual(750, company.Inventory.MaterialQuantity("cotton"), 1e-6);
-            Assert.AreEqual(7000000, report.Wages);       // разнорабочий 3 млн + раскройщик 4 млн
-            Assert.AreEqual(840000, report.SocialTax);     // 12% от ФОТ
-            Assert.Greater(report.Energy, 0);
-        }
-
-        [Test]
-        public void Production_WithoutMaterials_ProducesNothing()
-        {
-            var world = CalmWorld();
-            var player = new PlayerController();
-            var company = world.AddCompany("player", player);
-            player.Submit(new BuyMachineCommand("cutting_band"));
-            player.Submit(new SetMonthlyPlanCommand("dobok", 100));
-            world.Simulation.RunMonths(1);
-            Assert.AreEqual(0, company.Reports[0].UnitsProduced);
-        }
 
         private static (GameWorld, Company, Company) TwoSellers(long priceB, long stockA, long stockB)
         {
@@ -99,7 +55,19 @@ namespace Geminium.Tests.EditMode
         }
 
         [Test]
-        public void Warehouse_ChargesCellsAndPenalizesOverflow()
+        public void Market_HiddenDefectsComeBackAsReturns()
+        {
+            var world = CalmWorld(d => d.Warehouse.StartingCells = 1000);
+            var a = world.AddCompany("a", new PlayerController());
+            a.Inventory.AddProducts("dobok", 1000, 64, 100000, hiddenDefects: 100);
+            world.Simulation.RunMonths(1);
+            var report = a.Reports[0];
+            Assert.That(report.ReturnedUnits, Is.EqualTo(report.UnitsSold / 10).Within(2));
+            Assert.AreEqual(-report.ReturnedUnits * (450000 + 15000), a.Ledger.MonthTotal(0, LedgerCategory.Returns));
+        }
+
+        [Test]
+        public void Warehouse_ChargesCellsPenalizesOverflowAndGrowsWithRacks()
         {
             var world = CalmWorld(d => d.Warehouse.StartingCells = 1);
             var player = new PlayerController();
@@ -110,9 +78,14 @@ namespace Geminium.Tests.EditMode
             Assert.AreEqual(-(150000 + 2000), company.Ledger.MonthTotal(0, LedgerCategory.Rent));
             Assert.AreEqual(-250 * 500, company.Ledger.MonthTotal(0, LedgerCategory.Penalties));
 
-            player.Submit(new BuyRacksCommand(2));
+            Assert.IsNull(player.Submit(new BatchCommand(new CompanyCommand[]
+            {
+                new PaintZoneCommand(1, 6, 4, 4, ZoneType.RawStorage),
+                new PlaceObjectCommand(FloorObjectKind.Rack, null, 1, 9, Facing.North),
+            })));
             world.Simulation.Step();
-            Assert.AreEqual(21, company.WarehouseCells);
+            Assert.AreEqual(11, company.WarehouseCells);
+            Assert.AreEqual(-2500000, company.Ledger.MonthTotal(0, LedgerCategory.Equipment));
         }
     }
 }

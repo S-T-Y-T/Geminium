@@ -32,6 +32,10 @@ namespace Geminium.Core.Data
         public SupplySettings Supply { get; }
         public WarehouseSettings Warehouse { get; }
         public ProductionSettings Production { get; }
+        public FloorSettings Floor { get; }
+        public MaintenanceSettings Maintenance { get; }
+        public StaffSettings Staff { get; }
+        public QualitySettings Quality { get; }
 
         public DataCatalog(GameData data)
         {
@@ -60,6 +64,10 @@ namespace Geminium.Core.Data
             Supply = data.Supply;
             Warehouse = data.Warehouse;
             Production = data.Production;
+            Floor = data.Floor;
+            Maintenance = data.Maintenance;
+            Staff = data.Staff;
+            Quality = data.Quality;
         }
 
         public MaterialDef Material(string id) => Find(materials, id, "сырья");
