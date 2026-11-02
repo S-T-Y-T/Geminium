@@ -17,6 +17,9 @@ namespace Geminium.Game
     {
         private enum Tool { Select, Zone, Aisle, EraseAisle, Machine, Rack, QcTable, Move }
 
+        // Экранные области панелей (пиксели): верхняя строка и сводка слева — DebugSimulationRunner, справа — эта панель.
+        private const float TopBarHeight = 60, LeftPanelWidth = 380, RightPanelWidth = 300;
+
         private static readonly Color[] ZoneColors =
         {
             new Color(0.93f, 0.93f, 0.93f), new Color(0.80f, 0.92f, 0.82f), new Color(0.98f, 0.82f, 0.85f),
@@ -89,13 +92,8 @@ namespace Geminium.Game
         private void UpdateCamera(FactoryFloor floor)
         {
             if (!cam.orthographic) cam.orthographic = true;
-            if (drawnWidth < 0)
-            {
-                // Первый кадр: цех целиком в центре экрана.
-                cam.transform.position = new Vector3(floor.Width / 2f, floor.Height / 2f, -10);
-                cam.orthographicSize = floor.Height / 2f + 3;
-            }
             var keyboard = Keyboard.current;
+            if (drawnWidth < 0 || (keyboard != null && keyboard.fKey.wasPressedThisFrame)) FitCamera(floor);
             var mouse = Mouse.current;
             float speed = cam.orthographicSize * Time.unscaledDeltaTime;
             var move = Vector3.zero;
@@ -116,6 +114,19 @@ namespace Geminium.Game
                 Vector2 delta = mouse.delta.ReadValue();
                 cam.transform.position -= new Vector3(delta.x, delta.y) * (cam.orthographicSize * 2 / Screen.height);
             }
+        }
+
+        // Весь цех в свободной части экрана: между панелями слева и справа, под верхней строкой.
+        private void FitCamera(FactoryFloor floor)
+        {
+            float freeWidth = Mathf.Max(100, Screen.width - LeftPanelWidth - RightPanelWidth);
+            float freeHeight = Mathf.Max(100, Screen.height - TopBarHeight);
+            float pixelsPerCell = Mathf.Min(freeWidth / (floor.Width + 2), freeHeight / (floor.Height + 2));
+            cam.orthographicSize = Screen.height / (2 * pixelsPerCell);
+            // Центр свободной части экрана (пиксели от левого нижнего угла) должен совпасть с центром цеха.
+            float shiftX = (LeftPanelWidth + freeWidth / 2 - Screen.width / 2f) / pixelsPerCell;
+            float shiftY = (freeHeight / 2 - Screen.height / 2f) / pixelsPerCell;
+            cam.transform.position = new Vector3(floor.Width / 2f - shiftX, floor.Height / 2f - shiftY, -10);
         }
 
         // ---------- Клетки ----------
@@ -325,7 +336,7 @@ namespace Geminium.Game
         private static bool OverPanel(Vector2 screen)
         {
             float top = Screen.height - screen.y; // IMGUI считает от верха
-            return top < 60 || screen.x < 380 || screen.x > Screen.width - 300;
+            return top < TopBarHeight || screen.x < LeftPanelWidth || screen.x > Screen.width - RightPanelWidth;
         }
 
         // ---------- Правая панель ----------
