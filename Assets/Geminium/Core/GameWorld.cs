@@ -7,6 +7,7 @@ using Geminium.Core.Economy;
 using Geminium.Core.Finance;
 using Geminium.Core.Market;
 using Geminium.Core.Production;
+using Geminium.Core.Sales;
 using Geminium.Core.Staff;
 using Geminium.Core.Supply;
 using Geminium.Core.Time;
@@ -16,9 +17,10 @@ namespace Geminium.Core
 {
     // Игровой мир: данные, симуляция, подсистемы и компании. С него начинается любая партия —
     // и в игре, и в прогоне Лаборатории без графики.
-    // Порядок подсистем важен: экономика → персонал (рынок труда) → контроллеры → снабжение → производство →
-    // рынок → склад → финансы. Контроллеры решают, уже видя новый месяц и кандидатов; их команды применяются
-    // до расчётов минуты; финансы подводят месяц последними.
+    // Порядок подсистем важен: экономика → персонал (рынок труда) → маркетинг (турниры, реклама) → тендеры →
+    // контроллеры → снабжение → производство → рынок → склад → финансы. Контроллеры решают, уже видя новый
+    // месяц, кандидатов, турниры и тендеры; их команды применяются до расчётов минуты; контракты отгружаются
+    // раньше розницы; репутация пересчитывается до подведения тендеров; финансы подводят месяц последними.
     public sealed class GameWorld
     {
         private static readonly Regex IdFormat = new Regex("^[a-z][a-z0-9_]*$");
@@ -30,6 +32,8 @@ namespace Geminium.Core
 
         public EconomySystem Economy { get; }
         public StaffSystem Staff { get; }
+        public MarketingSystem Marketing { get; }
+        public TenderSystem Tenders { get; }
         public SupplySystem Supply { get; }
         public ProductionSystem Production { get; }
         public MarketSystem Market { get; }
@@ -43,6 +47,8 @@ namespace Geminium.Core
 
             Simulation.AddSystem(Economy = new EconomySystem(catalog));
             Simulation.AddSystem(Staff = new StaffSystem(this));
+            Simulation.AddSystem(Marketing = new MarketingSystem(this));
+            Simulation.AddSystem(Tenders = new TenderSystem(this));
             Simulation.AddSystem(new ControllerSystem(this));
             Simulation.AddSystem(Supply = new SupplySystem(this));
             Simulation.AddSystem(Production = new ProductionSystem(this));

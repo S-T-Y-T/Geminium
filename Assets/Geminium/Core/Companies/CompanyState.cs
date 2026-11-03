@@ -46,6 +46,16 @@ namespace Geminium.Core.Companies
         public int Hires;
         public int Quits;
         public double OvertimeHours;
+        // Этап 3: тендеры и репутация.
+        public long ContractUnits;          // отгружено по контрактам
+        public long ContractReturnedUnits;  // из возвратов — рекламации по контрактам
+        public int B2bComplaints;           // партий с рекламациями
+        public int TendersWon;
+        public int ContractsCompleted;
+        public int ContractsTerminated;
+        public int Scandals;
+        public double ReputationGain;
+        public double ReputationLoss;
 
         internal static void Add(SortedDictionary<string, long> counter, string id, long amount)
         {
@@ -74,6 +84,15 @@ namespace Geminium.Core.Companies
             Hires = 0;
             Quits = 0;
             OvertimeHours = 0;
+            ContractUnits = 0;
+            ContractReturnedUnits = 0;
+            B2bComplaints = 0;
+            TendersWon = 0;
+            ContractsCompleted = 0;
+            ContractsTerminated = 0;
+            Scandals = 0;
+            ReputationGain = 0;
+            ReputationLoss = 0;
         }
     }
 
@@ -123,6 +142,20 @@ namespace Geminium.Core.Companies
         public int Hires;
         public int Quits;
         public double OvertimeHours;
+        public long ContractRevenue;        // выручка по контрактам B2B (входит в Revenue)
+        public long ContractUnits;
+        public int TendersWon;
+        public int ContractsActive;
+        public int ContractsCompleted;
+        public int ContractsTerminated;
+        public int B2bComplaints;
+        public long MarketingSpend;         // реклама, спонсорство, амбассадоры, сертификация (входит в OtherExpenses)
+        public long AdBudget;
+        public int Certificates;            // действующих
+        public int Ambassadors;
+        public int Scandals;
+        public double ReputationGain;
+        public double ReputationLoss;
         public readonly SortedDictionary<string, long> SoldByProduct = new SortedDictionary<string, long>(StringComparer.Ordinal);
         public readonly SortedDictionary<string, long> LostSalesByProduct = new SortedDictionary<string, long>(StringComparer.Ordinal);
         public readonly SortedDictionary<string, double> MarketShareByProduct = new SortedDictionary<string, double>(StringComparer.Ordinal);

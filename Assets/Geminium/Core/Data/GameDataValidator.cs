@@ -125,12 +125,69 @@ namespace Geminium.Core.Data
                         errors.Add($"Продукт «{p.Id}»: у сырья «{input.MaterialId}» нет поставщика.");
 
             if (data.Staff != null)
-                foreach (var id in new[] { data.Staff.LaborerProfessionId, data.Staff.MechanicProfessionId, data.Staff.QcInspectorProfessionId })
+                foreach (var id in new[] { data.Staff.LaborerProfessionId, data.Staff.MechanicProfessionId, data.Staff.QcInspectorProfessionId,
+                             data.Staff.SalesManagerProfessionId })
                     if (!professionIds.Contains(id ?? "")) errors.Add($"Персонал: нет профессии «{id}».");
 
             CheckSettings(data, errors);
+            CheckSales(data, errors);
             return errors;
         }
+
+        // Этап 3: тендеры, маркетинг, спортсмены, архетипы ботов, суррогат.
+        private static void CheckSales(GameData data, List<string> errors)
+        {
+            CheckIds(data.Athletes, a => a.Id, "Спортсмен", errors);
+            foreach (var a in (data.Athletes ?? new List<AthleteDef>()).Where(a => a != null))
+                if (a.Rating < 0 || a.Rating > 100 || a.MonthlyFee < 0) errors.Add($"Спортсмен «{a.Id}»: рейтинг 0–100, гонорар не меньше нуля.");
+
+            CheckIds(data.BotArchetypes, b => b.Id, "Архетип бота", errors);
+            foreach (var b in (data.BotArchetypes ?? new List<BotArchetypeDef>()).Where(b => b != null))
+            {
+                if (b.MinPriceFactor <= 0 || b.PriceFactor < b.MinPriceFactor || b.PriceFactor > b.MaxPriceFactor)
+                    errors.Add($"Архетип «{b.Id}»: нужно 0 < MinPriceFactor ≤ PriceFactor ≤ MaxPriceFactor.");
+                if (b.AdBudgetShare < 0 || b.AdBudgetShare > b.MaxAdBudgetShare || b.MaxAdBudgetShare > 1 || b.TenderMarkup < 0 || b.TenderMarkup > 1
+                    || b.TenderAppetite < 0 || b.TenderAppetite > 1 || b.HillClimbStep <= 0 || b.MachineTier < 1 || b.MachineTier > 3
+                    || b.MaintenanceInterval < 1 || b.PlanGrowth <= 0 || b.RawRacks < 0 || b.FinishedRacks < 0 || b.SalesManagers < 0 || b.Ambassadors < 0)
+                    errors.Add($"Архетип «{b.Id}»: неверные доли, уровень станков или количества.");
+            }
+
+            var tenders = data.Tenders;
+            if (tenders == null) errors.Add("Не заданы параметры тендеров.");
+            else
+            {
+                if (tenders.MinTendersPerMonth < 0 || tenders.MaxTendersPerMonth < tenders.MinTendersPerMonth || tenders.ReferenceDemand <= 0
+                    || tenders.WeightPrice < 0 || tenders.WeightReputation < 0 || tenders.WeightQualityHistory < 0 || tenders.WeightManagers < 0
+                    || tenders.LatePenaltyPerWeek < 0 || tenders.MaxWeeksLate < 0 || tenders.SponsorshipBonusMonths < 0)
+                    errors.Add("Тендеры: неверные параметры.");
+                var levels = tenders.Levels ?? new List<TenderLevelDef>();
+                foreach (TenderLevel level in Enum.GetValues(typeof(TenderLevel)))
+                    if (levels.Count(l => l != null && l.Level == level) != 1) errors.Add($"Тендеры: уровень {level} должен быть задан ровно один раз.");
+                foreach (var l in levels.Where(l => l != null))
+                    if (l.MinUnits < 1 || l.MaxUnits < l.MinUnits || l.MinDeliveryMonths < 1 || l.MaxDeliveryMonths < l.MinDeliveryMonths
+                        || l.Weight < 0 || l.MaxPriceShare <= 0 || l.MaxPriceShare > 1 || l.MinReputation < 0 || l.MinReputation > 100)
+                        errors.Add($"Тендеры, уровень {l.Level}: неверные партия, срок, вес или предельная цена.");
+                if (levels.Where(l => l != null).Sum(l => l.Weight) <= 0) errors.Add("Тендеры: сумма весов уровней должна быть больше нуля.");
+            }
+
+            var m = data.Marketing;
+            if (m == null) errors.Add("Не заданы параметры маркетинга.");
+            else if (m.AdMaxBoost < 0 || m.AdBudgetScale <= 0 || m.AdCarryover < 0 || m.AdCarryover >= 1 || m.ReputationReversion < 0 || m.ReputationReversion > 1
+                     || !IsShare(m.RegionalTournamentChance) || !IsShare(m.NationalTournamentChance) || !IsShare(m.WorldTournamentChance)
+                     || !IsShare(m.ScandalChance) || !IsShare(m.WinChanceScale) || m.AmbassadorWinGainMax < m.AmbassadorWinGainMin
+                     || m.CertificationMinMonths < 1 || m.CertificationMaxMonths < m.CertificationMinMonths || m.CertificateValidityMonths < 1
+                     || m.CertificationCost < 0 || m.RegionalSponsorshipCost < 0 || m.NationalSponsorshipCost < 0 || m.WorldSponsorshipCost < 0
+                     || m.ManagerMarketingDiscount < 0 || m.MaxManagerMarketingDiscount < 0 || m.MaxManagerMarketingDiscount >= 1)
+                errors.Add("Маркетинг: неверные параметры.");
+
+            var s = data.Surrogate;
+            if (s == null) errors.Add("Не заданы параметры суррогатной модели.");
+            else if (s.Utilization <= 0 || s.Utilization > 2 || s.PlanFulfilment <= 0 || s.PlanFulfilment > 1 || s.DefectMultiplier < 0
+                     || s.EnergyPerMinute < 0 || s.MaintenancePerUnit < 0)
+                errors.Add("Суррогатная модель: неверные параметры.");
+        }
+
+        private static bool IsShare(double value) => value >= 0 && value <= 1;
 
         private static void CheckSettings(GameData data, List<string> errors)
         {

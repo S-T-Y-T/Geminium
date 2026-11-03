@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Geminium.Core.Data;
 using Geminium.Core.Factory;
+using Geminium.Core.Sales;
 using Geminium.Core.Staff;
 using Geminium.Core.Time;
 
@@ -42,6 +43,9 @@ namespace Geminium.Core.Companies
         public DefectPolicy DefectPolicy { get; internal set; } = DefectPolicy.Scrap;
         public bool InputQcEnabled { get; internal set; }
         public int TransportBatch { get; internal set; }
+
+        // Сбыт и маркетинг (этап 3): контракты, сертификаты, реклама, амбассадоры.
+        public SalesState Sales { get; } = new SalesState();
 
         public IReadOnlyList<Loan> Loans => loans;
         public IReadOnlyList<MonthlyReport> Reports => reports;

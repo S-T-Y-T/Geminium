@@ -694,6 +694,7 @@ MonoBehaviour:
       LaborerProfessionId: laborer
       MechanicProfessionId: mechanic
       QcInspectorProfessionId: qc_inspector
+      SalesManagerProfessionId: sales_manager
       CandidatesPerProfession: 4
       CandidateExperienceMean: 35
       CandidateExperienceSd: 20
@@ -722,3 +723,198 @@ MonoBehaviour:
       RepairQualityPenalty: 10
       DiscountPriceShare: 0.4
       ReturnFee: 15000
+    Tenders:
+      MinTendersPerMonth: 1
+      MaxTendersPerMonth: 3
+      ReferenceDemand: 2000
+      WeightPrice: 0.5
+      WeightReputation: 0.2
+      WeightQualityHistory: 0.2
+      WeightManagers: 0.1
+      ManagerBonusPerManager: 0.5
+      SponsorshipScoreBonus: 0.1
+      SponsorshipBonusMonths: 6
+      LatePenaltyPerWeek: 0.02
+      MaxWeeksLate: 4
+      TerminationReputationLoss: 10
+      ComplaintReputationLoss: 2
+      FederationMinReputation: 30
+      Levels:
+      - Level: 0
+        MinUnits: 50
+        MaxUnits: 200
+        MinReputation: 0
+        CertificateRequired: 0
+        CertificateBonus: 0
+        MinDeliveryMonths: 1
+        MaxDeliveryMonths: 1
+        Weight: 0.4
+        MaxPriceShare: 0.7
+      - Level: 1
+        MinUnits: 100
+        MaxUnits: 500
+        MinReputation: 30
+        CertificateRequired: 0
+        CertificateBonus: 0
+        MinDeliveryMonths: 1
+        MaxDeliveryMonths: 2
+        Weight: 0.35
+        MaxPriceShare: 0.65
+      - Level: 2
+        MinUnits: 500
+        MaxUnits: 1500
+        MinReputation: 40
+        CertificateRequired: 0
+        CertificateBonus: 0.1
+        MinDeliveryMonths: 2
+        MaxDeliveryMonths: 2
+        Weight: 0.18
+        MaxPriceShare: 0.6
+      - Level: 3
+        MinUnits: 1000
+        MaxUnits: 3000
+        MinReputation: 50
+        CertificateRequired: 1
+        CertificateBonus: 0
+        MinDeliveryMonths: 2
+        MaxDeliveryMonths: 3
+        Weight: 0.07
+        MaxPriceShare: 0.55
+    Marketing:
+      AdMaxBoost: 0.3
+      AdBudgetScale: 5000000
+      AdCarryover: 0.5
+      ReputationReversion: 0.05
+      ReturnReputationPerPercent: 0.3
+      RegionalTournamentChance: 0.5
+      NationalTournamentChance: 0.15
+      WorldTournamentChance: 0.04
+      RegionalSponsorshipCost: 8000000
+      NationalSponsorshipCost: 25000000
+      WorldSponsorshipCost: 70000000
+      RegionalSponsorshipReputation: 2
+      NationalSponsorshipReputation: 5
+      WorldSponsorshipReputation: 10
+      WinChanceScale: 0.6
+      RegionalWinExponent: 1
+      NationalWinExponent: 3
+      WorldWinExponent: 6
+      AmbassadorWinGainMin: 0.15
+      AmbassadorWinGainMax: 0.2
+      ScandalChance: 0.02
+      ScandalReputationLoss: 8
+      CertificationCost: 12000000
+      CertificationMinMonths: 2
+      CertificationMaxMonths: 3
+      CertificationQuality: 60
+      CertificateValidityMonths: 24
+      CertifiedTournamentBonus: 0.1
+      ManagerMarketingDiscount: 0.05
+      MaxManagerMarketingDiscount: 0.2
+    Athletes:
+    - Id: athlete_1
+      Rating: 95
+      MonthlyFee: 12000000
+    - Id: athlete_2
+      Rating: 88
+      MonthlyFee: 9000000
+    - Id: athlete_3
+      Rating: 82
+      MonthlyFee: 7000000
+    - Id: athlete_4
+      Rating: 75
+      MonthlyFee: 5000000
+    - Id: athlete_5
+      Rating: 68
+      MonthlyFee: 3500000
+    - Id: athlete_6
+      Rating: 60
+      MonthlyFee: 2500000
+    - Id: athlete_7
+      Rating: 52
+      MonthlyFee: 1500000
+    - Id: athlete_8
+      Rating: 45
+      MonthlyFee: 1000000
+    BotArchetypes:
+    - Id: balanced
+      PriceFactor: 1
+      MinPriceFactor: 0.85
+      MaxPriceFactor: 1.2
+      PreferQuality: 0
+      MachineTier: 1
+      PlanGrowth: 1.05
+      QcStation: 1
+      InputQc: 0
+      Mechanic: 1
+      Hiring: 0
+      DefectPolicy: 0
+      MaintenanceInterval: 400
+      RawRacks: 4
+      FinishedRacks: 3
+      SalesManagers: 1
+      AdBudgetShare: 0.03
+      MaxAdBudgetShare: 0.1
+      TenderMarkup: 0.9
+      TenderAppetite: 0.3
+      Certify: 0
+      SponsorUpTo: 0
+      Ambassadors: 0
+      HillClimbStep: 0.05
+    - Id: premium
+      PriceFactor: 1.2
+      MinPriceFactor: 1
+      MaxPriceFactor: 1.5
+      PreferQuality: 1
+      MachineTier: 2
+      PlanGrowth: 1.05
+      QcStation: 1
+      InputQc: 1
+      Mechanic: 1
+      Hiring: 1
+      DefectPolicy: 2
+      MaintenanceInterval: 300
+      RawRacks: 4
+      FinishedRacks: 3
+      SalesManagers: 2
+      AdBudgetShare: 0.06
+      MaxAdBudgetShare: 0.15
+      TenderMarkup: 0.95
+      TenderAppetite: 0.4
+      Certify: 1
+      SponsorUpTo: 2
+      Ambassadors: 1
+      HillClimbStep: 0.05
+    - Id: dumper
+      PriceFactor: 0.85
+      MinPriceFactor: 0.7
+      MaxPriceFactor: 1
+      PreferQuality: 0
+      MachineTier: 1
+      PlanGrowth: 1.1
+      QcStation: 0
+      InputQc: 0
+      Mechanic: 0
+      Hiring: 2
+      DefectPolicy: 0
+      MaintenanceInterval: 800
+      RawRacks: 3
+      FinishedRacks: 2
+      SalesManagers: 0
+      AdBudgetShare: 0.01
+      MaxAdBudgetShare: 0.05
+      TenderMarkup: 0.8
+      TenderAppetite: 0.5
+      Certify: 0
+      SponsorUpTo: 0
+      Ambassadors: 0
+      HillClimbStep: 0.05
+    Surrogate:
+      Utilization: 1.43
+      PlanFulfilment: 0.92
+      DefectMultiplier: 1.578
+      EnergyPerMinute: 8.3
+      MaintenancePerUnit: 569
+      CalibrationSamples: 552
+      OutputR2: 0.958
+      DefectR2: 0.712

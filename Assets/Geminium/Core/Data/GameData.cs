@@ -33,5 +33,28 @@ namespace Geminium.Core.Data
         public MaintenanceSettings Maintenance = new MaintenanceSettings();
         public StaffSettings Staff = new StaffSettings();
         public QualitySettings Quality = new QualitySettings();
+
+        // Этап 3: тендеры, маркетинг, спортсмены-амбассадоры, архетипы ботов, суррогатная модель.
+        public TenderSettings Tenders = new TenderSettings();
+        public MarketingSettings Marketing = new MarketingSettings();
+        public List<AthleteDef> Athletes = new List<AthleteDef>();
+        public List<BotArchetypeDef> BotArchetypes = new List<BotArchetypeDef>
+        {
+            new BotArchetypeDef { Id = "balanced", SalesManagers = 1 },
+            new BotArchetypeDef
+            {
+                Id = "premium", PriceFactor = 1.2, MinPriceFactor = 1.0, MaxPriceFactor = 1.5, PreferQuality = true, MachineTier = 2, InputQc = true,
+                Hiring = CandidateChoice.Experienced, DefectPolicy = Factory.DefectPolicy.Repair, MaintenanceInterval = 300, SalesManagers = 2,
+                AdBudgetShare = 0.06, MaxAdBudgetShare = 0.15, TenderMarkup = 0.95, TenderAppetite = 0.4, Certify = true,
+                SponsorUpTo = TournamentLevel.National, Ambassadors = 1,
+            },
+            new BotArchetypeDef
+            {
+                Id = "dumper", PriceFactor = 0.85, MinPriceFactor = 0.7, MaxPriceFactor = 1.0, PlanGrowth = 1.1, QcStation = false, Mechanic = false,
+                Hiring = CandidateChoice.Cheap, MaintenanceInterval = 800, RawRacks = 3, FinishedRacks = 2, AdBudgetShare = 0.01,
+                MaxAdBudgetShare = 0.05, TenderMarkup = 0.8, TenderAppetite = 0.5,
+            },
+        };
+        public SurrogateSettings Surrogate = new SurrogateSettings();
     }
 }

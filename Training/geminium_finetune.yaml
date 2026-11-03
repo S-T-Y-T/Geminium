@@ -1,0 +1,31 @@
+# Короткое дообучение политики на полном цехе (GDD 8.2): те же наблюдения и действия, но месяц считает
+# детальный цех (около 45 тыс. игровых минут), поэтому шагов мало и шаг обучения меньше.
+# Запуск — с --initialize-from=<run-id обучения на суррогате>, см. Training/README.md.
+behaviors:
+  GeminiumBot:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 128
+      buffer_size: 1152
+      learning_rate: 1.0e-4
+      learning_rate_schedule: constant
+      beta: 2.0e-3
+      epsilon: 0.1
+      lambd: 0.95
+      num_epoch: 3
+    network_settings:
+      normalize: false
+      hidden_units: 128
+      num_layers: 2
+    reward_signals:
+      extrinsic:
+        gamma: 0.97
+        strength: 1.0
+    max_steps: 3000
+    time_horizon: 12
+    summary_freq: 576
+    keep_checkpoints: 2
+    checkpoint_interval: 1500
+engine_settings:
+  no_graphics: true
+  time_scale: 100

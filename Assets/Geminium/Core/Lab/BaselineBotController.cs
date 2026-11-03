@@ -1,102 +1,41 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Geminium.Core.Companies;
 using Geminium.Core.Data;
-using Geminium.Core.Factory;
-using Geminium.Core.Staff;
 
 namespace Geminium.Core.Lab
 {
-    // Профиль скриптового бота (GDD 8.1): цена, качество сырья, станки, персонал и контроль.
-    public sealed class BotProfile
+    // Скриптовый бот (GDD 8.2): базовая линия Лаборатории и запасной вариант до ML-Agents.
+    // Месячные решения — поиск восхождением по четырём ручкам: общий уровень цены, доля рекламы,
+    // наценка в тендерах, рост плана. Цель — чистая прибыль прошлого месяца.
+    // Поверх общего уровня цена каждого продукта подстраивается правилом: много упущенных продаж — дороже,
+    // залежался товар — дешевле. Станок докупается, когда упущенных продаж больше 20% от проданного.
+    public sealed class BaselineBotController : BotController
     {
-        public double PriceFactor = 1.0;       // цена относительно эталонной
-        public bool PreferQuality;             // поставщики с лучшим качеством вместо дешёвых
-        public int MachineTier = 1;            // уровень покупаемых станков
-        public double PlanGrowth = 1.05;       // план = прошлый спрос × рост
-        public bool QcStation = true;          // стол ОТК и контролёр
-        public bool InputQc;                   // входной контроль сырья
-        public bool Mechanic = true;           // наладчик для ТО
-        public CandidateChoice Hiring = CandidateChoice.Balanced;
-        public DefectPolicy DefectPolicy = DefectPolicy.Scrap;
+        private const int PriceKnob = 0, AdKnob = 1, TenderKnob = 2, PlanKnob = 3;
+        private readonly Dictionary<string, double> adjustments = new Dictionary<string, double>();
+        private HillClimber climber;
 
-        public static BotProfile Balanced => new BotProfile();
-        public static BotProfile Premium => new BotProfile
+        public BaselineBotController(BotArchetypeDef archetype) : base(archetype) { }
+
+        public HillClimber Climber => climber;
+
+        protected override bool Decide(int monthIndex)
         {
-            PriceFactor = 1.2, PreferQuality = true, MachineTier = 2, InputQc = true,
-            Hiring = CandidateChoice.Experienced, DefectPolicy = DefectPolicy.Repair,
-        };
-        public static BotProfile Dumper => new BotProfile
-        {
-            PriceFactor = 0.85, PlanGrowth = 1.1, QcStation = false, Mechanic = false, Hiring = CandidateChoice.Cheap,
-        };
-    }
-
-    public enum CandidateChoice
-    {
-        Balanced = 0,     // опыт на сум зарплаты
-        Experienced = 1,  // самые опытные
-        Cheap = 2,        // самые дешёвые
-    }
-
-    // Скриптовый бот: базовая линия Лаборатории и запасной вариант до ML-Agents (GDD 8.2).
-    // Месяц 0: цех по шаблону (FloorPlanner), по станку на зону, найм, цены, план под мощность, поставки.
-    // Каждый день: свободных операторов — к станкам без людей.
-    // Каждый месяц: план = прошлый спрос × рост (под мощность), поставки под план, цена по остаткам и упущенным
-    // продажам, новый станок у прохода при упущенных продажах, найм на свободные места, прибавка при низкой морали.
-    public sealed class BaselineBotController : CompanyController
-    {
-        private const double WeeksPerMonth = 4.33;
-        private const double WorkingDaysPerMonth = 21.7;
-        private const double Utilization = 0.75;   // потери на логистику и простои при оценке мощности
-        private readonly BotProfile profile;
-        private readonly Dictionary<string, double> priceFactors = new Dictionary<string, double>();
-
-        public BaselineBotController(BotProfile profile) { this.profile = profile ?? BotProfile.Balanced; }
-
-        public BotProfile Profile => profile;
-        private DataCatalog Catalog => World.Catalog;
-        private List<ProductDef> Products => Catalog.Products.Where(p => p.UnlockedByDefault).ToList();
-
-        protected internal override void OnMonthStarted(int monthIndex)
-        {
-            if (monthIndex == 0) Setup();
-            else Adjust();
-        }
-
-        protected internal override void OnDayStarted(long dayIndex) => AssignOperators();
-
-        private void Setup()
-        {
-            // Половина капитала — на станки, поровну на зону; в зоне — лучший станок профиля, который укладывается в долю.
-            var zones = Products.SelectMany(p => p.Operations).Select(o => o.Zone).Distinct().OrderBy(z => z).ToList();
-            double perZone = Company.Cash * 0.5 / Math.Max(1, zones.Count);
-            var machines = zones.Select(z => PickMachine(z, perZone)).Where(m => m != null).ToList();
-            var template = new LayoutTemplate { QcStation = profile.QcStation };
-            Submit(new BatchCommand(FloorPlanner.InitialLayout(Catalog, template, machines.Select(m => m.Id))));
-
-            Submit(new SetDefectPolicyCommand(profile.DefectPolicy));
-            Submit(new SetInputQcCommand(profile.InputQc));
-            Hire(machines);
-
-            int rivals = Math.Max(1, World.Companies.Count);
-            var plans = FitToCapacity(Products.ToDictionary(p => p.Id, p => p.BaseDemandPerMonth / (double)rivals), machines);
-            foreach (var product in Products)
+            var a = Archetype;
+            if (climber == null)
             {
-                priceFactors[product.Id] = profile.PriceFactor;
-                Submit(new SetRetailPriceCommand(product.Id, (long)Math.Round(product.BasePrice * profile.PriceFactor)));
-                Submit(new SetMonthlyPlanCommand(product.Id, (int)Math.Round(plans[product.Id])));
+                bool tenders = a.TenderMarkup > 0;
+                climber = new HillClimber(
+                    new[] { a.PriceFactor, a.AdBudgetShare, a.TenderMarkup, a.PlanGrowth },
+                    new[] { a.MinPriceFactor, 0, tenders ? 0.7 : 0, 0.9 },
+                    new[] { a.MaxPriceFactor, a.MaxAdBudgetShare, tenders ? 1.0 : 0, 1.4 },
+                    a.HillClimbStep, World.Simulation.Random.Fork("bot." + Company.Id));
             }
-            UpdateSupply(plans);
-        }
-
-        private void Adjust()
-        {
             var last = Company.LastReport;
-            if (last == null) return;
+            // Первый полный месяц — точка отсчёта; искать начинаем со второго.
+            if (monthIndex >= 2) climber.Step(last.NetIncome);
 
-            var desired = new Dictionary<string, double>();
             long sold = 0, lost = 0;
             foreach (var product in Products)
             {
@@ -104,157 +43,79 @@ namespace Geminium.Core.Lab
                 last.LostSalesByProduct.TryGetValue(product.Id, out long productLost);
                 sold += productSold;
                 lost += productLost;
-                long stock = Company.Inventory.ProductUnits(product.Id);
-                desired[product.Id] = Math.Max(10, (productSold + productLost) * profile.PlanGrowth - stock);
-
-                // Цена: много упущенных продаж — дороже, залежался товар — дешевле.
-                double factor = priceFactors.TryGetValue(product.Id, out double f) ? f : profile.PriceFactor;
-                if (productLost > 0.2 * Math.Max(1, productSold)) factor *= 1.03;
-                else if (stock > productSold) factor *= 0.97;
-                factor = Formulas.Clamp(factor, profile.PriceFactor * 0.8, profile.PriceFactor * 1.25);
-                priceFactors[product.Id] = factor;
-                Submit(new SetRetailPriceCommand(product.Id, (long)Math.Round(product.BasePrice * World.Economy.PriceLevel * factor)));
+                double adjustment = adjustments.TryGetValue(product.Id, out double x) ? x : 1;
+                if (productLost > 0.2 * Math.Max(1, productSold)) adjustment *= 1.03;
+                else if (Company.Inventory.ProductUnits(product.Id) > productSold) adjustment *= 0.97;
+                adjustments[product.Id] = Formulas.Clamp(adjustment, 0.85, 1.15);
+                Knobs.PriceFactors[product.Id] = climber[PriceKnob] * adjustments[product.Id];
             }
+            Knobs.AdShare = climber[AdKnob];
+            Knobs.TenderMarkup = climber[TenderKnob];
+            Knobs.PlanFactor = climber[PlanKnob];
+            Knobs.QualityMaterials = a.PreferQuality;
+            Knobs.Expand = lost > 0.2 * Math.Max(1, sold);
+            return true;
+        }
+    }
 
-            var owned = Company.Machines.Select(m => Catalog.Machine(m.DefId)).ToList();
-            var newMachines = new List<MachineDef>();
-            if (lost > 0.2 * Math.Max(1, sold))
-            {
-                var machine = PickMachine(Bottleneck(desired, owned));
-                var spot = machine == null ? null : FloorPlanner.FindMachineSpot(Company.Floor, Catalog, machine.Id);
-                if (spot.HasValue && Company.Cash > machine.Price * 3)
-                {
-                    Submit(PlaceObjectCommand.Machine(machine.Id, spot.Value.x, spot.Value.y, spot.Value.facing));
-                    newMachines.Add(machine);
-                }
-            }
+    // Бот под управлением политики (обученной нейросети или любой другой реализации IBotPolicy).
+    // Планировка, найм, поставки и маркетинг по архетипу — как у скриптового бота; месячные ручки — от политики.
+    // policy == null — действия приходят извне (дообучение в ML-Agents): в начале месяца бот готовит наблюдения
+    // и ждёт вызова Act; команды месяца применятся на минуту позже — в полночь цех всё равно не работает.
+    public sealed class PolicyBotController : BotController
+    {
+        private readonly IBotPolicy policy;
 
-            var plans = FitToCapacity(desired, owned.Concat(newMachines).ToList());
-            foreach (var pair in plans) Submit(new SetMonthlyPlanCommand(pair.Key, (int)Math.Round(pair.Value)));
-            UpdateSupply(plans);
-            Hire(owned.Concat(newMachines).ToList());
-
-            foreach (var worker in Company.Workers.Where(w => w.Morale < 40))
-                Submit(new SetWageCommand(worker.Id, (long)Math.Round(worker.MonthlyWage * 1.05)));
-
-            if (Company.Cash < 10_000_000 && Company.Debt == 0) Submit(new TakeLoanCommand(30_000_000, 12));
+        public PolicyBotController(BotArchetypeDef archetype, IBotPolicy policy = null) : base(archetype)
+        {
+            this.policy = policy;
         }
 
-        // ---------- Персонал ----------
+        public int[] LastActions { get; private set; }
+        public bool AwaitingActions { get; private set; }
+        public BotSituation PendingSituation { get; private set; }
+        public bool[] PendingMask { get; private set; }
 
-        // Нанять недостающих: оператор на каждый станок, разнорабочие (1 на 3 станка), наладчик, контролёр.
-        private void Hire(List<MachineDef> machines)
+        protected override bool Decide(int monthIndex)
         {
-            var staff = Catalog.Staff;
-            var need = new List<string>();
-            var operatorsByProfession = Company.Workers.GroupBy(w => w.ProfessionId).ToDictionary(g => g.Key, g => g.Count());
-            foreach (var group in machines.GroupBy(m => Catalog.OperatorOf(m.Zone)?.Id).Where(g => g.Key != null))
+            var situation = Situation();
+            var mask = BotActions.Mask(situation);
+            if (policy == null)
             {
-                operatorsByProfession.TryGetValue(group.Key, out int have);
-                for (int i = have; i < group.Count(); i++) need.Add(group.Key);
+                PendingSituation = situation;
+                PendingMask = mask;
+                AwaitingActions = true;
+                return false;
             }
-            int laborers = Math.Max(1, (int)Math.Ceiling(machines.Count / 3.0));
-            for (int i = Company.CountWorkers(staff.LaborerProfessionId); i < laborers; i++) need.Add(staff.LaborerProfessionId);
-            if (profile.Mechanic && Company.CountWorkers(staff.MechanicProfessionId) == 0) need.Add(staff.MechanicProfessionId);
-            if (profile.QcStation && Company.CountWorkers(staff.QcInspectorProfessionId) == 0) need.Add(staff.QcInspectorProfessionId);
-
-            var taken = new HashSet<int>();
-            foreach (string professionId in need)
-            {
-                foreach (var candidate in World.Staff.Candidates.Where(c => c.ProfessionId == professionId && !taken.Contains(c.Id))
-                             .OrderByDescending(Score).ThenBy(c => c.Id))
-                {
-                    taken.Add(candidate.Id);
-                    if (Submit(new HireCommand(candidate.Id)) == null) break; // занят другой компанией — берём следующего
-                }
-            }
+            Apply(BotActions.Sanitize(policy.Decide(BotObservation.Encode(situation), mask), mask));
+            return true;
         }
 
-        private double Score(Candidate c)
+        // Действия извне для месяца, которого бот ждёт.
+        public void Act(int[] actions)
         {
-            switch (profile.Hiring)
-            {
-                case CandidateChoice.Experienced: return c.Experience;
-                case CandidateChoice.Cheap: return -c.ExpectedWage;
-                default: return c.Experience / Math.Max(1, c.ExpectedWage) * 1_000_000;
-            }
+            if (!AwaitingActions) throw new InvalidOperationException("Бот не ждёт решения.");
+            AwaitingActions = false;
+            Apply(BotActions.Sanitize(actions, PendingMask));
+            ExecuteDecision();
         }
 
-        // Свободных операторов — к станкам их зоны, у которых нет человека в смене 0.
-        private void AssignOperators()
+        private void Apply(int[] actions)
         {
-            var busy = new HashSet<int>(Company.Workers.Where(w => w.AssignedObjectId >= 0).Select(w => w.AssignedObjectId));
-            foreach (var worker in Company.Workers)
+            LastActions = actions;
+
+            for (int i = 0; i < Catalog.Products.Count && i < BotSituation.MaxProducts; i++)
             {
-                if (worker.AssignedObjectId >= 0 && Company.Floor.FindObject(worker.AssignedObjectId) != null) continue;
-                var zone = Catalog.Profession(worker.ProfessionId).OperatedZone;
-                if (zone == ProductionZone.None) continue;
-                var machine = Company.Machines.FirstOrDefault(m => !busy.Contains(m.Id) && Catalog.Machine(m.DefId).Zone == zone);
-                if (machine == null) continue;
-                busy.Add(machine.Id);
-                Submit(new AssignWorkerCommand(worker.Id, machine.Id, 0));
+                var product = Catalog.Products[i];
+                if (!product.UnlockedByDefault) continue;
+                double current = Knobs.PriceFactors.TryGetValue(product.Id, out double f) ? f : Archetype.PriceFactor;
+                Knobs.PriceFactors[product.Id] = current * (1 + BotActions.PriceStep(actions, i));
             }
-        }
-
-        // ---------- План и мощность ----------
-
-        private double ZoneCapacity(ProductionZone zone, List<MachineDef> machines) =>
-            machines.Where(m => m.Zone == zone).Sum(m => m.Power)
-            * Company.Schedule.ShiftsPerDay * Company.Schedule.ShiftLengthMinutes * WorkingDaysPerMonth * Utilization;
-
-        private Dictionary<ProductionZone, double> ZoneLoads(Dictionary<string, double> plans)
-        {
-            var loads = new Dictionary<ProductionZone, double>();
-            foreach (var product in Products)
-            foreach (var op in product.Operations)
-            {
-                loads.TryGetValue(op.Zone, out double load);
-                loads[op.Zone] = load + plans[product.Id] * op.BaseTimeMinutes;
-            }
-            return loads;
-        }
-
-        private Dictionary<string, double> FitToCapacity(Dictionary<string, double> desired, List<MachineDef> machines)
-        {
-            double factor = 1;
-            foreach (var pair in ZoneLoads(desired))
-                if (pair.Value > 0) factor = Math.Min(factor, ZoneCapacity(pair.Key, machines) / pair.Value);
-            return desired.ToDictionary(p => p.Key, p => Math.Floor(p.Value * factor));
-        }
-
-        private ProductionZone Bottleneck(Dictionary<string, double> desired, List<MachineDef> machines) =>
-            ZoneLoads(desired).OrderByDescending(p => p.Value / Math.Max(1, ZoneCapacity(p.Key, machines))).First().Key;
-
-        private MachineDef PickMachine(ProductionZone zone, double budget = double.MaxValue)
-        {
-            var machines = Catalog.MachinesForZone(zone);
-            return machines.LastOrDefault(m => m.Tier <= profile.MachineTier && m.Price <= budget) ?? machines.FirstOrDefault();
-        }
-
-        // Недельные поставки сырья под месячный план: (нужно − запас) / 4,33 недели, не меньше минимальной партии.
-        private void UpdateSupply(Dictionary<string, double> plans)
-        {
-            var need = new SortedDictionary<string, double>(StringComparer.Ordinal);
-            foreach (var product in Products)
-            foreach (var input in product.Operations.SelectMany(o => o.Inputs))
-            {
-                need.TryGetValue(input.MaterialId, out double amount);
-                need[input.MaterialId] = amount + input.Amount * plans[product.Id];
-            }
-
-            foreach (var pair in need)
-            {
-                var suppliers = Catalog.SuppliersOf(pair.Key);
-                if (suppliers.Count == 0) continue;
-                var chosen = profile.PreferQuality
-                    ? suppliers.OrderByDescending(s => s.QualityMax).ThenBy(s => s.PriceDeviation).First()
-                    : suppliers.OrderBy(s => s.PriceDeviation).ThenByDescending(s => s.Reliability).First();
-                double missing = Math.Max(0, pair.Value - Company.Inventory.MaterialQuantity(pair.Key));
-                foreach (var other in suppliers.Where(s => s != chosen))
-                    Submit(new SetSupplyScheduleCommand(other.Id, 0, DeliveryFrequency.None));
-                double weekly = missing <= 0 ? 0 : Math.Max(chosen.MinBatch, Math.Ceiling(missing / WeeksPerMonth));
-                Submit(new SetSupplyScheduleCommand(chosen.Id, weekly, weekly > 0 ? DeliveryFrequency.Weekly : DeliveryFrequency.None));
-            }
+            Knobs.PlanFactor = BotActions.PlanFactor(actions);
+            Knobs.QualityMaterials = BotActions.QualityMaterials(actions);
+            Knobs.AdShare = BotActions.AdShare(actions);
+            Knobs.TenderMarkup = BotActions.TenderMarkup(actions);
+            Knobs.Expand = BotActions.Expand(actions);
         }
     }
 }

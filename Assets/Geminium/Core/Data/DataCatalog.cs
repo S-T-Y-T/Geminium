@@ -14,6 +14,8 @@ namespace Geminium.Core.Data
         private readonly Dictionary<string, ProductDef> products;
         private readonly Dictionary<string, ProfessionDef> professions;
         private readonly Dictionary<string, SupplierDef> suppliers;
+        private readonly Dictionary<string, AthleteDef> athletes;
+        private readonly Dictionary<string, BotArchetypeDef> botArchetypes;
 
         public IReadOnlyList<MaterialDef> Materials { get; }
         public IReadOnlyList<MachineDef> Machines { get; }
@@ -21,6 +23,8 @@ namespace Geminium.Core.Data
         public IReadOnlyList<ProfessionDef> Professions { get; }
         public IReadOnlyList<SupplierDef> Suppliers { get; }
         public IReadOnlyList<EventDef> Events { get; }
+        public IReadOnlyList<AthleteDef> Athletes { get; }
+        public IReadOnlyList<BotArchetypeDef> BotArchetypes { get; }
 
         public CalendarSettings Calendar { get; }
         public WorkScheduleSettings DefaultWorkSchedule { get; }
@@ -36,6 +40,9 @@ namespace Geminium.Core.Data
         public MaintenanceSettings Maintenance { get; }
         public StaffSettings Staff { get; }
         public QualitySettings Quality { get; }
+        public TenderSettings Tenders { get; }
+        public MarketingSettings Marketing { get; }
+        public SurrogateSettings Surrogate { get; }
 
         public DataCatalog(GameData data)
         {
@@ -48,6 +55,10 @@ namespace Geminium.Core.Data
             Professions = data.Professions.ToList();
             Suppliers = data.Suppliers.ToList();
             Events = data.Events.ToList();
+            Athletes = data.Athletes.ToList();
+            BotArchetypes = data.BotArchetypes.ToList();
+            athletes = Athletes.ToDictionary(a => a.Id);
+            botArchetypes = BotArchetypes.ToDictionary(b => b.Id);
             suppliers = Suppliers.ToDictionary(s => s.Id);
             materials = Materials.ToDictionary(m => m.Id);
             machines = Machines.ToDictionary(m => m.Id);
@@ -68,6 +79,9 @@ namespace Geminium.Core.Data
             Maintenance = data.Maintenance;
             Staff = data.Staff;
             Quality = data.Quality;
+            Tenders = data.Tenders;
+            Marketing = data.Marketing;
+            Surrogate = data.Surrogate;
         }
 
         public MaterialDef Material(string id) => Find(materials, id, "сырья");
@@ -75,6 +89,8 @@ namespace Geminium.Core.Data
         public ProductDef Product(string id) => Find(products, id, "продукта");
         public ProfessionDef Profession(string id) => Find(professions, id, "профессии");
         public SupplierDef Supplier(string id) => Find(suppliers, id, "поставщика");
+        public AthleteDef Athlete(string id) => Find(athletes, id, "спортсмена");
+        public BotArchetypeDef BotArchetype(string id) => Find(botArchetypes, id, "архетипа бота");
 
         public IReadOnlyList<SupplierDef> SuppliersOf(string materialId) =>
             Suppliers.Where(s => s.MaterialId == materialId).ToList();

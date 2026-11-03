@@ -86,7 +86,7 @@ namespace Geminium.Core.Market
                 var c = companies[i];
                 double quality = c.Inventory.ProductUnits(product.Id) > 0 ? c.Inventory.ProductQuality(product.Id) : 0;
                 attractiveness[i] = Formulas.Attractiveness(quality, c.Reputation, c.RetailPrice(product.Id), referencePrice,
-                    settings.QualityWeight, settings.ReputationWeight, elasticity);
+                    settings.QualityWeight, settings.ReputationWeight, elasticity) * world.Marketing.DemandMultiplier(c, product.Id);
             }
             double total = attractiveness.Sum();
             if (total <= 0) return;

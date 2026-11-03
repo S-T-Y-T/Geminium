@@ -4,12 +4,13 @@ using Geminium.Core.Data;
 
 namespace Geminium.Core.Factory
 {
-    // Что включить в шаблон цеха бота (GDD 8.1: «Премиум» — с ОТК, «Демпер» — без контроля).
+    // Что включить в шаблон цеха бота (GDD 8.1: «Премиум» — просторный, с ОТК; «Демпер» — плотный, без контроля).
     public sealed class LayoutTemplate
     {
         public bool QcStation = true;
         public int RawRacks = 4;
         public int FinishedRacks = 3;
+        public int Desks = 1;          // столы менеджеров по продажам в офисе
     }
 
     // Планировщик цеха для ботов (GDD 8.1, решение №22): шаблон раскладки и поиск места под новый станок.
@@ -64,7 +65,9 @@ namespace Geminium.Core.Factory
                 Add(commands, scratch, catalog, new PlaceObjectCommand(FloorObjectKind.Rack, null, finished.X0 + i, row + 1, Facing.South));
             if (template.QcStation)
                 Add(commands, scratch, catalog, new PlaceObjectCommand(FloorObjectKind.QcTable, null, BandOf(ZoneType.QualityControl, scratch.Width).X0, row + 1, Facing.South));
-            Add(commands, scratch, catalog, new PlaceObjectCommand(FloorObjectKind.Desk, null, BandOf(ZoneType.Office, scratch.Width).X0, row + 1, Facing.South));
+            var office = BandOf(ZoneType.Office, scratch.Width);
+            for (int i = 0; i < template.Desks && office.X0 + i <= office.X1; i++)
+                Add(commands, scratch, catalog, new PlaceObjectCommand(FloorObjectKind.Desk, null, office.X0 + i, row + 1, Facing.South));
 
             foreach (string machineId in machineIds)
             {

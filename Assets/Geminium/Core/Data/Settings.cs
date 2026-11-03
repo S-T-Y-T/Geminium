@@ -134,6 +134,7 @@ namespace Geminium.Core.Data
         public string LaborerProfessionId = "laborer";
         public string MechanicProfessionId = "mechanic";
         public string QcInspectorProfessionId = "qc_inspector";
+        public string SalesManagerProfessionId = "sales_manager";
         public int CandidatesPerProfession = 4;      // кандидатов каждой профессии в месяц при нормальной экономике
         public double CandidateExperienceMean = 35;
         public double CandidateExperienceSd = 20;

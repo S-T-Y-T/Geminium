@@ -173,6 +173,20 @@ namespace Geminium.Core.Finance
             report.Hires = stats.Hires;
             report.Quits = stats.Quits;
             report.OvertimeHours = stats.OvertimeHours;
+            report.ContractRevenue = company.Ledger.MonthTotal(month, LedgerCategory.SalesContracts);
+            report.ContractUnits = stats.ContractUnits;
+            report.TendersWon = stats.TendersWon;
+            report.ContractsActive = company.Sales.Contracts.Count(c => c.Status == Sales.ContractStatus.Active);
+            report.ContractsCompleted = stats.ContractsCompleted;
+            report.ContractsTerminated = stats.ContractsTerminated;
+            report.B2bComplaints = stats.B2bComplaints;
+            report.MarketingSpend = -company.Ledger.MonthTotal(month, LedgerCategory.Marketing);
+            report.AdBudget = company.Sales.AdBudget;
+            report.Certificates = company.Sales.Certificates.Count(c => c.IsValid(month));
+            report.Ambassadors = company.Sales.Ambassadors.Count;
+            report.Scandals = stats.Scandals;
+            report.ReputationGain = stats.ReputationGain;
+            report.ReputationLoss = stats.ReputationLoss;
             foreach (var product in catalog.Products)
             {
                 stats.Sold.TryGetValue(product.Id, out long sold);

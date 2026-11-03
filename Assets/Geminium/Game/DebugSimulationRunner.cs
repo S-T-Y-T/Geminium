@@ -104,7 +104,16 @@ namespace Geminium.Game
                 text.AppendLine($"логистика {last.LogisticsKm:0.0} км; простои, ч: нет людей {last.DowntimeNoOperatorHours:0}, " +
                                 $"нет работы {last.DowntimeNoMaterialsHours:0}, ремонт {last.DowntimeBrokenHours:0}");
                 text.AppendLine($"поломок {last.Breakdowns}, ТО {last.Maintenances}, найден брак {last.DetectedDefects}, возвраты {last.ReturnedUnits}");
+                text.AppendLine($"тендеры: выиграно {last.TendersWon}, по контрактам {last.ContractRevenue:N0} сум, неустойки {last.Penalties:N0}");
+                text.AppendLine($"маркетинг {last.MarketingSpend:N0} сум, репутация +{last.ReputationGain:0.0} −{last.ReputationLoss:0.0}");
             }
+            var sales = company.Sales;
+            text.AppendLine($"репутация {company.Reputation:0}; реклама {sales.AdBudget:N0} сум/мес; " +
+                            $"сертификатов {sales.Certificates.Count(c => c.IsValid(world.Simulation.MonthIndex))}; амбассадор {(sales.Ambassadors.Count > 0 ? sales.Ambassadors[0] : "нет")}");
+            foreach (var contract in sales.Contracts.Where(c => c.Status == Geminium.Core.Sales.ContractStatus.Active))
+                text.AppendLine($"   контракт: {contract.ProductId} {contract.Delivered}/{contract.Units}, срок — месяц {contract.DeadlineMonth + 1}");
+            text.AppendLine("Открытые тендеры: " + (world.Tenders.OpenTenders.Count == 0 ? "нет"
+                : string.Join("; ", world.Tenders.OpenTenders.Select(t => $"{t.Level} {t.ProductId} {t.Units} шт. до {t.MaxUnitPrice:N0}"))));
             text.AppendLine();
             text.AppendLine($"Персонал ({company.Workers.Count}):");
             foreach (var group in company.Workers.GroupBy(w => w.ProfessionId))

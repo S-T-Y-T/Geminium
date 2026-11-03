@@ -44,6 +44,29 @@ namespace Geminium.Core
             return (qualityWeight * quality + reputationWeight * reputation) / Math.Pow(price / referencePrice, priceElasticity);
         }
 
+        // ---------- Тендеры и маркетинг (GDD 7.2, 7.3) ----------
+
+        // Score = w_1·(P_max − P_bid)/P_max + w_2·R/100 + w_3·QH/100 + w_4·B_mgr (+ бонусы сертификата и спонсорства).
+        public static double TenderScore(long maxPrice, long bid, double reputation, double qualityHistory, double managerBonus,
+            double wPrice, double wReputation, double wQuality, double wManagers, double extraBonus)
+        {
+            if (maxPrice <= 0) throw new ArgumentOutOfRangeException(nameof(maxPrice), "P_max должна быть больше нуля.");
+            return wPrice * (maxPrice - bid) / (double)maxPrice + wReputation * reputation / 100 + wQuality * qualityHistory / 100
+                   + wManagers * Clamp(managerBonus, 0, 1) + extraBonus;
+        }
+
+        // k_ads = 1 + a·(1 − e^(−B/B_0)) — множитель спроса от рекламы с убывающей отдачей.
+        public static double AdMultiplier(double adStock, double scale, double maxBoost) =>
+            scale <= 0 || adStock <= 0 ? 1 : 1 + maxBoost * (1 - Math.Exp(-adStock / scale));
+
+        // R(t+1) = R(t) + ΔR_маркетинг + ΔR_победы − ΔR_рекламации + λ·(50 − R(t)), в пределах 0–100.
+        public static double NextReputation(double reputation, double gains, double losses, double reversion) =>
+            Clamp(reputation + gains - losses + reversion * (50 - reputation), 0, 100);
+
+        // Шанс победы амбассадора на турнире: scale · (рейтинг/100)^степень (чем выше уровень, тем больше степень).
+        public static double WinChance(double rating, double scale, double exponent) =>
+            Clamp(scale * Math.Pow(Clamp(rating, 0, 100) / 100, exponent), 0, 1);
+
         // ---------- Производство (GDD 7.6.4) ----------
 
         // Q = 0,4·Q_raw + 0,4·Skill + 0,2·Cond.

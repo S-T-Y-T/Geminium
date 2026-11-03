@@ -3,7 +3,9 @@
     "rootNamespace": "Geminium.EditorTools",
     "references": [
         "Geminium.Core",
-        "Geminium.Game"
+        "Geminium.Game",
+        "Geminium.ML",
+        "Unity.InferenceEngine"
     ],
     "includePlatforms": [
         "Editor"
