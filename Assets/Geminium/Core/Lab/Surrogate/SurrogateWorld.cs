@@ -396,8 +396,13 @@ namespace Geminium.Core.Lab.Surrogate
         private double MaterialCost(ProductDef product, bool quality)
         {
             double cost = 0;
-            foreach (var input in product.Operations.SelectMany(o => o.Inputs))
-                cost += input.Amount * catalog.Material(input.MaterialId).BasePrice;
+            foreach (var op in product.Operations)
+            foreach (var input in op.Inputs)
+            {
+                var material = catalog.Material(input.MaterialId);
+                bool sheet = op.Zone == ProductionZone.Cutting && material.Unit == MaterialUnit.SquareMeter;
+                cost += input.Amount * (sheet ? 1 + catalog.Production.CuttingWasteShare : 1) * material.BasePrice; // как в полном цехе: отходы раскроя
+            }
             return cost * PriceLevel * (quality ? 1.1 : 0.95);
         }
 

@@ -11,6 +11,7 @@ namespace Geminium.Core.Factory
         public int RawRacks = 4;
         public int FinishedRacks = 3;
         public int Desks = 1;          // столы менеджеров по продажам в офисе
+        public bool Naive;             // неудачная планировка: станки в дальних от ворот концах зон (Лаборатория)
     }
 
     // Планировщик цеха для ботов (GDD 8.1, решение №22): шаблон раскладки и поиск места под новый станок.
@@ -71,14 +72,15 @@ namespace Geminium.Core.Factory
 
             foreach (string machineId in machineIds)
             {
-                var spot = FindMachineSpot(scratch, catalog, machineId);
+                var spot = FindMachineSpot(scratch, catalog, machineId, template.Naive);
                 if (spot.HasValue) Add(commands, scratch, catalog, PlaceObjectCommand.Machine(machineId, spot.Value.x, spot.Value.y, spot.Value.facing));
             }
             return commands;
         }
 
         // Свободное место под станок у главного прохода в его зоне; null — места нет.
-        public static (int x, int y, Facing facing)? FindMachineSpot(FactoryFloor floor, DataCatalog catalog, string machineId)
+        // farEnd — искать с дальнего от ворот края зоны (неудачная планировка).
+        public static (int x, int y, Facing facing)? FindMachineSpot(FactoryFloor floor, DataCatalog catalog, string machineId, bool farEnd = false)
         {
             var def = catalog.Machine(machineId);
             var zone = (ZoneType)(int)def.Zone;
@@ -88,8 +90,11 @@ namespace Geminium.Core.Factory
                 if (band.Zone != zone) continue;
                 var facing = band.Top ? Facing.South : Facing.North;
                 int y = band.Top ? row + 1 : row - def.SizeY;
-                for (int x = band.X0; x + def.SizeX - 1 <= band.X1; x++)
+                for (int i = 0; i + def.SizeX - 1 <= band.X1 - band.X0; i++)
+                {
+                    int x = farEnd ? band.X1 - def.SizeX + 1 - i : band.X0 + i;
                     if (floor.CanPlace(def.SizeX, def.SizeY, x, y, facing, z => z == zone) == null) return (x, y, facing);
+                }
             }
             return null;
         }

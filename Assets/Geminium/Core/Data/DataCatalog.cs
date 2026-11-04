@@ -25,6 +25,8 @@ namespace Geminium.Core.Data
         public IReadOnlyList<EventDef> Events { get; }
         public IReadOnlyList<AthleteDef> Athletes { get; }
         public IReadOnlyList<BotArchetypeDef> BotArchetypes { get; }
+        public IReadOnlyList<DigitalModuleDef> DigitalModules { get; }
+        public IReadOnlyList<ScenarioDef> Scenarios { get; }
 
         public CalendarSettings Calendar { get; }
         public WorkScheduleSettings DefaultWorkSchedule { get; }
@@ -43,6 +45,7 @@ namespace Geminium.Core.Data
         public TenderSettings Tenders { get; }
         public MarketingSettings Marketing { get; }
         public SurrogateSettings Surrogate { get; }
+        public DigitalSettings Digital { get; }
 
         public DataCatalog(GameData data)
         {
@@ -57,6 +60,8 @@ namespace Geminium.Core.Data
             Events = data.Events.ToList();
             Athletes = data.Athletes.ToList();
             BotArchetypes = data.BotArchetypes.ToList();
+            DigitalModules = data.DigitalModules.ToList();
+            Scenarios = data.Scenarios.ToList();
             athletes = Athletes.ToDictionary(a => a.Id);
             botArchetypes = BotArchetypes.ToDictionary(b => b.Id);
             suppliers = Suppliers.ToDictionary(s => s.Id);
@@ -82,6 +87,7 @@ namespace Geminium.Core.Data
             Tenders = data.Tenders;
             Marketing = data.Marketing;
             Surrogate = data.Surrogate;
+            Digital = data.Digital;
         }
 
         public MaterialDef Material(string id) => Find(materials, id, "сырья");

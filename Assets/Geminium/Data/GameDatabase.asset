@@ -669,6 +669,7 @@ MonoBehaviour:
       MaxTransportBatch: 20
       FlushMinutes: 120
       RequestIntervalMinutes: 10
+      CuttingWasteShare: 0.12
     Floor:
       BuildingWidth: 32
       BuildingHeight: 20
@@ -918,3 +919,118 @@ MonoBehaviour:
       CalibrationSamples: 552
       OutputR2: 0.958
       DefectR2: 0.712
+    Digital:
+      ConditionErrorWithoutIot: 15
+      PredictiveConditionThreshold: 55
+      TwinRelocationCostShare: 0.01
+      TwinReviewMonths: 3
+      TwinMinSavingCells: 2
+      AiCuttingWasteShare: 0.04
+      AiQualityDetection: 0.97
+      PricingMinFactor: 0.7
+      PricingMaxFactor: 1.6
+      PricingStep: 0.05
+      DepreciationMonths: 36
+      LabPurchaseFromMonth: 3
+      LabCashReserve: 3
+    DigitalModules:
+    - Module: 0
+      Capex: 30000000
+      MonthlyLicense: 1500000
+      Requires: -1
+    - Module: 1
+      Capex: 20000000
+      MonthlyLicense: 2000000
+      Requires: 0
+    - Module: 2
+      Capex: 40000000
+      MonthlyLicense: 3000000
+      Requires: -1
+    - Module: 3
+      Capex: 25000000
+      MonthlyLicense: 2000000
+      Requires: -1
+    - Module: 4
+      Capex: 35000000
+      MonthlyLicense: 2500000
+      Requires: -1
+    - Module: 5
+      Capex: 15000000
+      MonthlyLicense: 1500000
+      Requires: -1
+    - Module: 6
+      Capex: 15000000
+      MonthlyLicense: 2000000
+      Requires: -1
+    Scenarios:
+    - Id: a_baseline
+      Modules: []
+      Subsidy: 0
+      NaiveLayout: 0
+      Baseline: 
+    - Id: b_predictive_maintenance
+      Modules:
+      - 0
+      - 1
+      Subsidy: 0
+      NaiveLayout: 0
+      Baseline: 
+    - Id: c0_naive_layout
+      Modules: []
+      Subsidy: 0
+      NaiveLayout: 1
+      Baseline: 
+    - Id: c_digital_twin
+      Modules:
+      - 2
+      Subsidy: 0
+      NaiveLayout: 1
+      Baseline: c0_naive_layout
+    - Id: d_ai_cutting
+      Modules:
+      - 3
+      Subsidy: 0
+      NaiveLayout: 0
+      Baseline: 
+    - Id: e_ai_quality
+      Modules:
+      - 4
+      Subsidy: 0
+      NaiveLayout: 0
+      Baseline: 
+    - Id: f_demand_forecast
+      Modules:
+      - 5
+      Subsidy: 0
+      NaiveLayout: 0
+      Baseline: 
+    - Id: g_ai_pricing
+      Modules:
+      - 6
+      Subsidy: 0
+      NaiveLayout: 0
+      Baseline: 
+    - Id: h_all_modules
+      Modules:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      Subsidy: 0
+      NaiveLayout: 0
+      Baseline: 
+    - Id: i_all_modules_subsidy
+      Modules:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      Subsidy: 1
+      NaiveLayout: 0
+      Baseline: 

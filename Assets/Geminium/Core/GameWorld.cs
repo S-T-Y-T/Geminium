@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Geminium.Core.Companies;
 using Geminium.Core.Data;
+using Geminium.Core.Digital;
 using Geminium.Core.Economy;
 using Geminium.Core.Finance;
 using Geminium.Core.Market;
@@ -17,7 +18,8 @@ namespace Geminium.Core
 {
     // Игровой мир: данные, симуляция, подсистемы и компании. С него начинается любая партия —
     // и в игре, и в прогоне Лаборатории без графики.
-    // Порядок подсистем важен: экономика → персонал (рынок труда) → маркетинг (турниры, реклама) → тендеры →
+    // Порядок подсистем важен: экономика → персонал (рынок труда) → цифровизация (лицензии, ИИ-цены) →
+    // маркетинг (турниры, реклама) → тендеры →
     // контроллеры → снабжение → производство → рынок → склад → финансы. Контроллеры решают, уже видя новый
     // месяц, кандидатов, турниры и тендеры; их команды применяются до расчётов минуты; контракты отгружаются
     // раньше розницы; репутация пересчитывается до подведения тендеров; финансы подводят месяц последними.
@@ -32,6 +34,7 @@ namespace Geminium.Core
 
         public EconomySystem Economy { get; }
         public StaffSystem Staff { get; }
+        public DigitalSystem Digital { get; }
         public MarketingSystem Marketing { get; }
         public TenderSystem Tenders { get; }
         public SupplySystem Supply { get; }
@@ -47,6 +50,7 @@ namespace Geminium.Core
 
             Simulation.AddSystem(Economy = new EconomySystem(catalog));
             Simulation.AddSystem(Staff = new StaffSystem(this));
+            Simulation.AddSystem(Digital = new DigitalSystem(this));
             Simulation.AddSystem(Marketing = new MarketingSystem(this));
             Simulation.AddSystem(Tenders = new TenderSystem(this));
             Simulation.AddSystem(new ControllerSystem(this));

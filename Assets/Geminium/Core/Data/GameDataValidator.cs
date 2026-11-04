@@ -131,7 +131,39 @@ namespace Geminium.Core.Data
 
             CheckSettings(data, errors);
             CheckSales(data, errors);
+            CheckDigital(data, errors);
             return errors;
+        }
+
+        // Этап 4: модули цифровизации и сценарии Лаборатории.
+        private static void CheckDigital(GameData data, List<string> errors)
+        {
+            var modules = (data.DigitalModules ?? new List<DigitalModuleDef>()).Where(m => m != null).ToList();
+            foreach (DigitalModule module in Enum.GetValues(typeof(DigitalModule)))
+                if (module != DigitalModule.None && modules.Count(m => m.Module == module) != 1)
+                    errors.Add($"Цифровизация: модуль {module} должен быть задан ровно один раз.");
+            foreach (var m in modules)
+            {
+                if (m.Module == DigitalModule.None || m.Capex < 0 || m.MonthlyLicense < 0)
+                    errors.Add($"Цифровизация, {m.Module}: стоимость и лицензия не меньше нуля.");
+                if (m.Requires == m.Module) errors.Add($"Цифровизация, {m.Module}: модуль не может зависеть от себя.");
+            }
+            var d = data.Digital;
+            if (d == null) errors.Add("Не заданы параметры цифровизации.");
+            else if (d.ConditionErrorWithoutIot < 0 || d.PredictiveConditionThreshold <= 0 || d.PredictiveConditionThreshold >= 100
+                     || !IsShare(d.TwinRelocationCostShare) || d.TwinReviewMonths < 1 || d.TwinMinSavingCells < 0
+                     || !IsShare(d.AiCuttingWasteShare) || !IsShare(d.AiQualityDetection) || d.PricingMinFactor <= 0
+                     || d.PricingMaxFactor < d.PricingMinFactor || d.PricingStep <= 0 || d.DepreciationMonths < 1
+                     || d.LabPurchaseFromMonth < 0 || d.LabCashReserve < 0)
+                errors.Add("Цифровизация: неверные параметры.");
+            if (data.Production != null && !IsShare(data.Production.CuttingWasteShare)) errors.Add("Производство: доля отходов раскроя — от 0 до 1.");
+
+            var scenarioIds = CheckIds(data.Scenarios, s => s.Id, "Сценарий", errors);
+            foreach (var s in (data.Scenarios ?? new List<ScenarioDef>()).Where(s => s != null && !string.IsNullOrEmpty(s.Baseline)))
+                if (!scenarioIds.Contains(s.Baseline)) errors.Add($"Сценарий «{s.Id}»: нет базового сценария «{s.Baseline}».");
+            foreach (var s in (data.Scenarios ?? new List<ScenarioDef>()).Where(s => s != null))
+                if (s.Modules == null || s.Modules.Any(m => m == DigitalModule.None) || s.Modules.Distinct().Count() != s.Modules.Count)
+                    errors.Add($"Сценарий «{s.Id}»: модули без повторов и без None.");
         }
 
         // Этап 3: тендеры, маркетинг, спортсмены, архетипы ботов, суррогат.

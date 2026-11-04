@@ -18,6 +18,8 @@ namespace Geminium.Core.Production
     //   3) раз в RequestIntervalMinutes — заявки на перевозку сырья, полуфабрикатов и готовой продукции;
     //   4) разнорабочие берут заявки по очереди и везут груз по проходам.
     // Готовая продукция на складе проходит выходной ОТК (если есть стол ОТК и контролёр на смене).
+    // Цифровизация (GDD 7.9): ИИ-раскрой уменьшает отходы листовых материалов, ИИ-контроль проверяет каждую единицу,
+    // предиктивное ТО обслуживает станок по состоянию, а не по счётчику операций.
     public sealed class ProductionSystem : SimulationSystem
     {
         private readonly GameWorld world;
@@ -64,6 +66,29 @@ namespace Geminium.Core.Production
             int minute = workDay.Hour * 60 + workDay.Minute;
             int end = schedule.ShiftsPerDay * schedule.ShiftLengthMinutes;
             return minute >= end && minute < end + company.OvertimeHours * 60 ? (schedule.ShiftsPerDay - 1, true) : (-1, false);
+        }
+
+        // Сколько сырья уходит на операцию у этой компании: в раскрое листовые материалы (м²) идут с отходами.
+        public double InputAmount(Company company, OperationDef op, MaterialAmount input)
+        {
+            if (op.Zone != ProductionZone.Cutting || catalog.Material(input.MaterialId).Unit != MaterialUnit.SquareMeter) return input.Amount;
+            double waste = company.Digital.Has(DigitalModule.AiCutting) ? catalog.Digital.AiCuttingWasteShare : settings.CuttingWasteShare;
+            return input.Amount * (1 + waste);
+        }
+
+        // Пора ли обслуживать станок: с предиктивным ТО — по состоянию, иначе — по регламенту в операциях.
+        public bool MaintenanceDue(Company company, MachineRuntime m) =>
+            company.Digital.Has(DigitalModule.PredictiveMaintenance)
+                ? m.Condition <= catalog.Digital.PredictiveConditionThreshold
+                : m.OperationsSinceMaintenance >= m.MaintenanceInterval;
+
+        // Состояние станка, каким его видит компания: с IoT-датчиками — точно, без них — грубо, с шагом ошибки.
+        public double ConditionEstimate(Company company, FloorObject machine)
+        {
+            double condition = machine.Machine.Condition;
+            if (company.Digital.Has(DigitalModule.IotSensors)) return condition;
+            double step = Math.Max(1, catalog.Digital.ConditionErrorWithoutIot * 2);
+            return Formulas.Clamp(Math.Round(condition / step) * step, 0, 100);
         }
 
         internal void InitializeMachine(FloorObject machine) =>
@@ -122,7 +147,7 @@ namespace Geminium.Core.Production
                 foreach (var machine in company.Machines)
                 {
                     var m = machine.Machine;
-                    if (!m.Broken && m.OperationsSinceMaintenance >= m.MaintenanceInterval) DoMaintenance(company, machine);
+                    if (!m.Broken && MaintenanceDue(company, m)) DoMaintenance(company, machine);
                 }
             }
         }
@@ -198,7 +223,7 @@ namespace Geminium.Core.Production
                 m.OperationsSinceMaintenance = 0;
             }
             // При трёх сменах окна нет: плановое ТО останавливает станок.
-            if (company.Schedule.ShiftsPerDay >= 3 && m.OperationsSinceMaintenance >= m.MaintenanceInterval && mechanicOnShift)
+            if (company.Schedule.ShiftsPerDay >= 3 && MaintenanceDue(company, m) && mechanicOnShift)
             {
                 DoMaintenance(company, o);
                 m.DownUntil = minute + maintenance.PlannedMinutes;
@@ -254,9 +279,9 @@ namespace Geminium.Core.Production
             {
                 var unit = m.Input[i];
                 var ops = catalog.Product(unit.ProductId).Operations;
-                if (unit.NextStep >= ops.Count || ops[unit.NextStep].Zone != zone || !HasInputs(m, ops[unit.NextStep])) continue;
+                if (unit.NextStep >= ops.Count || ops[unit.NextStep].Zone != zone || !HasInputs(company, m, ops[unit.NextStep])) continue;
                 m.Input.RemoveAt(i);
-                Start(m, unit, unit.NextStep, ops[unit.NextStep], def, efficiency, feed);
+                Start(company, m, unit, unit.NextStep, ops[unit.NextStep], def, efficiency, feed);
                 return true;
             }
 
@@ -264,29 +289,31 @@ namespace Geminium.Core.Production
             {
                 if (!product.UnlockedByDefault || product.Operations[0].Zone != zone) continue;
                 state.StartedThisMonth.TryGetValue(product.Id, out int started);
-                if (started >= company.MonthlyPlan(product.Id) || !HasInputs(m, product.Operations[0])) continue;
+                if (started >= company.MonthlyPlan(product.Id) || !HasInputs(company, m, product.Operations[0])) continue;
                 state.StartedThisMonth[product.Id] = started + 1;
-                Start(m, new WorkUnit { ProductId = product.Id }, 0, product.Operations[0], def, efficiency, feed);
+                Start(company, m, new WorkUnit { ProductId = product.Id }, 0, product.Operations[0], def, efficiency, feed);
                 return true;
             }
             return false;
         }
 
-        private static bool HasInputs(MachineRuntime m, OperationDef op)
+        private bool HasInputs(Company company, MachineRuntime m, OperationDef op)
         {
             foreach (var input in op.Inputs)
-                if (m.Materials.MaterialQuantity(input.MaterialId) + 1e-9 < input.Amount) return false;
+                if (m.Materials.MaterialQuantity(input.MaterialId) + 1e-9 < InputAmount(company, op, input)) return false;
             return true;
         }
 
-        private static void Start(MachineRuntime m, WorkUnit unit, int step, OperationDef op, MachineDef def, double efficiency, double feed)
+        private void Start(Company company, MachineRuntime m, WorkUnit unit, int step, OperationDef op, MachineDef def, double efficiency, double feed)
         {
             foreach (var input in op.Inputs)
             {
-                m.Materials.TryTakeMaterial(input.MaterialId, input.Amount, out double q, out double cost);
+                double amount = InputAmount(company, op, input);
+                m.Materials.TryTakeMaterial(input.MaterialId, amount, out double q, out double cost);
                 unit.RawQualitySum += q;
                 unit.RawQualityCount++;
-                unit.MaterialCost += input.Amount * cost;
+                unit.MaterialCost += amount * cost;
+                company.CurrentMonth.FabricWaste += amount - input.Amount;
             }
             m.Current = unit;
             m.CurrentStep = step;
@@ -373,13 +400,14 @@ namespace Geminium.Core.Production
                     if (op.Zone != zone) continue;
                     foreach (var input in op.Inputs)
                     {
-                        if (m.Materials.MaterialQuantity(input.MaterialId) >= input.Amount * Math.Max(1, batch / 2.0)) continue;
+                        double amount = InputAmount(company, op, input);
+                        if (m.Materials.MaterialQuantity(input.MaterialId) >= amount * Math.Max(1, batch / 2.0)) continue;
                         string key = "M|" + o.Id + "|" + input.MaterialId;
-                        if (state.PendingKeys.Contains(key) || company.Inventory.MaterialQuantity(input.MaterialId) + 1e-9 < input.Amount) continue;
+                        if (state.PendingKeys.Contains(key) || company.Inventory.MaterialQuantity(input.MaterialId) + 1e-9 < amount) continue;
                         Enqueue(state, new TransportRequest
                         {
                             Kind = TransportKind.Material, ToObjectId = o.Id, MaterialId = input.MaterialId,
-                            Quantity = input.Amount * batch, Key = key,
+                            Quantity = amount * batch, Key = key,
                         });
                     }
                 }
@@ -593,9 +621,10 @@ namespace Geminium.Core.Production
             foreach (var unit in units)
             {
                 if (unit.IsRework) unit.IsRework = false;
-                bool inspected = qcStation && state.QcCapacityUsedToday < capacity;
-                if (inspected) state.QcCapacityUsedToday++;
-                bool detected = qcRandom.Chance(quality.OutputQcDetection) && inspected && unit.Defective;
+                bool vision = company.Digital.Has(DigitalModule.AiQuality);
+                bool inspected = vision || (qcStation && state.QcCapacityUsedToday < capacity);
+                if (inspected && !vision) state.QcCapacityUsedToday++;
+                bool detected = qcRandom.Chance(vision ? catalog.Digital.AiQualityDetection : quality.OutputQcDetection) && inspected && unit.Defective;
                 if (detected)
                 {
                     company.CurrentMonth.DetectedDefects++;

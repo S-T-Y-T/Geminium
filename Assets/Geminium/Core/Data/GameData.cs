@@ -56,5 +56,19 @@ namespace Geminium.Core.Data
             },
         };
         public SurrogateSettings Surrogate = new SurrogateSettings();
+
+        // Этап 4: ветка «Цифровизация» и сценарии Лаборатории.
+        public DigitalSettings Digital = new DigitalSettings();
+        public List<DigitalModuleDef> DigitalModules = new List<DigitalModuleDef>
+        {
+            new DigitalModuleDef { Module = DigitalModule.IotSensors, Capex = 30000000, MonthlyLicense = 1500000 },
+            new DigitalModuleDef { Module = DigitalModule.PredictiveMaintenance, Capex = 20000000, MonthlyLicense = 2000000, Requires = DigitalModule.IotSensors },
+            new DigitalModuleDef { Module = DigitalModule.DigitalTwin, Capex = 40000000, MonthlyLicense = 3000000 },
+            new DigitalModuleDef { Module = DigitalModule.AiCutting, Capex = 25000000, MonthlyLicense = 2000000 },
+            new DigitalModuleDef { Module = DigitalModule.AiQuality, Capex = 35000000, MonthlyLicense = 2500000 },
+            new DigitalModuleDef { Module = DigitalModule.DemandForecast, Capex = 15000000, MonthlyLicense = 1500000 },
+            new DigitalModuleDef { Module = DigitalModule.AiPricing, Capex = 15000000, MonthlyLicense = 2000000 },
+        };
+        public List<ScenarioDef> Scenarios = new List<ScenarioDef>();
     }
 }

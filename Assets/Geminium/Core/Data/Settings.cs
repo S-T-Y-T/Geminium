@@ -94,6 +94,7 @@ namespace Geminium.Core.Data
         public int MaxTransportBatch = 20;
         public int FlushMinutes = 120;               // неполную партию везут, если она ждёт дольше
         public int RequestIntervalMinutes = 10;      // как часто цех формирует заявки на перевозку
+        public double CuttingWasteShare = 0.12;      // отходы раскроя листовых материалов (м²) без ИИ-раскроя
     }
 
     // Здание и логистика (GDD 7.6.1, 7.6.6).

@@ -27,6 +27,8 @@ namespace Geminium.Core.Companies
         SocialTax = 16,        // социальный налог с фонда оплаты труда
         Returns = 17,          // возвраты брака покупателями и экспертиза
         Training = 18,         // обучение сотрудников
+        DigitalModules = 19,   // внедрение модулей цифровизации (вложение, амортизируется)
+        DigitalLicense = 20,   // лицензии модулей цифровизации
     }
 
     public readonly struct LedgerEntry

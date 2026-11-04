@@ -1,5 +1,7 @@
 // Генератор GameDatabase.asset (Unity YAML) и того же набора в JSON (для быстрых прогонов ядра в .NET).
-// Стартовые данные этапов 1–2 (заглушки до калибровки). После генерации источник истины — файл данных.
+// Стартовые данные этапов 1–4 (заглушки до калибровки). После генерации источник истины — файл данных:
+// генератор перезаписывает его целиком, поэтому правки из инспектора Unity сначала переносите сюда.
+// Запуск из корня проекта: node Tools/gen_database.js Assets/Geminium/Data/GameDatabase.asset <файл.json для LabRun>.
 const fs = require('fs');
 const [assetOut, jsonOut] = process.argv.slice(2);
 
@@ -87,7 +89,7 @@ const data = {
     PriceRatioMin: 0.5, PriceRatioMax: 2, MaxDelayDays: 5, FailureShare: 0.2,
   },
   Warehouse: { StartingCells: 20, DailyRent: 150000, DailyCostPerOccupiedCell: 2000, OverflowPenaltyPerUnit: 500, CellsPerRack: 10, RackPrice: 2500000 },
-  Production: { WearExponent: 2, EnergyPricePerKwh: 1000, MismatchEfficiency: 0.6, DefaultTransportBatch: 5, MaxTransportBatch: 20, FlushMinutes: 120, RequestIntervalMinutes: 10 },
+  Production: { WearExponent: 2, EnergyPricePerKwh: 1000, MismatchEfficiency: 0.6, DefaultTransportBatch: 5, MaxTransportBatch: 20, FlushMinutes: 120, RequestIntervalMinutes: 10, CuttingWasteShare: 0.12 },
   Floor: {
     BuildingWidth: 32, BuildingHeight: 20, CellSizeMeters: 2, ExpansionColumns: 8, MaxExpansions: 2, ExpansionMonthlyRent: 5000000,
     WalkMetersPerMinute: 40, LoadMinutes: 1, RearFeedExtraMinutes: 0.5, RelocationCostShare: 0.05, QcTablePrice: 3000000, DeskPrice: 1000000,
@@ -136,6 +138,31 @@ const data = {
       Hiring: 2, MaintenanceInterval: 800, RawRacks: 3, FinishedRacks: 2, AdBudgetShare: 0.01, MaxAdBudgetShare: 0.05, TenderMarkup: 0.8, TenderAppetite: 0.5 }),
   ],
   Surrogate: { Utilization: 1.43, PlanFulfilment: 0.92, DefectMultiplier: 1.578, EnergyPerMinute: 8.3, MaintenancePerUnit: 569, CalibrationSamples: 552, OutputR2: 0.958, DefectR2: 0.712 },
+  Digital: {
+    ConditionErrorWithoutIot: 15, PredictiveConditionThreshold: 55, TwinRelocationCostShare: 0.01, TwinReviewMonths: 3, TwinMinSavingCells: 2,
+    AiCuttingWasteShare: 0.04, AiQualityDetection: 0.97, PricingMinFactor: 0.7, PricingMaxFactor: 1.6, PricingStep: 0.05, DepreciationMonths: 36, LabPurchaseFromMonth: 3, LabCashReserve: 3,
+  },
+  DigitalModules: [
+    { Module: 0, Capex: 30000000, MonthlyLicense: 1500000, Requires: -1 },
+    { Module: 1, Capex: 20000000, MonthlyLicense: 2000000, Requires: 0 },
+    { Module: 2, Capex: 40000000, MonthlyLicense: 3000000, Requires: -1 },
+    { Module: 3, Capex: 25000000, MonthlyLicense: 2000000, Requires: -1 },
+    { Module: 4, Capex: 35000000, MonthlyLicense: 2500000, Requires: -1 },
+    { Module: 5, Capex: 15000000, MonthlyLicense: 1500000, Requires: -1 },
+    { Module: 6, Capex: 15000000, MonthlyLicense: 2000000, Requires: -1 },
+  ],
+  Scenarios: [
+    { Id: 'a_baseline', Modules: [], Subsidy: false, NaiveLayout: false, Baseline: '' },
+    { Id: 'b_predictive_maintenance', Modules: [0, 1], Subsidy: false, NaiveLayout: false, Baseline: '' },
+    { Id: 'c0_naive_layout', Modules: [], Subsidy: false, NaiveLayout: true, Baseline: '' },
+    { Id: 'c_digital_twin', Modules: [2], Subsidy: false, NaiveLayout: true, Baseline: 'c0_naive_layout' },
+    { Id: 'd_ai_cutting', Modules: [3], Subsidy: false, NaiveLayout: false, Baseline: '' },
+    { Id: 'e_ai_quality', Modules: [4], Subsidy: false, NaiveLayout: false, Baseline: '' },
+    { Id: 'f_demand_forecast', Modules: [5], Subsidy: false, NaiveLayout: false, Baseline: '' },
+    { Id: 'g_ai_pricing', Modules: [6], Subsidy: false, NaiveLayout: false, Baseline: '' },
+    { Id: 'h_all_modules', Modules: [0, 1, 2, 3, 4, 5, 6], Subsidy: false, NaiveLayout: false, Baseline: '' },
+    { Id: 'i_all_modules_subsidy', Modules: [0, 1, 2, 3, 4, 5, 6], Subsidy: true, NaiveLayout: false, Baseline: '' },
+  ],
 };
 
 // ---------- Unity YAML ----------
@@ -148,7 +175,10 @@ function emit(obj, indent) {
   let out = '';
   const pad = ' '.repeat(indent);
   for (const [k, v] of Object.entries(obj)) {
-    if (Array.isArray(v)) {
+    if (Array.isArray(v) && v.length > 0 && (v[0] === null || typeof v[0] !== 'object')) {
+      // Список простых значений (например, модули сценария): Unity пишет каждый элемент строкой «- значение».
+      out += `${pad}${k}:\n` + v.map((x) => `${pad}- ${scalar(x)}\n`).join('');
+    } else if (Array.isArray(v)) {
       out += `${pad}${k}:\n`;
       for (const item of v) {
         const inner = emit(item, indent + 2);

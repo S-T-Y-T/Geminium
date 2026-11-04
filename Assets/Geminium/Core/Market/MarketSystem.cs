@@ -50,6 +50,90 @@ namespace Geminium.Core.Market
         public double ShareOf(int monthIndex, string companyId, string productId) =>
             monthIndex >= 0 && monthIndex < history.Count && history[monthIndex].TryGetValue(productId, out var month) ? month.ShareOf(companyId) : 0;
 
+        // ---------- Прогноз спроса и ИИ-цены (цифровизация, GDD 7.9) ----------
+
+        private const double ExpectedQuality = 60;  // качество, которое модель ждёт от компании без запаса на складе
+
+        // Прогноз спроса компании на продукт в этом месяце (модуль «Прогноз спроса»): сезонно-наивный —
+        // спрос прошлого месяца (продано + упущено) × изменение сезонности, индекса экономики и событий спроса.
+        // Без истории — ожидаемые продажи по модели рынка.
+        public double Forecast(Company company, string productId)
+        {
+            var last = company.LastReport;
+            var history = Economy.History;
+            if (last == null || history.Count < 2)
+                return ExpectedSales(company, catalog.Product(productId), company.RetailPrice(productId));
+            last.SoldByProduct.TryGetValue(productId, out long sold);
+            last.LostSalesByProduct.TryGetValue(productId, out long lost);
+            var previous = history[history.Count - 2];
+            var current = history[history.Count - 1];
+            double change = current.Seasonality / Math.Max(1e-6, previous.Seasonality) * current.Index / Math.Max(1e-6, previous.Index)
+                            * DemandEvents(current, productId) / DemandEvents(previous, productId);
+            return (sold + lost) * change;
+        }
+
+        // Множитель спроса от событий, действовавших в месяц снимка экономики.
+        private double DemandEvents(EconomySnapshot snapshot, string productId)
+        {
+            double multiplier = 1;
+            foreach (string id in snapshot.ActiveEventIds)
+            {
+                var e = catalog.Events.FirstOrDefault(x => x.Id == id);
+                if (e != null && e.Effect == EventEffect.Demand && (string.IsNullOrEmpty(e.Target) || e.Target == productId))
+                    multiplier *= 1 + e.Magnitude;
+            }
+            return Math.Max(1e-6, multiplier);
+        }
+
+        // ИИ-цена: перебор множителя к эталонной цене, максимум ожидаемой маржи (цена − сырьё по бирже),
+        // продажи не больше доступного товара (запас + план месяца).
+        public long OptimalPrice(Company company, string productId)
+        {
+            var product = catalog.Product(productId);
+            var d = catalog.Digital;
+            double reference = product.BasePrice * Economy.PriceLevel;
+            double available = Math.Max(1, company.Inventory.ProductUnits(productId) + company.MonthlyPlan(productId));
+            double unitCost = 0;
+            foreach (var input in product.Operations.SelectMany(o => o.Inputs))
+                unitCost += input.Amount * world.Supply.ExchangePrice(input.MaterialId);
+            double best = double.MinValue, bestPrice = company.RetailPrice(productId);
+            for (int k = 0; d.PricingMinFactor + k * d.PricingStep <= d.PricingMaxFactor + 1e-9; k++)
+            {
+                double price = reference * (d.PricingMinFactor + k * d.PricingStep);
+                double margin = Math.Min(ExpectedSales(company, product, price), available) * (price - unitCost);
+                if (margin > best + 1e-6)
+                {
+                    best = margin;
+                    bestPrice = price;
+                }
+            }
+            return (long)Math.Round(bestPrice);
+        }
+
+        // Продажи компании по модели рынка, если её цена — price, а у конкурентов — текущие.
+        private double ExpectedSales(Company company, ProductDef product, double price)
+        {
+            var active = world.Companies.Where(c => !c.IsBankrupt).ToList();
+            if (!active.Contains(company)) return 0;
+            double reference = product.BasePrice * Economy.PriceLevel;
+            double elasticity = Economy.PriceElasticity(settings.PriceElasticity);
+            double total = 0, own = 0, sum = 0;
+            foreach (var c in active)
+            {
+                double p = c == company ? price : c.RetailPrice(product.Id);
+                sum += p;
+                double quality = c.Inventory.ProductUnits(product.Id) > 0 ? c.Inventory.ProductQuality(product.Id) : ExpectedQuality;
+                double a = Formulas.Attractiveness(quality, c.Reputation, p, reference, settings.QualityWeight, settings.ReputationWeight, elasticity)
+                           * world.Marketing.DemandMultiplier(c, product.Id);
+                total += a;
+                if (c == company) own = a;
+            }
+            double monthly = Formulas.MonthlyDemand(product.BaseDemandPerMonth, Economy.Seasonality,
+                Economy.Multiplier(EventEffect.Demand, product.Id), Economy.Index);
+            double size = Formulas.MarketSize(monthly, reference, sum / active.Count, settings.MarketSizeElasticity);
+            return total > 0 ? size * own / total : 0;
+        }
+
         protected internal override void OnMonthStarted(int monthIndex)
         {
             workingDaysThisMonth = Math.Max(1, marketDays.CountWorkingDays(Simulation.Calendar, monthIndex));

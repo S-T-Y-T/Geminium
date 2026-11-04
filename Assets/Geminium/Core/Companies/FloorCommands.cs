@@ -71,18 +71,21 @@ namespace Geminium.Core.Companies
             if (o == null) return $"Нет объекта №{ObjectId}.";
             string machineId = o.Kind == FloorObjectKind.Machine ? o.DefId : null;
             return company.Floor.CanPlace(o.SizeX, o.SizeY, X, Y, Facing, FloorRules.ZoneAllowed(world.Catalog, o.Kind, machineId), o.Id)
-                   ?? CheckCash(company, RelocationCost(o, world));
+                   ?? CheckCash(company, RelocationCost(company, o, world));
         }
 
         internal override void Apply(Company company, GameWorld world)
         {
             var o = company.Floor.FindObject(ObjectId);
-            company.Pay(LedgerCategory.Other, RelocationCost(o, world));
+            company.Pay(LedgerCategory.Other, RelocationCost(company, o, world));
             company.Floor.Move(o, X, Y, Facing);
         }
 
-        private static long RelocationCost(FloorObject o, GameWorld world) =>
-            o.Kind == FloorObjectKind.Machine ? (long)Math.Round(o.PurchasePrice * world.Catalog.Floor.RelocationCostShare) : 0;
+        public static long RelocationCost(Company company, FloorObject o, GameWorld world) =>
+            o.Kind == FloorObjectKind.Machine
+                ? (long)Math.Round(o.PurchasePrice * (company.Digital.Has(DigitalModule.DigitalTwin)
+                    ? world.Catalog.Digital.TwinRelocationCostShare : world.Catalog.Floor.RelocationCostShare))
+                : 0;
     }
 
     // Убрать объект. Сырьё со станка возвращается на склад, незавершённые единицы списываются.

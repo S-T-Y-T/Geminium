@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Geminium.Core.Companies;
 using Geminium.Core.Data;
+using Geminium.Core.Digital;
 using Geminium.Core.Factory;
 using Geminium.Core.Sales;
 using Geminium.Core.Staff;
@@ -35,6 +36,10 @@ namespace Geminium.Core.Lab
         public BotKnobs Knobs { get; } = new BotKnobs();
         public BotArchetypeDef Archetype { get; }
 
+        // Модули цифровизации, которые бот купит, как только хватит денег (сценарии Лаборатории, GDD 10).
+        public List<DigitalModule> PlannedModules { get; } = new List<DigitalModule>();
+        public bool NaiveLayout { get; set; }     // неудачная планировка (сценарий Лаборатории для двойника)
+
         protected BotController(BotArchetypeDef archetype)
         {
             Archetype = archetype ?? throw new ArgumentNullException(nameof(archetype));
@@ -54,6 +59,7 @@ namespace Geminium.Core.Lab
                 return;
             }
             if (Company.LastReport == null) return;
+            BuyPlannedModules();
             if (Decide(monthIndex)) Execute();
         }
 
@@ -82,7 +88,7 @@ namespace Geminium.Core.Lab
             var template = new LayoutTemplate
             {
                 QcStation = Archetype.QcStation, RawRacks = Archetype.RawRacks, FinishedRacks = Archetype.FinishedRacks,
-                Desks = Archetype.SalesManagers,
+                Desks = Archetype.SalesManagers, Naive = NaiveLayout,
             };
             Submit(new BatchCommand(FloorPlanner.InitialLayout(Catalog, template, machines.Select(m => m.Id))));
             Submit(new SetDefectPolicyCommand(Archetype.DefectPolicy));
@@ -106,11 +112,12 @@ namespace Geminium.Core.Lab
         private void Execute()
         {
             var last = Company.LastReport;
+            bool aiPricing = Company.Digital.Has(DigitalModule.AiPricing) && Company.Digital.AutoPricing;
             foreach (var product in Products)
             {
                 double factor = Formulas.Clamp(PriceFactor(product.Id), Archetype.MinPriceFactor, Archetype.MaxPriceFactor);
                 Knobs.PriceFactors[product.Id] = factor;
-                Submit(new SetRetailPriceCommand(product.Id, (long)Math.Round(product.BasePrice * World.Economy.PriceLevel * factor)));
+                if (!aiPricing) Submit(new SetRetailPriceCommand(product.Id, (long)Math.Round(product.BasePrice * World.Economy.PriceLevel * factor)));
             }
 
             var desired = new Dictionary<string, double>();
@@ -119,7 +126,8 @@ namespace Geminium.Core.Lab
                 last.SoldByProduct.TryGetValue(product.Id, out long sold);
                 last.LostSalesByProduct.TryGetValue(product.Id, out long lost);
                 long stock = Company.Inventory.ProductUnits(product.Id);
-                desired[product.Id] = Math.Max(10, (sold + lost) * Knobs.PlanFactor - stock + ContractNeedThisMonth(product.Id));
+                double demand = Company.Digital.Has(DigitalModule.DemandForecast) ? World.Market.Forecast(Company, product.Id) : sold + lost;
+                desired[product.Id] = Math.Max(10, demand * Knobs.PlanFactor - stock + ContractNeedThisMonth(product.Id));
             }
 
             var owned = Company.Machines.Select(m => Catalog.Machine(m.DefId)).ToList();
@@ -127,7 +135,7 @@ namespace Geminium.Core.Lab
             if (Knobs.Expand)
             {
                 var machine = PickMachine(Bottleneck(desired, owned));
-                var spot = machine == null ? null : FloorPlanner.FindMachineSpot(Company.Floor, Catalog, machine.Id);
+                var spot = machine == null ? null : FloorPlanner.FindMachineSpot(Company.Floor, Catalog, machine.Id, NaiveLayout);
                 if (spot.HasValue && Company.Cash > machine.Price * 3)
                 {
                     Submit(PlaceObjectCommand.Machine(machine.Id, spot.Value.x, spot.Value.y, spot.Value.facing));
@@ -147,6 +155,24 @@ namespace Geminium.Core.Lab
             Submit(new SetAdBudgetCommand((long)Math.Round(Math.Max(0, last.Revenue - last.ContractRevenue) * Knobs.AdShare)));
             Marketing(last);
             BidTenders(all);
+            if (Company.Digital.Has(DigitalModule.DigitalTwin) && World.Simulation.MonthIndex % Catalog.Digital.TwinReviewMonths == 0)
+                foreach (var move in DigitalTwin.Suggest(World, Company, 2))
+                    if (Company.Cash > move.Cost * 10) Submit(new MoveObjectCommand(move.ObjectId, move.X, move.Y, move.Facing));
+        }
+
+        // Купить запланированные модули по порядку (зависимые — после тех, от которых зависят), если денег хватает с запасом.
+        private void BuyPlannedModules()
+        {
+            if (PlannedModules.Count == 0 || World.Simulation.MonthIndex < Catalog.Digital.LabPurchaseFromMonth) return;
+            foreach (var module in PlannedModules)
+            {
+                if (Company.Digital.Has(module)) continue;
+                var requires = World.Digital.Def(module).Requires;
+                if (requires != DigitalModule.None && !Company.Digital.Has(requires)) continue;
+                if (Company.Cash < World.Digital.NetCapex(Company, module) * Catalog.Digital.LabCashReserve) return;
+                Submit(new BuyDigitalModuleCommand(module));
+                return; // по одному модулю в месяц: зависимый купится в следующем
+            }
         }
 
         protected virtual double PriceFactor(string productId) =>
@@ -332,10 +358,11 @@ namespace Geminium.Core.Lab
         {
             var need = new SortedDictionary<string, double>(StringComparer.Ordinal);
             foreach (var product in Products)
-            foreach (var input in product.Operations.SelectMany(o => o.Inputs))
+            foreach (var op in product.Operations)
+            foreach (var input in op.Inputs)
             {
                 need.TryGetValue(input.MaterialId, out double amount);
-                need[input.MaterialId] = amount + input.Amount * plans[product.Id];
+                need[input.MaterialId] = amount + World.Production.InputAmount(Company, op, input) * plans[product.Id];
             }
 
             foreach (var pair in need)

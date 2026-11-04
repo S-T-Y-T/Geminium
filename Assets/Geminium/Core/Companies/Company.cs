@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Geminium.Core.Data;
+using Geminium.Core.Digital;
 using Geminium.Core.Factory;
 using Geminium.Core.Sales;
 using Geminium.Core.Staff;
@@ -46,6 +47,9 @@ namespace Geminium.Core.Companies
 
         // Сбыт и маркетинг (этап 3): контракты, сертификаты, реклама, амбассадоры.
         public SalesState Sales { get; } = new SalesState();
+
+        // Цифровизация (этап 4): купленные модули.
+        public DigitalState Digital { get; } = new DigitalState();
 
         public IReadOnlyList<Loan> Loans => loans;
         public IReadOnlyList<MonthlyReport> Reports => reports;

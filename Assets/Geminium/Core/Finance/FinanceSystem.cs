@@ -69,6 +69,9 @@ namespace Geminium.Core.Finance
                 equipmentValue += Formulas.ResidualValue(item.PurchasePrice, age + 1, settings.DepreciationMonths);
             }
 
+            var (digitalValue, digitalDepreciation) = world.Digital.Assets(company, month);
+            depreciation += digitalDepreciation;
+
             var report = new MonthlyReport
             {
                 Month = month,
@@ -80,7 +83,7 @@ namespace Geminium.Core.Finance
                 Energy = Spent(LedgerCategory.Energy),
                 Penalties = Spent(LedgerCategory.Penalties),
                 OtherExpenses = Spent(LedgerCategory.Maintenance) + Spent(LedgerCategory.Marketing) + Spent(LedgerCategory.Other)
-                                + Spent(LedgerCategory.Returns) + Spent(LedgerCategory.Training),
+                                + Spent(LedgerCategory.Returns) + Spent(LedgerCategory.Training) + Spent(LedgerCategory.DigitalLicense),
                 Interest = Spent(LedgerCategory.Interest),
                 Depreciation = depreciation,
             };
@@ -98,7 +101,9 @@ namespace Geminium.Core.Finance
 
             double averageProfit = company.Reports.Skip(Math.Max(0, company.Reports.Count - 5)).Select(r => (double)r.NetIncome)
                 .Append(report.NetIncome).Average();
-            report.Capitalization = Formulas.Capitalization(report.Cash, report.MachinesValue, 0, report.InventoryValue, report.Debt,
+            report.DigitalValue = digitalValue;
+            report.DigitalDepreciation = digitalDepreciation;
+            report.Capitalization = Formulas.Capitalization(report.Cash, report.MachinesValue, digitalValue, report.InventoryValue, report.Debt,
                 averageProfit, Economy.CapitalizationMultiplier, company.Reputation);
 
             long payments = company.totalPaymentsOnTime + company.totalPaymentsMissed;
@@ -187,6 +192,11 @@ namespace Geminium.Core.Finance
             report.Scandals = stats.Scandals;
             report.ReputationGain = stats.ReputationGain;
             report.ReputationLoss = stats.ReputationLoss;
+            report.FabricWaste = stats.FabricWaste;
+            report.DigitalCapex = -company.Ledger.MonthTotal(month, LedgerCategory.DigitalModules);
+            report.DigitalLicense = -company.Ledger.MonthTotal(month, LedgerCategory.DigitalLicense);
+            report.DigitalSubsidy = stats.DigitalSubsidy;
+            report.DigitalModules = company.Digital.Modules.Count(m => m.Active);
             foreach (var product in catalog.Products)
             {
                 stats.Sold.TryGetValue(product.Id, out long sold);

@@ -56,6 +56,9 @@ namespace Geminium.Core.Companies
         public int Scandals;
         public double ReputationGain;
         public double ReputationLoss;
+        // Этап 4: цифровизация.
+        public double FabricWaste;          // отходы раскроя, м²
+        public long DigitalSubsidy;         // компенсация госпрограммы за внедрение модулей
 
         internal static void Add(SortedDictionary<string, long> counter, string id, long amount)
         {
@@ -93,6 +96,8 @@ namespace Geminium.Core.Companies
             Scandals = 0;
             ReputationGain = 0;
             ReputationLoss = 0;
+            FabricWaste = 0;
+            DigitalSubsidy = 0;
         }
     }
 
@@ -156,6 +161,13 @@ namespace Geminium.Core.Companies
         public int Scandals;
         public double ReputationGain;
         public double ReputationLoss;
+        public double FabricWaste;          // отходы раскроя, м²
+        public long DigitalCapex;           // внедрение модулей в этом месяце (вложение, не расход)
+        public long DigitalLicense;         // лицензии (входят в OtherExpenses)
+        public long DigitalDepreciation;    // амортизация модулей (входит в Depreciation)
+        public long DigitalValue;           // остаточная стоимость модулей (входит в капитализацию)
+        public long DigitalSubsidy;
+        public int DigitalModules;          // работающих модулей
         public readonly SortedDictionary<string, long> SoldByProduct = new SortedDictionary<string, long>(StringComparer.Ordinal);
         public readonly SortedDictionary<string, long> LostSalesByProduct = new SortedDictionary<string, long>(StringComparer.Ordinal);
         public readonly SortedDictionary<string, double> MarketShareByProduct = new SortedDictionary<string, double>(StringComparer.Ordinal);

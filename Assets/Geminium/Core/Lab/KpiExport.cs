@@ -9,7 +9,7 @@ namespace Geminium.Core.Lab
     // Выгрузка KPI в CSV для Excel (GDD 10): строка на компанию и месяц.
     // Разделитель «;» и десятичная запятая — так файл без настройки открывает русский Excel.
     // Колонки: месяц, макроэкономика, P&L, баланс, капитализация, выпуск и продажи, логистика, простои,
-    // качество, персонал, тендеры и маркетинг, доли рынка и цены сырья.
+    // качество, персонал, тендеры и маркетинг, цифровизация, доли рынка и цены сырья.
     public static class KpiExport
     {
         private static readonly CultureInfo Russian = CultureInfo.GetCultureInfo("ru-RU");
@@ -33,6 +33,7 @@ namespace Geminium.Core.Lab
                 "workers", "average_morale", "hires", "quits", "overtime_hours",
                 "contract_revenue", "contract_units", "tenders_won", "contracts_active", "contracts_completed", "contracts_terminated",
                 "b2b_complaints", "marketing", "ad_budget", "certificates", "ambassadors", "scandals", "reputation_gain", "reputation_loss",
+                "fabric_waste_m2", "digital_modules", "digital_capex", "digital_license", "digital_depreciation", "digital_value", "digital_subsidy",
             };
             header.AddRange(products.Select(p => "sold_" + p));
             header.AddRange(products.Select(p => "share_pct_" + p));
@@ -69,6 +70,8 @@ namespace Geminium.Core.Lab
                         Num(r.ContractRevenue), Num(r.ContractUnits), Num(r.TendersWon), Num(r.ContractsActive), Num(r.ContractsCompleted),
                         Num(r.ContractsTerminated), Num(r.B2bComplaints), Num(r.MarketingSpend), Num(r.AdBudget), Num(r.Certificates),
                         Num(r.Ambassadors), Num(r.Scandals), Num(r.ReputationGain), Num(r.ReputationLoss),
+                        Num(r.FabricWaste), Num(r.DigitalModules), Num(r.DigitalCapex), Num(r.DigitalLicense), Num(r.DigitalDepreciation),
+                        Num(r.DigitalValue), Num(r.DigitalSubsidy),
                     };
                     row.AddRange(products.Select(p => Num(r.SoldByProduct.TryGetValue(p, out long sold) ? sold : 0)));
                     row.AddRange(products.Select(p => Num((r.MarketShareByProduct.TryGetValue(p, out double share) ? share : 0) * 100)));

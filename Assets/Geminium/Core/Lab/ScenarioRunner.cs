@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Geminium.Core.Companies;
 using Geminium.Core.Data;
 
@@ -23,6 +25,30 @@ namespace Geminium.Core.Lab
             var world = new GameWorld(catalog, seed);
             for (int i = 0; i < CompanyIds.Length; i++) world.AddCompany(CompanyIds[i], CreateBot(catalog, ArchetypeIds[i], policies[i]));
             return world;
+        }
+
+        // Сценарий Лаборатории (GDD 10): стандартная партия, фабрика игрока покупает модули сценария,
+        // конкуренты — без цифровизации. Со «Субсидией» госпрограмма компенсирует внедрение весь прогон.
+        // Ручки поиска восхождением у всех ботов заморожены: модули сравниваются при одной политике управления.
+        public static GameWorld CreateScenarioWorld(DataCatalog catalog, ulong seed, ScenarioDef scenario, IBotPolicy policy = null)
+        {
+            var world = CreateStandardWorld(catalog, seed, policy);
+            var player = world.Companies[0];
+            foreach (var company in world.Companies)
+                if (company.Controller is BaselineBotController baseline) baseline.FreezeKnobs = true;
+            var bot = (BotController)player.Controller;
+            bot.NaiveLayout = scenario.NaiveLayout;
+            foreach (var module in OrderedByRequirements(catalog, scenario.Modules)) bot.PlannedModules.Add(module);
+            if (scenario.Subsidy)
+                player.Digital.ForcedSubsidy = catalog.Events.Where(e => e.Effect == EventEffect.StateSubsidy).Select(e => e.Magnitude).DefaultIfEmpty(0).Max();
+            return world;
+        }
+
+        private static IEnumerable<DigitalModule> OrderedByRequirements(DataCatalog catalog, IEnumerable<DigitalModule> modules)
+        {
+            var list = modules.ToList();
+            var requires = catalog.DigitalModules.ToDictionary(d => d.Module, d => d.Requires);
+            return list.OrderBy(m => list.Contains(requires[m]) ? 1 : 0).ThenBy(m => (int)m);
         }
 
         public static CompanyController CreateBot(DataCatalog catalog, string archetypeId, IBotPolicy policy = null)

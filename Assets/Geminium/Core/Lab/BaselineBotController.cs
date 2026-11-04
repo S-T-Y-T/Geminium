@@ -20,6 +20,10 @@ namespace Geminium.Core.Lab
 
         public HillClimber Climber => climber;
 
+        // Без поиска: ручки остаются на стартовых значениях архетипа (Лаборатория сценариев сравнивает модули
+        // при одной и той же политике управления — иначе крошечная разница в прибыли переворачивает решения поиска).
+        public bool FreezeKnobs { get; set; }
+
         protected override bool Decide(int monthIndex)
         {
             var a = Archetype;
@@ -34,7 +38,7 @@ namespace Geminium.Core.Lab
             }
             var last = Company.LastReport;
             // Первый полный месяц — точка отсчёта; искать начинаем со второго.
-            if (monthIndex >= 2) climber.Step(last.NetIncome);
+            if (monthIndex >= 2 && !FreezeKnobs) climber.Step(last.NetIncome);
 
             long sold = 0, lost = 0;
             foreach (var product in Products)

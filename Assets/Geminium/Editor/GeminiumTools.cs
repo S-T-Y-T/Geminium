@@ -101,6 +101,34 @@ namespace Geminium.EditorTools
             return outputPath;
         }
 
+        // Лаборатория сценариев (GDD 10, TODO 4.6): все сценарии из данных × N seed без графики, параллельно.
+        // Два CSV в Reports: прогоны (scenarios_runs.csv) и эффекты против баз с ROI, сроком окупаемости и NPV
+        // (scenarios_summary.csv).
+        [MenuItem("Geminium/Лаборатория сценариев (5 seed × 36 месяцев)")]
+        public static void RunScenariosFromMenu() => EditorUtility.RevealInFinder(RunScenarios(5, 36, null));
+
+        // Unity.exe -batchmode -nographics -projectPath <проект> -executeMethod Geminium.EditorTools.GeminiumTools.RunScenariosFromCommandLine
+        //           [-geminiumSeeds 5] [-geminiumMonths 36] [-geminiumOut папка] -quit
+        public static void RunScenariosFromCommandLine() =>
+            RunScenarios(int.Parse(Argument("-geminiumSeeds") ?? "5"), int.Parse(Argument("-geminiumMonths") ?? "36"), Argument("-geminiumOut"));
+
+        public static string RunScenarios(int seeds, int months, string folder)
+        {
+            var catalog = AssetDatabase.LoadAssetAtPath<GameDatabase>(DatabasePath).CreateCatalog();
+            if (catalog.Scenarios.Count == 0) throw new InvalidOperationException("В GameDatabase нет сценариев (Data → Scenarios).");
+            var runs = ScenarioLab.Run(catalog, catalog.Scenarios, seeds, months);
+            var summary = ScenarioLab.Summarize(runs, catalog.Scenarios);
+            folder ??= Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Reports");
+            Directory.CreateDirectory(folder);
+            File.WriteAllText(Path.Combine(folder, "scenarios_runs.csv"), ScenarioLab.RunsCsv(runs), new UTF8Encoding(true));
+            string summaryPath = Path.Combine(folder, "scenarios_summary.csv");
+            File.WriteAllText(summaryPath, ScenarioLab.SummaryCsv(summary), new UTF8Encoding(true));
+            foreach (var s in summary)
+                Debug.Log($"Geminium: {s.Scenario}: ΔNI {s.DeltaPerMonth / 1e6:0.0} ± {s.Ci95 / 1e6:0.0} млн/мес, ROI {s.Roi:P0}, NPV {s.Npv / 1e6:0} млн");
+            Debug.Log("Geminium: Лаборатория сценариев сохранена в " + folder);
+            return summaryPath;
+        }
+
         // Отладочная сцена: камера + объект Simulation с DebugSimulationRunner и ссылкой на GameDatabase.
         [MenuItem("Geminium/Создать отладочную сцену")]
         public static void BuildDebugScene()
