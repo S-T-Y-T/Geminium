@@ -123,7 +123,7 @@ namespace Geminium.Core.Digital
                 foreach (var m in company.Digital.Modules.Where(m => m.Active))
                     company.Pay(LedgerCategory.DigitalLicense, (long)Math.Round(Def(m.Module).MonthlyLicense * Economy.PriceLevel));
                 if (company.Digital.Has(DigitalModule.AiPricing) && company.Digital.AutoPricing)
-                    foreach (var product in catalog.Products.Where(p => p.UnlockedByDefault))
+                    foreach (var product in world.Rules.OpenProducts(catalog))
                         company.SetRetailPrice(product.Id, world.Market.OptimalPrice(company, product.Id));
             }
         }

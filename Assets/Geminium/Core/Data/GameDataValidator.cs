@@ -132,6 +132,7 @@ namespace Geminium.Core.Data
             CheckSettings(data, errors);
             CheckSales(data, errors);
             CheckDigital(data, errors);
+            CheckCampaign(data, errors);
             return errors;
         }
 
@@ -164,6 +165,37 @@ namespace Geminium.Core.Data
             foreach (var s in (data.Scenarios ?? new List<ScenarioDef>()).Where(s => s != null))
                 if (s.Modules == null || s.Modules.Any(m => m == DigitalModule.None) || s.Modules.Distinct().Count() != s.Modules.Count)
                     errors.Add($"Сценарий «{s.Id}»: модули без повторов и без None.");
+        }
+
+        // Этап 4: задания кампании и свободный режим.
+        private static void CheckCampaign(GameData data, List<string> errors)
+        {
+            if (data.FreeModeMonths < 1) errors.Add("Свободный режим: срок — не меньше месяца.");
+            CheckIds(data.Missions, m => m.Id, "Задание", errors);
+            var products = new HashSet<string>((data.Products ?? new List<ProductDef>()).Where(p => p != null).Select(p => p.Id));
+            var archetypes = new HashSet<string>((data.BotArchetypes ?? new List<BotArchetypeDef>()).Where(b => b != null).Select(b => b.Id));
+            foreach (var m in (data.Missions ?? new List<MissionDef>()).Where(m => m != null))
+            {
+                string name = $"Задание «{m.Id}»";
+                if (m.Months < 1) errors.Add($"{name}: срок — не меньше месяца.");
+                if (m.StartingCash < 0) errors.Add($"{name}: стартовый капитал не меньше нуля.");
+                if (m.PassScore < 0 || m.PassScore > 100) errors.Add($"{name}: проходной балл — от 0 до 100.");
+                if (m.StartCondition <= 0 || m.StartCondition > 100) errors.Add($"{name}: состояние станков на старте — больше 0 и не больше 100.");
+                if (m.Products == null || m.Products.Count == 0 || m.Products.Any(p => !products.Contains(p)))
+                    errors.Add($"{name}: нужен хотя бы один продукт, и все продукты должны быть в данных.");
+                if (m.Layout != StartLayout.Empty && !archetypes.Contains(m.LayoutArchetype ?? ""))
+                    errors.Add($"{name}: нет архетипа «{m.LayoutArchetype}» для готового цеха.");
+                if (m.Features == null || m.Modules == null || m.Modules.Any(x => x == DigitalModule.None)) errors.Add($"{name}: списки возможностей и модулей без None.");
+                if (m.Goals == null || m.Goals.Count == 0) errors.Add($"{name}: нужна хотя бы одна цель.");
+                foreach (var g in (m.Goals ?? new List<GoalDef>()).Where(g => g != null))
+                {
+                    if (g.Target == g.Zero || g.Weight <= 0) errors.Add($"{name}: у цели {g.Metric} Target и Zero должны различаться, вес — больше нуля.");
+                    if (!string.IsNullOrEmpty(g.ProductId) && !m.Products.Contains(g.ProductId)) errors.Add($"{name}: цель по продукту «{g.ProductId}», которого нет в задании.");
+                }
+                foreach (var t in (m.Tenders ?? new List<MissionTenderDef>()).Where(t => t != null))
+                    if (t.Month < 0 || t.Month >= m.Months || t.Units < 1 || t.DeliveryMonths < 1 || m.Products == null || !m.Products.Contains(t.ProductId))
+                        errors.Add($"{name}: тендер задания — месяц внутри задания, продукт задания, объём и срок больше нуля.");
+            }
         }
 
         // Этап 3: тендеры, маркетинг, спортсмены, архетипы ботов, суррогат.

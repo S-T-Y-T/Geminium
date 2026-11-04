@@ -12,6 +12,9 @@ const S = (Id, MaterialId, Origin, PriceDeviation, Reliability, QualityMin, Qual
 const Mc = (Id, Zone, Tier, Power, EnergyKw, DurabilityOperations, Price, SizeX, SizeY) =>
   ({ Id, Zone, Tier, Power, EnergyKw, DurabilityOperations, Price, SizeX, SizeY });
 const Op = (Zone, BaseTimeMinutes, inputs) => ({ Zone, BaseTimeMinutes, Inputs: inputs.map(([MaterialId, Amount]) => ({ MaterialId, Amount })) });
+const Goal = (Metric, Target, Zero, ProductId = '', Weight = 1) => ({ Metric, Target, Zero, ProductId, Weight });
+const Mission = (m) => ({ Id: '', Months: 2, Rivals: false, Layout: 0, LayoutArchetype: 'balanced', StartingCash: 0, StartCondition: 100, Products: [], Features: [],
+  Modules: [], Tenders: [], Goals: [], PassScore: 60, ...m });
 const P = (Id, BasePrice, BaseDemandPerMonth, BaseDefectChance, UnitsPerCell, UnlockedByDefault, Operations) =>
   ({ Id, BasePrice, BaseDemandPerMonth, BaseDefectChance, UnitsPerCell, UnlockedByDefault, Operations });
 const E = (Id, MonthlyProbability, MinDurationMonths, MaxDurationMonths, SeasonStartMonth, SeasonEndMonth, Effect, Magnitude, Target) =>
@@ -163,6 +166,25 @@ const data = {
     { Id: 'h_all_modules', Modules: [0, 1, 2, 3, 4, 5, 6], Subsidy: false, NaiveLayout: false, Baseline: '' },
     { Id: 'i_all_modules_subsidy', Modules: [0, 1, 2, 3, 4, 5, 6], Subsidy: true, NaiveLayout: false, Baseline: '' },
   ],
+  // Кампания (GDD 4.1). Возможности: 0 формовка, 1 логистика, 2 качество, 3 ТО, 4 маркетинг, 5 тендеры, 6 кредит,
+  // 7 сертификация, 8 цифровизация. Цех: 0 пустой, 1 готовый, 2 готовый с неудачной планировкой.
+  // Цели: балл = 100 × (факт − Zero) / (Target − Zero) в пределах 0–100.
+  Missions: [
+    Mission({ Id: 'm1_first_shop', Months: 2, Layout: 0, Products: ['dobok'], Features: [],
+      Goals: [Goal(0, 250, 0, 'dobok'), Goal(1, 5, 15)] }),
+    Mission({ Id: 'm2_logistics', Months: 2, Layout: 2, Products: ['dobok'], Features: [1],
+      Goals: [Goal(2, 30, 5, '', 2), Goal(0, 250, 50, 'dobok'), Goal(3, 0, 10)] }),
+    Mission({ Id: 'm3_quality', Months: 2, Layout: 1, LayoutArchetype: 'dumper', Products: ['dobok'], Features: [1, 2],
+      Goals: [Goal(1, 2.5, 6), Goal(4, 0, 8)] }),
+    Mission({ Id: 'm4_equipment', Months: 3, Layout: 1, LayoutArchetype: 'dumper', StartCondition: 1, Products: ['dobok', 'helmet'],
+      Features: [0, 1, 2, 3, 8], Modules: [0, 1], Goals: [Goal(5, 2, 12)] }),
+    Mission({ Id: 'm5_market', Months: 3, Rivals: true, Layout: 1, Products: ['dobok', 'helmet'], Features: [0, 1, 2, 3, 4, 8], Modules: [0, 1],
+      Goals: [Goal(6, 33, 15)] }),
+    Mission({ Id: 'm6_contracts', Months: 3, Rivals: true, Layout: 1, Products: ['dobok', 'helmet', 'hogu'], Features: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+      Modules: [0, 1, 2, 3, 4, 5, 6], Tenders: [{ Month: 0, Level: 2, ProductId: 'dobok', Units: 200, DeliveryMonths: 2 }],
+      Goals: [Goal(7, 1, 0.5)] }),
+  ],
+  FreeModeMonths: 36,
 };
 
 // ---------- Unity YAML ----------

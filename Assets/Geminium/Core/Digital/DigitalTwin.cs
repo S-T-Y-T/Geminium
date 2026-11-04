@@ -27,8 +27,7 @@ namespace Geminium.Core.Digital
         {
             var catalog = world.Catalog;
             var floor = company.Floor;
-            var plans = catalog.Products.Where(p => p.UnlockedByDefault && company.MonthlyPlan(p.Id) > 0)
-                .ToDictionary(p => p, p => (double)company.MonthlyPlan(p.Id));
+            var plans = Plans(world, company);
             double totalPlan = plans.Values.Sum();
             var moves = new List<LayoutMove>();
             if (totalPlan <= 0) return moves;
@@ -61,6 +60,26 @@ namespace Geminium.Core.Digital
                 moves.Add(best);
             }
             return moves.OrderByDescending(m => m.SavingCellsPerUnit).Take(maxMoves).ToList();
+        }
+
+        // План выпуска открытых продуктов — веса путей.
+        public static Dictionary<ProductDef, double> Plans(GameWorld world, Company company) =>
+            world.Rules.OpenProducts(world.Catalog).Where(p => company.MonthlyPlan(p.Id) > 0)
+                .ToDictionary(p => p, p => (double)company.MonthlyPlan(p.Id));
+
+        // Путь грузов всей планировки, клеток на единицу плана (задание кампании «Логистика»).
+        // Станки, к которым с их места что-то недоступно, не считаются; 0 — нет плана.
+        public static double LayoutCost(GameWorld world, Company company, Dictionary<ProductDef, double> plans)
+        {
+            double total = plans.Values.Sum();
+            if (total <= 0) return 0;
+            double cost = 0;
+            foreach (var machine in company.Machines)
+            {
+                double c = Cost(world, company, machine, machine.AccessCell, plans);
+                if (c > 0) cost += c;
+            }
+            return cost / total;
         }
 
         // Взвешенный планом путь грузов станка при клетке подхода access; −1 — с этого места что-то недоступно.

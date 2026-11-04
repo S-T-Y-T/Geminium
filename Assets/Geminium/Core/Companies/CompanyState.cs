@@ -168,6 +168,7 @@ namespace Geminium.Core.Companies
         public long DigitalValue;           // остаточная стоимость модулей (входит в капитализацию)
         public long DigitalSubsidy;
         public int DigitalModules;          // работающих модулей
+        public readonly SortedDictionary<string, long> ProducedByProduct = new SortedDictionary<string, long>(StringComparer.Ordinal);   // годные
         public readonly SortedDictionary<string, long> SoldByProduct = new SortedDictionary<string, long>(StringComparer.Ordinal);
         public readonly SortedDictionary<string, long> LostSalesByProduct = new SortedDictionary<string, long>(StringComparer.Ordinal);
         public readonly SortedDictionary<string, double> MarketShareByProduct = new SortedDictionary<string, double>(StringComparer.Ordinal);

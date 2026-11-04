@@ -111,7 +111,7 @@ namespace Geminium.Core.Lab
             for (int i = 0; i < Catalog.Products.Count && i < BotSituation.MaxProducts; i++)
             {
                 var product = Catalog.Products[i];
-                if (!product.UnlockedByDefault) continue;
+                if (!World.Rules.IsProductOpen(product)) continue;
                 double current = Knobs.PriceFactors.TryGetValue(product.Id, out double f) ? f : Archetype.PriceFactor;
                 Knobs.PriceFactors[product.Id] = current * (1 + BotActions.PriceStep(actions, i));
             }

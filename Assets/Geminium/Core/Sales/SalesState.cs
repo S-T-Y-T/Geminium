@@ -47,7 +47,10 @@ namespace Geminium.Core.Sales
         public int AwardedMonth;
         public int DeadlineMonth;       // последний месяц, в котором поставка ещё в срок
         public int WeeksLate;
+        public int CompletedMonth = -1;  // месяц последней поставки; −1 — ещё не выполнен
         public ContractStatus Status;
+
+        public bool CompletedOnTime => Status == ContractStatus.Completed && CompletedMonth <= DeadlineMonth;
 
         public int Remaining => Units - Delivered;
         public long Value => (long)Units * UnitPrice;

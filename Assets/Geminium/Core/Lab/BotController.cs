@@ -46,7 +46,7 @@ namespace Geminium.Core.Lab
         }
 
         protected DataCatalog Catalog => World.Catalog;
-        protected List<ProductDef> Products => Catalog.Products.Where(p => p.UnlockedByDefault).ToList();
+        protected List<ProductDef> Products => World.Rules.OpenProducts(Catalog).ToList();
 
         // 0 — сбалансированный, 1 — «Премиум», 2 — «Демпер» (для наблюдений нейросети).
         public int ArchetypeIndex => Archetype.Id == "premium" ? 1 : Archetype.Id == "dumper" ? 2 : 0;
@@ -303,7 +303,7 @@ namespace Geminium.Core.Lab
         }
 
         // Свободных операторов — к станкам их зоны, у которых нет человека в смене 0.
-        private void AssignOperators()
+        internal void AssignOperators()
         {
             var busy = new HashSet<int>(Company.Workers.Where(w => w.AssignedObjectId >= 0).Select(w => w.AssignedObjectId));
             foreach (var worker in Company.Workers)
@@ -421,7 +421,7 @@ namespace Geminium.Core.Lab
             {
                 var product = Catalog.Products[i];
                 var p = s.Products[i];
-                p.Active = product.UnlockedByDefault;
+                p.Active = world.Rules.IsProductOpen(product);
                 if (!p.Active) continue;
                 double reference = product.BasePrice * economy.PriceLevel;
                 double perCompany = Math.Max(1, product.BaseDemandPerMonth / (double)rivals);

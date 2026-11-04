@@ -287,7 +287,7 @@ namespace Geminium.Core.Production
 
             foreach (var product in catalog.Products)
             {
-                if (!product.UnlockedByDefault || product.Operations[0].Zone != zone) continue;
+                if (!world.Rules.IsProductOpen(product) || product.Operations[0].Zone != zone) continue;
                 state.StartedThisMonth.TryGetValue(product.Id, out int started);
                 if (started >= company.MonthlyPlan(product.Id) || !HasInputs(company, m, product.Operations[0])) continue;
                 state.StartedThisMonth[product.Id] = started + 1;
@@ -385,7 +385,7 @@ namespace Geminium.Core.Production
         {
             var state = company.Production;
             int batch = company.TransportBatch;
-            var active = catalog.Products.Where(p => p.UnlockedByDefault && company.MonthlyPlan(p.Id) > 0).ToList();
+            var active = world.Rules.OpenProducts(catalog).Where(p => company.MonthlyPlan(p.Id) > 0).ToList();
 
             foreach (var o in company.Floor.Objects)
             {

@@ -70,5 +70,9 @@ namespace Geminium.Core.Data
             new DigitalModuleDef { Module = DigitalModule.AiPricing, Capex = 15000000, MonthlyLicense = 2000000 },
         };
         public List<ScenarioDef> Scenarios = new List<ScenarioDef>();
+
+        // Режимы игры (GDD 4): кампания из шести заданий и свободный режим.
+        public List<MissionDef> Missions = new List<MissionDef>();
+        public int FreeModeMonths = 36;
     }
 }

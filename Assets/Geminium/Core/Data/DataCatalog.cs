@@ -27,6 +27,8 @@ namespace Geminium.Core.Data
         public IReadOnlyList<BotArchetypeDef> BotArchetypes { get; }
         public IReadOnlyList<DigitalModuleDef> DigitalModules { get; }
         public IReadOnlyList<ScenarioDef> Scenarios { get; }
+        public IReadOnlyList<MissionDef> Missions { get; }
+        public int FreeModeMonths { get; }
 
         public CalendarSettings Calendar { get; }
         public WorkScheduleSettings DefaultWorkSchedule { get; }
@@ -47,8 +49,15 @@ namespace Geminium.Core.Data
         public SurrogateSettings Surrogate { get; }
         public DigitalSettings Digital { get; }
 
+        private readonly GameData data;
+        private string fingerprint;
+
+        // Отпечаток данных для сохранений (Core/Save): считается при первом обращении.
+        public string Fingerprint => fingerprint ?? (fingerprint = Save.DataFingerprint.Of(data));
+
         public DataCatalog(GameData data)
         {
+            this.data = data;
             var errors = GameDataValidator.Validate(data);
             if (errors.Count > 0) throw new GameDataException(errors);
 
@@ -62,6 +71,8 @@ namespace Geminium.Core.Data
             BotArchetypes = data.BotArchetypes.ToList();
             DigitalModules = data.DigitalModules.ToList();
             Scenarios = data.Scenarios.ToList();
+            Missions = (data.Missions ?? new List<MissionDef>()).ToList();
+            FreeModeMonths = data.FreeModeMonths;
             athletes = Athletes.ToDictionary(a => a.Id);
             botArchetypes = BotArchetypes.ToDictionary(b => b.Id);
             suppliers = Suppliers.ToDictionary(s => s.Id);
@@ -97,6 +108,7 @@ namespace Geminium.Core.Data
         public SupplierDef Supplier(string id) => Find(suppliers, id, "поставщика");
         public AthleteDef Athlete(string id) => Find(athletes, id, "спортсмена");
         public BotArchetypeDef BotArchetype(string id) => Find(botArchetypes, id, "архетипа бота");
+        public MissionDef Mission(string id) => Missions.FirstOrDefault(m => m.Id == id) ?? throw new KeyNotFoundException($"Нет задания «{id}».");
 
         public IReadOnlyList<SupplierDef> SuppliersOf(string materialId) =>
             Suppliers.Where(s => s.MaterialId == materialId).ToList();

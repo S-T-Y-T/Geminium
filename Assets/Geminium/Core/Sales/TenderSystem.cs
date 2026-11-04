@@ -20,6 +20,7 @@ namespace Geminium.Core.Sales
         private readonly WorkSchedule shippingDays;
         private readonly List<Tender> tenders = new List<Tender>();
         private readonly List<Tender> open = new List<Tender>();
+        private readonly List<MissionTenderDef> scripted = new List<MissionTenderDef>();
         private int nextTenderId = 1;
         private int nextContractId = 1;
         private SimRandom random;
@@ -37,6 +38,9 @@ namespace Geminium.Core.Sales
 
         protected override void OnAttached() => random = Simulation.Random.Fork("tenders");
 
+        // Тендер задания кампании: публикуется в свой месяц после случайных и не трогает генератор.
+        public void AddScripted(MissionTenderDef tender) => scripted.Add(tender ?? throw new ArgumentNullException(nameof(tender)));
+
         public Tender FindTender(int tenderId) => tenders.FirstOrDefault(t => t.Id == tenderId);
 
         public TenderLevelDef LevelDef(TenderLevel level) => settings.Levels.First(l => l.Level == level);
@@ -46,7 +50,7 @@ namespace Geminium.Core.Sales
         protected internal override void OnMonthStarted(int monthIndex)
         {
             open.Clear();
-            var products = catalog.Products.Where(p => p.UnlockedByDefault).ToList();
+            var products = world.Rules.OpenProducts(catalog).ToList();
             int count = random.NextInt(settings.MinTendersPerMonth, settings.MaxTendersPerMonth + 1);
             double totalWeight = settings.Levels.Sum(l => l.Weight);
             for (int i = 0; i < count; i++)
@@ -73,6 +77,19 @@ namespace Geminium.Core.Sales
                     Id = nextTenderId++, Level = level.Level, ProductId = product.Id, Units = units, PublishedMonth = monthIndex,
                     DeliveryMonths = Math.Min(delivery, level.MaxDeliveryMonths),
                     MaxUnitPrice = (long)Math.Round(product.BasePrice * world.Economy.PriceLevel * level.MaxPriceShare),
+                };
+                tenders.Add(tender);
+                open.Add(tender);
+            }
+
+            foreach (var def in scripted)
+            {
+                if (def.Month != monthIndex) continue;
+                var tender = new Tender
+                {
+                    Id = nextTenderId++, Level = def.Level, ProductId = def.ProductId, Units = def.Units, PublishedMonth = monthIndex,
+                    DeliveryMonths = def.DeliveryMonths,
+                    MaxUnitPrice = (long)Math.Round(catalog.Product(def.ProductId).BasePrice * world.Economy.PriceLevel * LevelDef(def.Level).MaxPriceShare),
                 };
                 tenders.Add(tender);
                 open.Add(tender);
@@ -242,6 +259,7 @@ namespace Geminium.Core.Sales
             if (contract.Remaining <= 0)
             {
                 contract.Status = ContractStatus.Completed;
+                contract.CompletedMonth = month;
                 company.CurrentMonth.ContractsCompleted++;
             }
         }

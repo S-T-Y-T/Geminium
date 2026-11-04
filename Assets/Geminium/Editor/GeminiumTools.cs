@@ -1,10 +1,12 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using Geminium.Core.Lab;
+using Geminium.Core.Modes;
 using Geminium.Game;
 
 namespace Geminium.EditorTools
@@ -127,6 +129,45 @@ namespace Geminium.EditorTools
                 Debug.Log($"Geminium: {s.Scenario}: ΔNI {s.DeltaPerMonth / 1e6:0.0} ± {s.Ci95 / 1e6:0.0} млн/мес, ROI {s.Roi:P0}, NPV {s.Npv / 1e6:0} млн");
             Debug.Log("Geminium: Лаборатория сценариев сохранена в " + folder);
             return summaryPath;
+        }
+
+        // Проверка заданий кампании (GDD 4.1): каждое задание проходят бездействующий игрок и бот «сбалансированный»
+        // за игрока, по seed 1–3. Бездействие должно проваливаться. Бот не делает того, чему учат задания 2, 4 и 6
+        // (перестановка станков, наладчик и ТО, заявка на тендер в первый месяц), поэтому там он тоже не проходит.
+        // Итог — в Console и в Reports/missions.csv.
+        [MenuItem("Geminium/Кампания: проверить задания")]
+        public static void RunMissionsFromMenu() => EditorUtility.RevealInFinder(RunMissions(3, null));
+
+        // Unity.exe -batchmode -nographics -projectPath <проект> -executeMethod Geminium.EditorTools.GeminiumTools.RunMissionsFromCommandLine
+        //           [-geminiumSeeds 3] [-geminiumOut папка] -quit
+        public static void RunMissionsFromCommandLine() => RunMissions(int.Parse(Argument("-geminiumSeeds") ?? "3"), Argument("-geminiumOut"));
+
+        public static string RunMissions(int seeds, string folder)
+        {
+            var catalog = AssetDatabase.LoadAssetAtPath<GameDatabase>(DatabasePath).CreateCatalog();
+            var csv = new StringBuilder("mission;player;seed;score;passed;goals\n");
+            foreach (var mission in catalog.Missions)
+            foreach (string player in new[] { "idle", "bot" })
+            {
+                double total = 0;
+                for (int seed = 1; seed <= seeds; seed++)
+                {
+                    var controller = player == "bot" ? ScenarioRunner.CreateBot(catalog, "balanced") : null;
+                    var session = GameSession.Start(catalog, GameSetup.Campaign(mission.Id, (ulong)seed), null, controller);
+                    session.World.Simulation.RunMonths(mission.Months);
+                    var result = session.MissionTracker.Result;
+                    total += result.Score;
+                    csv.Append($"{mission.Id};{player};{seed};{result.Score:0.0};{result.Passed};")
+                       .Append(string.Join(" ", result.Goals.Select(g => $"{g.Goal.Metric}={g.Actual:0.##}"))).Append('\n');
+                }
+                Debug.Log($"Geminium: {mission.Id}, {(player == "bot" ? "бот" : "без действий")}: средний балл {total / seeds:0.0} (проходной {mission.PassScore:0})");
+            }
+            folder ??= Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Reports");
+            Directory.CreateDirectory(folder);
+            string path = Path.Combine(folder, "missions.csv");
+            File.WriteAllText(path, csv.ToString(), new UTF8Encoding(true));
+            Debug.Log("Geminium: проверка заданий сохранена в " + path);
+            return path;
         }
 
         // Отладочная сцена: камера + объект Simulation с DebugSimulationRunner и ссылкой на GameDatabase.

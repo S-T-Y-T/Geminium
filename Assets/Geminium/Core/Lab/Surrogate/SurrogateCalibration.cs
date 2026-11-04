@@ -47,7 +47,7 @@ namespace Geminium.Core.Lab.Surrogate
                 var operators = company.Workers.Where(w => catalog.Profession(w.ProfessionId).OperatedZone != ProductionZone.None).ToList();
                 foreach (var w in operators) s.ZoneOperators[(int)catalog.Profession(w.ProfessionId).OperatedZone]++;
                 s.AverageExperience = operators.Count > 0 ? operators.Average(w => w.Experience) : 30;
-                foreach (var product in catalog.Products.Where(p => p.UnlockedByDefault))
+                foreach (var product in world.Rules.OpenProducts(catalog))
                 {
                     int plan = company.MonthlyPlan(product.Id);
                     if (plan > 0) s.Plan[product.Id] = plan;

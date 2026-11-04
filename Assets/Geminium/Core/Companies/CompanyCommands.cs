@@ -40,7 +40,7 @@ namespace Geminium.Core.Companies
         internal override void Apply(Company company, GameWorld world)
         {
             foreach (var command in Commands)
-                if (command.Validate(company, world) == null) command.Apply(company, world);
+                if ((world.Rules.Check(command, world) ?? command.Validate(company, world)) == null) command.Apply(company, world);
         }
     }
 
@@ -79,7 +79,7 @@ namespace Geminium.Core.Companies
             string error = CheckProduct(world.Catalog, ProductId);
             if (error != null) return error;
             if (Units < 0) return "План не может быть отрицательным.";
-            if (Units > 0 && !world.Catalog.Product(ProductId).UnlockedByDefault) return $"Продукт «{ProductId}» ещё не открыт.";
+            if (Units > 0 && !world.Rules.IsProductOpen(world.Catalog.Product(ProductId))) return $"Продукт «{ProductId}» ещё не открыт.";
             return null;
         }
 
@@ -94,14 +94,19 @@ namespace Geminium.Core.Companies
         public SetWorkScheduleCommand(WorkScheduleSettings settings)
         {
             // Копия, чтобы изменение исходного объекта после подачи не меняло команду.
-            this.settings = settings == null ? null : new WorkScheduleSettings
-            {
-                WorkingDaysPerWeek = settings.WorkingDaysPerWeek,
-                ShiftsPerDay = settings.ShiftsPerDay,
-                ShiftLengthMinutes = settings.ShiftLengthMinutes,
-                FirstShiftStartMinute = settings.FirstShiftStartMinute,
-            };
+            this.settings = Copy(settings);
         }
+
+        // Копия настроек (для сохранений и интерфейса).
+        public WorkScheduleSettings Settings => Copy(settings);
+
+        private static WorkScheduleSettings Copy(WorkScheduleSettings settings) => settings == null ? null : new WorkScheduleSettings
+        {
+            WorkingDaysPerWeek = settings.WorkingDaysPerWeek,
+            ShiftsPerDay = settings.ShiftsPerDay,
+            ShiftLengthMinutes = settings.ShiftLengthMinutes,
+            FirstShiftStartMinute = settings.FirstShiftStartMinute,
+        };
 
         public override string Validate(Company company, GameWorld world)
         {

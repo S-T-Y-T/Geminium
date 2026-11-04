@@ -199,6 +199,8 @@ namespace Geminium.Core.Finance
             report.DigitalModules = company.Digital.Modules.Count(m => m.Active);
             foreach (var product in catalog.Products)
             {
+                stats.Produced.TryGetValue(product.Id, out long produced);
+                report.ProducedByProduct[product.Id] = produced;
                 stats.Sold.TryGetValue(product.Id, out long sold);
                 report.SoldByProduct[product.Id] = sold;
                 stats.LostSales.TryGetValue(product.Id, out long lost);
