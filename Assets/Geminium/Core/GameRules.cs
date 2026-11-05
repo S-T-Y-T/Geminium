@@ -14,7 +14,7 @@ namespace Geminium.Core
         private readonly HashSet<Feature> features;      // null — все возможности
         private readonly HashSet<DigitalModule> modules; // null — все модули
 
-        public const string LockedMessage = "Это откроется в следующих заданиях кампании.";
+        public static string LockedMessage => CoreText.T("err.locked", "Это откроется в следующих заданиях кампании.");
 
         public GameRules(IEnumerable<string> products = null, IEnumerable<Feature> features = null, IEnumerable<DigitalModule> modules = null)
         {
@@ -72,7 +72,7 @@ namespace Geminium.Core
                     return Need(Feature.Digital);
                 case SetMonthlyPlanCommand plan:
                     return plan.Units > 0 && world.Catalog.Products.Any(p => p.Id == plan.ProductId)
-                           && !IsProductOpen(world.Catalog.Product(plan.ProductId)) ? $"Продукт «{plan.ProductId}» ещё не открыт." : null;
+                           && !IsProductOpen(world.Catalog.Product(plan.ProductId)) ? CoreText.T("err.product_locked", "Продукт «{0}» ещё не открыт.", plan.ProductId) : null;
                 default:
                     return null;
             }

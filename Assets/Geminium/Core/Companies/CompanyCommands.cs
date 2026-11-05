@@ -20,10 +20,10 @@ namespace Geminium.Core.Companies
         internal virtual void OnAccepted(Company company, GameWorld world) { }
 
         protected static string CheckProduct(DataCatalog catalog, string productId) =>
-            catalog.Products.Any(p => p.Id == productId) ? null : $"Нет продукта «{productId}».";
+            catalog.Products.Any(p => p.Id == productId) ? null : CoreText.T("err.no_product", "Нет продукта «{0}».", productId);
 
         protected static string CheckCash(Company company, long cost) =>
-            company.Cash >= cost ? null : $"Не хватает денег: нужно {cost:N0} сум, на счёте {company.Cash:N0}.";
+            company.Cash >= cost ? null : CoreText.T("err.not_enough_cash", "Не хватает денег: нужно {0:N0} сум, на счёте {1:N0}.", cost, company.Cash);
     }
 
     // Пакет команд, зависящих друг от друга (например, «покрасить зоны → поставить станки»).
@@ -35,7 +35,7 @@ namespace Geminium.Core.Companies
 
         public BatchCommand(IEnumerable<CompanyCommand> commands) { Commands = commands.ToList(); }
 
-        public override string Validate(Company company, GameWorld world) => Commands.Count == 0 ? "Пакет пуст." : null;
+        public override string Validate(Company company, GameWorld world) => Commands.Count == 0 ? CoreText.T("err.empty_batch", "Пакет пуст.") : null;
 
         internal override void Apply(Company company, GameWorld world)
         {
@@ -57,7 +57,7 @@ namespace Geminium.Core.Companies
         }
 
         public override string Validate(Company company, GameWorld world) =>
-            CheckProduct(world.Catalog, ProductId) ?? (Price <= 0 ? "Цена должна быть больше нуля." : null);
+            CheckProduct(world.Catalog, ProductId) ?? (Price <= 0 ? CoreText.T("err.price_positive", "Цена должна быть больше нуля.") : null);
 
         internal override void Apply(Company company, GameWorld world) => company.SetRetailPrice(ProductId, Price);
     }
@@ -78,8 +78,8 @@ namespace Geminium.Core.Companies
         {
             string error = CheckProduct(world.Catalog, ProductId);
             if (error != null) return error;
-            if (Units < 0) return "План не может быть отрицательным.";
-            if (Units > 0 && !world.Rules.IsProductOpen(world.Catalog.Product(ProductId))) return $"Продукт «{ProductId}» ещё не открыт.";
+            if (Units < 0) return CoreText.T("err.plan_negative", "План не может быть отрицательным.");
+            if (Units > 0 && !world.Rules.IsProductOpen(world.Catalog.Product(ProductId))) return CoreText.T("err.product_locked", "Продукт «{0}» ещё не открыт.", ProductId);
             return null;
         }
 
@@ -110,7 +110,7 @@ namespace Geminium.Core.Companies
 
         public override string Validate(Company company, GameWorld world)
         {
-            if (settings == null) return "График не задан.";
+            if (settings == null) return CoreText.T("err.no_schedule", "График не задан.");
             try
             {
                 new WorkSchedule(settings);
@@ -139,9 +139,9 @@ namespace Geminium.Core.Companies
 
         public override string Validate(Company company, GameWorld world)
         {
-            if (!world.Catalog.Suppliers.Any(s => s.Id == SupplierId)) return $"Нет поставщика «{SupplierId}».";
+            if (!world.Catalog.Suppliers.Any(s => s.Id == SupplierId)) return CoreText.T("err.no_supplier", "Нет поставщика «{0}».", SupplierId);
             var supplier = world.Catalog.Supplier(SupplierId);
-            return Quantity < supplier.MinBatch ? $"Минимальная партия у «{SupplierId}» — {supplier.MinBatch}." : null;
+            return Quantity < supplier.MinBatch ? CoreText.T("err.min_batch", "Минимальная партия у «{0}» — {1}.", SupplierId, supplier.MinBatch) : null;
         }
 
         internal override void Apply(Company company, GameWorld world) =>
@@ -164,10 +164,10 @@ namespace Geminium.Core.Companies
 
         public override string Validate(Company company, GameWorld world)
         {
-            if (!world.Catalog.Suppliers.Any(s => s.Id == SupplierId)) return $"Нет поставщика «{SupplierId}».";
+            if (!world.Catalog.Suppliers.Any(s => s.Id == SupplierId)) return CoreText.T("err.no_supplier", "Нет поставщика «{0}».", SupplierId);
             var supplier = world.Catalog.Supplier(SupplierId);
             bool cancel = Quantity <= 0 || Frequency == DeliveryFrequency.None;
-            return !cancel && Quantity < supplier.MinBatch ? $"Минимальная партия у «{SupplierId}» — {supplier.MinBatch}." : null;
+            return !cancel && Quantity < supplier.MinBatch ? CoreText.T("err.min_batch", "Минимальная партия у «{0}» — {1}.", SupplierId, supplier.MinBatch) : null;
         }
 
         internal override void Apply(Company company, GameWorld world) =>
@@ -189,9 +189,9 @@ namespace Geminium.Core.Companies
         public override string Validate(Company company, GameWorld world)
         {
             var finance = world.Catalog.Finance;
-            if (Amount <= 0) return "Сумма кредита должна быть больше нуля.";
-            if (TermMonths < 1 || TermMonths > finance.MaxLoanTermMonths) return $"Срок кредита — от 1 до {finance.MaxLoanTermMonths} месяцев.";
-            if (company.Debt + Amount > finance.MaxDebt) return $"Банк не даст больше: предел долга {finance.MaxDebt:N0} сум.";
+            if (Amount <= 0) return CoreText.T("err.loan_positive", "Сумма кредита должна быть больше нуля.");
+            if (TermMonths < 1 || TermMonths > finance.MaxLoanTermMonths) return CoreText.T("err.loan_term", "Срок кредита — от 1 до {0} месяцев.", finance.MaxLoanTermMonths);
+            if (company.Debt + Amount > finance.MaxDebt) return CoreText.T("err.max_debt", "Банк не даст больше: предел долга {0:N0} сум.", finance.MaxDebt);
             return null;
         }
 

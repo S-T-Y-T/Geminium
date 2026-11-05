@@ -32,7 +32,7 @@ namespace Geminium.Core.Companies
 
         public override string Validate(Company company, GameWorld world)
         {
-            if (Kind == FloorObjectKind.Machine && !world.Catalog.Machines.Any(m => m.Id == MachineId)) return $"Нет станка «{MachineId}».";
+            if (Kind == FloorObjectKind.Machine && !world.Catalog.Machines.Any(m => m.Id == MachineId)) return CoreText.T("err.no_machine_def", "Нет станка «{0}».", MachineId);
             var (sizeX, sizeY) = FloorRules.Size(world.Catalog, Kind, MachineId);
             return company.Floor.CanPlace(sizeX, sizeY, X, Y, Facing, FloorRules.ZoneAllowed(world.Catalog, Kind, MachineId))
                    ?? CheckCash(company, FloorRules.Price(world.Catalog, Kind, MachineId));
@@ -68,7 +68,7 @@ namespace Geminium.Core.Companies
         public override string Validate(Company company, GameWorld world)
         {
             var o = company.Floor.FindObject(ObjectId);
-            if (o == null) return $"Нет объекта №{ObjectId}.";
+            if (o == null) return CoreText.T("err.no_object", "Нет объекта №{0}.", ObjectId);
             string machineId = o.Kind == FloorObjectKind.Machine ? o.DefId : null;
             return company.Floor.CanPlace(o.SizeX, o.SizeY, X, Y, Facing, FloorRules.ZoneAllowed(world.Catalog, o.Kind, machineId), o.Id)
                    ?? CheckCash(company, RelocationCost(company, o, world));
@@ -96,7 +96,7 @@ namespace Geminium.Core.Companies
         public RemoveObjectCommand(int objectId) { ObjectId = objectId; }
 
         public override string Validate(Company company, GameWorld world) =>
-            company.Floor.FindObject(ObjectId) == null ? $"Нет объекта №{ObjectId}." : null;
+            company.Floor.FindObject(ObjectId) == null ? CoreText.T("err.no_object", "Нет объекта №{0}.", ObjectId) : null;
 
         internal override void Apply(Company company, GameWorld world)
         {
@@ -166,7 +166,7 @@ namespace Geminium.Core.Companies
         }
 
         public override string Validate(Company company, GameWorld world) =>
-            company.Floor.FindObject(ObjectId)?.Kind == FloorObjectKind.Machine ? null : $"Нет станка №{ObjectId}.";
+            company.Floor.FindObject(ObjectId)?.Kind == FloorObjectKind.Machine ? null : CoreText.T("err.no_machine", "Нет станка №{0}.", ObjectId);
 
         internal override void Apply(Company company, GameWorld world) => company.Floor.SetFeed(company.Floor.FindObject(ObjectId), Feed);
     }
@@ -175,7 +175,7 @@ namespace Geminium.Core.Companies
     public sealed class ExpandBuildingCommand : CompanyCommand
     {
         public override string Validate(Company company, GameWorld world) =>
-            company.Floor.Expansions >= world.Catalog.Floor.MaxExpansions ? "Больше пристроек арендовать нельзя." : null;
+            company.Floor.Expansions >= world.Catalog.Floor.MaxExpansions ? CoreText.T("err.max_expansions", "Больше пристроек арендовать нельзя.") : null;
 
         internal override void Apply(Company company, GameWorld world) => company.Floor.Expand(world.Catalog.Floor.ExpansionColumns);
     }
@@ -224,7 +224,7 @@ namespace Geminium.Core.Companies
 
         internal static string CheckRect(Company company, int x, int y, int width, int height) =>
             width < 1 || height < 1 || !company.Floor.InBounds(x, y) || !company.Floor.InBounds(x + width - 1, y + height - 1)
-                ? "Прямоугольник выходит за стены цеха."
+                ? CoreText.T("err.rect_outside", "Прямоугольник выходит за стены цеха.")
                 : null;
     }
 }

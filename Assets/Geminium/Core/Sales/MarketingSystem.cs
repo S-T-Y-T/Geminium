@@ -180,8 +180,8 @@ namespace Geminium.Core.Sales
         public string CheckSponsorship(Company company, int tournamentId)
         {
             var tournament = UpcomingTournaments.FirstOrDefault(t => t.Id == tournamentId);
-            if (tournament == null) return $"Турнир №{tournamentId} не объявлен или уже прошёл.";
-            return tournament.Sponsors.Contains(company.Id) ? "Компания уже спонсирует этот турнир." : null;
+            if (tournament == null) return CoreText.T("err.no_tournament", "Турнир №{0} не объявлен или уже прошёл.", tournamentId);
+            return tournament.Sponsors.Contains(company.Id) ? CoreText.T("err.already_sponsor", "Компания уже спонсирует этот турнир.") : null;
         }
 
         internal void Sponsor(Company company, int tournamentId)
@@ -193,8 +193,8 @@ namespace Geminium.Core.Sales
 
         public string CheckAmbassador(string athleteId)
         {
-            if (!catalog.Athletes.Any(a => a.Id == athleteId)) return $"Нет спортсмена «{athleteId}».";
-            return AmbassadorOwner(athleteId) != null ? "У спортсмена уже есть контракт." : null;
+            if (!catalog.Athletes.Any(a => a.Id == athleteId)) return CoreText.T("err.no_athlete", "Нет спортсмена «{0}».", athleteId);
+            return AmbassadorOwner(athleteId) != null ? CoreText.T("err.athlete_taken", "У спортсмена уже есть контракт.") : null;
         }
 
         internal void HireAmbassador(Company company, string athleteId)
@@ -211,11 +211,11 @@ namespace Geminium.Core.Sales
 
         public string CheckCertification(Company company, string productId, CertificationBody body)
         {
-            if (!catalog.Products.Any(p => p.Id == productId)) return $"Нет продукта «{productId}».";
+            if (!catalog.Products.Any(p => p.Id == productId)) return CoreText.T("err.no_product", "Нет продукта «{0}».", productId);
             int month = Simulation.MonthIndex;
             bool busy = company.Sales.Certificates.Any(c => c.ProductId == productId && c.Body == body
                                                              && (!c.Checked || c.IsValid(month)));
-            return busy ? "Сертификат на этот продукт уже есть или проверка ещё идёт." : null;
+            return busy ? CoreText.T("err.certificate_busy", "Сертификат на этот продукт уже есть или проверка ещё идёт.") : null;
         }
 
         internal void StartCertification(Company company, string productId, CertificationBody body)

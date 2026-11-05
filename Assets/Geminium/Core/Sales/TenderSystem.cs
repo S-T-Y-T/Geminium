@@ -102,9 +102,9 @@ namespace Geminium.Core.Sales
         public string CheckBid(Company company, int tenderId, long unitPrice)
         {
             var tender = open.FirstOrDefault(t => t.Id == tenderId);
-            if (tender == null) return $"Тендер №{tenderId} не принимает заявки.";
-            if (unitPrice <= 0) return "Цена заявки должна быть больше нуля.";
-            if (unitPrice > tender.MaxUnitPrice) return $"Цена выше предельной: не больше {tender.MaxUnitPrice:N0} сум за единицу.";
+            if (tender == null) return CoreText.T("err.tender_closed", "Тендер №{0} не принимает заявки.", tenderId);
+            if (unitPrice <= 0) return CoreText.T("err.bid_positive", "Цена заявки должна быть больше нуля.");
+            if (unitPrice > tender.MaxUnitPrice) return CoreText.T("err.bid_above_max", "Цена выше предельной: не больше {0:N0} сум за единицу.", tender.MaxUnitPrice);
             return CheckEligibility(company, tender);
         }
 
@@ -113,9 +113,9 @@ namespace Geminium.Core.Sales
         {
             var level = LevelDef(tender.Level);
             if (company.Reputation < level.MinReputation)
-                return $"Нужна репутация не ниже {level.MinReputation:0}, у компании {company.Reputation:0}.";
+                return CoreText.T("err.reputation_required", "Нужна репутация не ниже {0:0}, у компании {1:0}.", level.MinReputation, company.Reputation);
             if (level.CertificateRequired && !company.Sales.HasValidCertificate(tender.ProductId, Simulation.MonthIndex))
-                return $"Нужен сертификат на «{tender.ProductId}».";
+                return CoreText.T("err.certificate_required", "Нужен сертификат на «{0}».", tender.ProductId);
             return null;
         }
 

@@ -1,0 +1,217 @@
+/* Geminium — светлая тема интерфейса (GDD 11.4): плоские панели, фиолетовый акцент и бирюзовый второй цвет,
+   как на схемах GDD. Не брать стиль «Lean»: без чёрной обводки, оливковой гаммы и бежевых плашек. */
+
+:root {
+    --bg: #EEF1F5;
+    --panel: #FFFFFF;
+    --ink: #1F2933;
+    --muted: #6B7785;
+    --line: #DCE1E8;
+    --accent: #5B4BC4;
+    --accent-soft: #EEEBFB;
+    --teal: #0E8C92;
+    --danger: #C9384B;
+    --positive: #1E8E5A;
+    -unity-font-style: normal;
+    font-size: 14px;
+    color: var(--ink);
+}
+
+Label { white-space: nowrap; }
+.wrap { white-space: normal; }
+.grow { flex-grow: 1; flex-shrink: 1; }
+.spacer { flex-grow: 1; }
+.strong { -unity-font-style: bold; margin-top: 2px; margin-bottom: 2px; }
+.hint { color: var(--muted); font-size: 12px; }
+.negative { color: var(--danger); }
+.positive { color: var(--positive); }
+.error { color: var(--danger); margin: 24px; white-space: normal; }
+
+.layer { position: absolute; left: 0; top: 0; right: 0; bottom: 0; flex-direction: column; }
+
+/* ---------- Кнопки ---------- */
+Button {
+    background-color: var(--accent-soft);
+    color: var(--accent);
+    border-width: 0;
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin: 2px;
+    -unity-font-style: bold;
+}
+Button:hover { background-color: #E0DAF8; }
+Button:disabled { opacity: 0.45; }
+.primary { background-color: var(--accent); color: #FFFFFF; }
+.primary:hover { background-color: #4B3CB0; }
+.plain { background-color: #F1F3F6; color: var(--ink); -unity-font-style: normal; }
+.plain:hover { background-color: #E4E8EE; }
+.danger { background-color: #FBE9EC; color: var(--danger); }
+.small { font-size: 12px; padding: 3px 8px; }
+.tiny { font-size: 11px; padding: 2px 6px; margin: 1px; }
+
+/* ---------- Верхняя панель ---------- */
+.topbar {
+    height: 48px;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--panel);
+    border-bottom-width: 1px;
+    border-bottom-color: var(--line);
+    padding: 0 10px;
+}
+.top-date { -unity-font-style: bold; margin-right: 18px; }
+.top-item { margin-right: 18px; color: var(--muted); }
+.top-cash { color: var(--ink); -unity-font-style: bold; }
+.top-cash.negative { color: var(--danger); }
+.speed { min-width: 36px; background-color: #F1F3F6; color: var(--ink); }
+.speed-active { background-color: var(--teal); color: #FFFFFF; }
+.top-button { margin-left: 8px; }
+
+/* ---------- Середина ---------- */
+.main { flex-grow: 1; flex-direction: row; }
+.nav {
+    width: 176px;
+    background-color: var(--panel);
+    border-right-width: 1px;
+    border-right-color: var(--line);
+    padding: 8px 6px;
+}
+.nav-button {
+    -unity-text-align: middle-left;
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--ink);
+    -unity-font-style: normal;
+    padding: 7px 10px;
+    margin: 1px 0;
+}
+.nav-button:hover { background-color: #F1F3F6; }
+.nav-active { background-color: var(--accent-soft); color: var(--accent); -unity-font-style: bold; }
+.center { flex-grow: 1; flex-direction: column; }
+.center-space { flex-grow: 1; }
+.news {
+    height: 118px;
+    background-color: rgba(255, 255, 255, 0.94);
+    border-top-width: 1px;
+    border-top-color: var(--line);
+    padding: 6px 12px;
+    overflow: hidden;
+}
+.news-title { -unity-font-style: bold; color: var(--teal); font-size: 12px; }
+.news-item { font-size: 12px; white-space: normal; margin-top: 2px; }
+.panel {
+    width: 560px;
+    background-color: var(--panel);
+    border-left-width: 1px;
+    border-left-color: var(--line);
+}
+.panel-scroll { flex-grow: 1; padding: 10px 14px; }
+
+/* ---------- Содержимое экранов ---------- */
+.title { font-size: 20px; -unity-font-style: bold; margin-bottom: 8px; }
+.row { flex-direction: row; align-items: center; flex-wrap: wrap; }
+.section {
+    margin: 6px 0 10px 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background-color: #F7F8FA;
+}
+.section-title { -unity-font-style: bold; color: var(--accent); margin-bottom: 4px; white-space: normal; }
+.card {
+    padding: 8px 10px;
+    margin: 4px 0;
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: var(--line);
+    background-color: var(--panel);
+}
+.pair { justify-content: space-between; flex-wrap: nowrap; margin: 1px 0; }
+.pair-label { color: var(--muted); margin-right: 8px; }
+.pair-label-short { color: var(--muted); margin: 0 4px 0 8px; }
+.pair-value { -unity-font-style: bold; }
+.pair-total { border-top-width: 1px; border-top-color: var(--line); padding-top: 2px; }
+.field { margin: 2px; }
+.field > .unity-text-field__input { padding: 2px 6px; }
+.dropdown { margin: 2px; }
+.toggle { margin: 4px 0; }
+.button-grid { flex-direction: row; flex-wrap: wrap; }
+.tip { margin-top: 10px; padding: 8px 10px; border-radius: 8px; background-color: #E6F5F5; color: #0B6E73; }
+
+.table { margin: 4px 0; }
+.tr { flex-direction: row; align-items: center; min-height: 24px; }
+.th { border-bottom-width: 1px; border-bottom-color: var(--line); }
+.th Label { color: var(--muted); font-size: 12px; white-space: normal; }
+.zebra { background-color: #F7F8FA; }
+.td { padding: 1px 4px; overflow: hidden; }
+.td Label { font-size: 12px; }
+
+.bar { height: 8px; flex-grow: 1; min-width: 80px; background-color: var(--line); border-radius: 4px; margin: 4px 6px; }
+.bar-fill { height: 8px; background-color: var(--teal); border-radius: 4px; }
+.bar-danger { height: 8px; background-color: var(--danger); border-radius: 4px; }
+
+.chart { margin: 4px 0 10px 0; }
+.chart-title { -unity-font-style: bold; font-size: 12px; color: var(--muted); }
+.chart-area { flex-direction: row; height: 90px; align-items: flex-end; border-bottom-width: 1px; border-bottom-color: var(--line); }
+.chart-col { flex-grow: 1; height: 100%; justify-content: flex-end; align-items: center; margin: 0 2px; }
+.chart-bar { width: 70%; background-color: var(--accent); border-radius: 3px 3px 0 0; }
+.chart-bar-negative { width: 70%; background-color: var(--danger); border-radius: 3px 3px 0 0; }
+.chart-label { font-size: 10px; color: var(--muted); }
+
+/* ---------- Меню ---------- */
+.menu-screen {
+    position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+    background-color: var(--bg);
+    align-items: center;
+    justify-content: center;
+}
+.menu {
+    width: 560px;
+    max-height: 92%;
+    padding: 24px 28px;
+    border-radius: 14px;
+    background-color: var(--panel);
+    overflow: hidden;
+}
+.logo { font-size: 40px; -unity-font-style: bold; color: var(--accent); -unity-text-align: middle-center; }
+.logo-small { font-size: 24px; -unity-font-style: bold; color: var(--accent); }
+.menu-hint { color: var(--muted); -unity-text-align: middle-center; margin-bottom: 14px; white-space: normal; }
+.menu-button { height: 40px; font-size: 16px; margin: 4px 0; }
+.menu-row { margin: 6px 0; }
+.mission-card { padding: 8px 12px; margin: 3px 0; border-radius: 8px; background-color: #F7F8FA; }
+.mission-title { -unity-font-style: bold; }
+.lab-list { max-height: 200px; }
+
+/* ---------- Диалоги ---------- */
+.overlay {
+    position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+    background-color: rgba(20, 24, 32, 0.45);
+    align-items: center;
+    justify-content: center;
+}
+.dialog {
+    width: 640px;
+    max-height: 88%;
+    padding: 20px 24px;
+    border-radius: 12px;
+    background-color: var(--panel);
+}
+.summary { margin: 6px 0 10px 0; padding: 10px 12px; border-radius: 8px; background-color: var(--accent-soft); }
+.big { font-size: 22px; -unity-font-style: bold; margin: 6px 0; }
+.goal-text { flex-grow: 1; flex-shrink: 1; white-space: normal; }
+.goal-score { -unity-font-style: bold; width: 40px; -unity-text-align: middle-right; }
+.rank { width: 30px; -unity-font-style: bold; }
+.rank-row { margin: 2px 0; padding: 4px 6px; }
+.rank-player { margin: 2px 0; padding: 4px 6px; border-radius: 6px; background-color: var(--accent-soft); }
+.slot-info { flex-grow: 1; flex-shrink: 1; white-space: normal; }
+
+.toast {
+    position: absolute;
+    bottom: 132px;
+    left: 30%;
+    right: 30%;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background-color: #2B3340;
+    color: #FFFFFF;
+    white-space: normal;
+    -unity-text-align: middle-center;
+}

@@ -1,0 +1,2183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Geminium_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 2deaf3ba2e156db41a3372ea3f381cb9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 330929007153152
+    m_Localized: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932861718528
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932903661568
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932903661569
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827392
+    m_Localized: Nothing yet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827393
+    m_Localized: OK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827394
+    m_Localized: UZS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827395
+    m_Localized: UZS {0:N1} M
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827396
+    m_Localized: "\xD6zbek\xE7a"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827397
+    m_Localized: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827398
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827399
+    m_Localized: A taekwondo equipment factory simulator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021696
+    m_Localized: Continue ({0})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021697
+    m_Localized: Campaign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021698
+    m_Localized: Six missions, each teaching one part of the factory.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021699
+    m_Localized: Free mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021700
+    m_Localized: "Three years against Daebo and Ab\u0131das. The most valuable company wins."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021701
+    m_Localized: Unlocks after the campaign.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021702
+    m_Localized: Load game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021703
+    m_Localized: The game autosaves at the end of every month.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021704
+    m_Localized: Scenario Lab
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021705
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021706
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021707
+    m_Localized: passed, best score {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021708
+    m_Localized: not passed, best score {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021709
+    m_Localized: new mission
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021710
+    m_Localized: unlocks after the previous one
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021711
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021712
+    m_Localized: World number (seed)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021713
+    m_Localized: Rivals
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021714
+    m_Localized: rule-based
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021715
+    m_Localized: trained neural network
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021716
+    m_Localized: The neural network model is not connected, so rivals are rule-based.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021717
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021718
+    m_Localized: Main menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021719
+    m_Localized: Month {0} of {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021720
+    m_Localized: month {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021721
+    m_Localized: Reputation {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021722
+    m_Localized: Reputation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021723
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021724
+    m_Localized: News
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604608
+    m_Localized: Shop floor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604609
+    m_Localized: Staff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604610
+    m_Localized: Supply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604611
+    m_Localized: Warehouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604612
+    m_Localized: Sales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604613
+    m_Localized: Marketing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604614
+    m_Localized: Finance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604615
+    m_Localized: Digitalization
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604616
+    m_Localized: Analytics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604617
+    m_Localized: Mission
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604618
+    m_Localized: Tools
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604619
+    m_Localized: Zone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604620
+    m_Localized: Machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604621
+    m_Localized: '{0}, tier {1}, {2}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604622
+    m_Localized: 'Access side: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604623
+    m_Localized: Rotate (R)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604624
+    m_Localized: Fit view (F)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604625
+    m_Localized: Weekly spaghetti diagram
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604626
+    m_Localized: 'Drag to paint zones and aisles, click to place objects. Camera: WASD, mouse wheel, right button.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604627
+    m_Localized: Selected object
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604628
+    m_Localized: Pick the Select tool and click an object on the floor.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604629
+    m_Localized: Condition
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604630
+    m_Localized: broken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604631
+    m_Localized: Weekly load
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604632
+    m_Localized: Operations since maintenance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604633
+    m_Localized: '{0} of {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604634
+    m_Localized: Operator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604635
+    m_Localized: none
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604636
+    m_Localized: '{0} #{1}, experience {2}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604637
+    m_Localized: Downtime this month, h
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604638
+    m_Localized: "no operator {0} \xB7 no work {1} \xB7 repair {2} \xB7 maintenance {3}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604639
+    m_Localized: "Maintenance every \u2026 operations"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604640
+    m_Localized: Assign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604641
+    m_Localized: 'Feed: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993216
+    m_Localized: Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993217
+    m_Localized: Remove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993218
+    m_Localized: Whole shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993219
+    m_Localized: Takt time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993220
+    m_Localized: '{0} min per unit'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993221
+    m_Localized: Bottleneck
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187520
+    m_Localized: Loads waiting for transport
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187521
+    m_Localized: Extensions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187522
+    m_Localized: Rent an extension ({0} a month)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187523
+    m_Localized: Schedule
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187524
+    m_Localized: '{0} days a week'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187525
+    m_Localized: '{0} shift(s)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187526
+    m_Localized: Detected defects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187527
+    m_Localized: Transport batch, pcs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187528
+    m_Localized: Employees ({0})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187529
+    m_Localized: Assign operators
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187530
+    m_Localized: 'Assigned to machines: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187531
+    m_Localized: Overtime, h per day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187532
+    m_Localized: Employee
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187533
+    m_Localized: Exp.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187534
+    m_Localized: Wage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187535
+    m_Localized: Morale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187536
+    m_Localized: Fatigue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187537
+    m_Localized: Train
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187538
+    m_Localized: absent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187539
+    m_Localized: "\u201C+5%\u201D raises the wage, \u201CTrain\u201D is a course for {0} (+experience), \u201C\u2715\u201D fires. \u25CF works at a machine."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187540
+    m_Localized: Labor market
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187541
+    m_Localized: Expected wage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187542
+    m_Localized: Stamina
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187543
+    m_Localized: Hire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187544
+    m_Localized: '#{0}, exp. {1} {2}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187545
+    m_Localized: Raw material exchange
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187546
+    m_Localized: Material
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187547
+    m_Localized: Exchange price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187548
+    m_Localized: In stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187549
+    m_Localized: Suppliers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187550
+    m_Localized: 'Suppliers: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187551
+    m_Localized: "{0} \xB7 reliability {1} \xB7 quality {2}\u2013{3} \xB7 min. batch {4} \xB7 lead time {5} d"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187552
+    m_Localized: 'Your price: {0} per unit'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187553
+    m_Localized: One-off order
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187554
+    m_Localized: Regular
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187555
+    m_Localized: "Regular delivery: {0} \u2014 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187556
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576128
+    m_Localized: Expected deliveries ({0})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576129
+    m_Localized: "{0}: {1} \u2014 {2}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576130
+    m_Localized: Incoming inspection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576131
+    m_Localized: Inspect raw material batches and return bad ones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576132
+    m_Localized: Capacity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576133
+    m_Localized: Cells
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576134
+    m_Localized: "{0} units don't fit \u2014 a fine every day."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576135
+    m_Localized: Racks on the floor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576136
+    m_Localized: The area by the gate plus racks, each rack holds {0} cells.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576137
+    m_Localized: Materials
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576138
+    m_Localized: Quantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576139
+    m_Localized: Quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576140
+    m_Localized: Products
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576141
+    m_Localized: Good
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576142
+    m_Localized: Defective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576143
+    m_Localized: Retail (B2C)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576144
+    m_Localized: Prices are set by the AI module (you can switch it off on the Digitalization screen).
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576145
+    m_Localized: 'Last month: sold {0}, lost {1}, market share {2}. In stock {3}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576146
+    m_Localized: Price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576147
+    m_Localized: Plan/mo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576148
+    m_Localized: 'Market reference price: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576149
+    m_Localized: Tenders (B2B)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964736
+    m_Localized: No tenders this month.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964737
+    m_Localized: '{0}: {1}, {2} pcs'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964738
+    m_Localized: Max price {0} per unit, delivery within {1} months after the award.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964739
+    m_Localized: Your price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964740
+    m_Localized: Place bid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964741
+    m_Localized: Update bid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964742
+    m_Localized: 'Bid placed: {0} per unit. Results come at the end of the month.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964743
+    m_Localized: Contracts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964744
+    m_Localized: Product
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964745
+    m_Localized: Level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964746
+    m_Localized: Delivered
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964747
+    m_Localized: Deadline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964748
+    m_Localized: Status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964749
+    m_Localized: Advertising
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964750
+    m_Localized: Monthly budget
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964751
+    m_Localized: 'Returns grow slower than the budget: about {0} a month gives two thirds of the effect.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964752
+    m_Localized: Tournaments
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964753
+    m_Localized: Month
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964754
+    m_Localized: Sponsorship
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964755
+    m_Localized: Sponsor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964756
+    m_Localized: you sponsor it
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964757
+    m_Localized: Ambassadors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964758
+    m_Localized: Athlete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964759
+    m_Localized: Rating
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964760
+    m_Localized: Monthly fee
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964761
+    m_Localized: Sign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964762
+    m_Localized: Release
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964763
+    m_Localized: Certification
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964764
+    m_Localized: "A check costs {0} and takes 2\u20133 months, average stock quality must be at least {1}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964765
+    m_Localized: no certificate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964766
+    m_Localized: '{0}, valid until month {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964767
+    m_Localized: under review until month {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964768
+    m_Localized: failed the check
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964769
+    m_Localized: Certify
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964770
+    m_Localized: Balance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964771
+    m_Localized: Cash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964772
+    m_Localized: Loan debt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964773
+    m_Localized: Credit rating
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964774
+    m_Localized: Cash has been negative for {0} month(s) in a row. Two months in a row means bankruptcy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964775
+    m_Localized: Profit and loss, month {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964776
+    m_Localized: Profit and loss appears after the first month
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964777
+    m_Localized: Revenue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964778
+    m_Localized: including contracts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547648
+    m_Localized: Cost of goods sold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547649
+    m_Localized: Wages and social tax
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547650
+    m_Localized: Rent and storage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547651
+    m_Localized: Electricity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547652
+    m_Localized: 'Other: maintenance, marketing, fines, returns'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547653
+    m_Localized: Depreciation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547654
+    m_Localized: Interest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547655
+    m_Localized: Profit tax
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547656
+    m_Localized: Net income
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547657
+    m_Localized: Capitalization
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547658
+    m_Localized: Loans
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547659
+    m_Localized: Amount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547660
+    m_Localized: Rate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547661
+    m_Localized: Term
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547662
+    m_Localized: Remaining
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547663
+    m_Localized: '{0} mo'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547664
+    m_Localized: The bank lends at {0} a year, total debt up to {1}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433728
+    m_Localized: Amount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433729
+    m_Localized: Take a loan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433730
+    m_Localized: The Digital Uzbekistan programme covers {0} of the implementation cost.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433731
+    m_Localized: Implementation {0}, licence {1} a month
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822336
+    m_Localized: 'Requires: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822337
+    m_Localized: Implement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822338
+    m_Localized: Turn on again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822339
+    m_Localized: active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822340
+    m_Localized: Turn off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822341
+    m_Localized: Set prices automatically
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822342
+    m_Localized: The twin found no moves that would noticeably shorten load paths.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822343
+    m_Localized: '{0} #{1}: path shorter by {2} cells per unit, moving costs {3}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822344
+    m_Localized: Exact condition of every machine instead of a rough estimate.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822345
+    m_Localized: Maintenance by machine condition (55% or less), not by an operation counter.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822346
+    m_Localized: "\u201CWhat if\u201D for the layout: suggests moves, and moving a machine is 5 times cheaper."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822347
+    m_Localized: Fabric waste in cutting is 4% instead of 12%.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822348
+    m_Localized: A camera checks every unit and finds 97% of defects without an inspector.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822349
+    m_Localized: Production plan from a seasonal demand forecast.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822350
+    m_Localized: Every month, the price with the highest expected margin.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822351
+    m_Localized: Charts appear after the first month.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822352
+    m_Localized: Monthly KPIs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822353
+    m_Localized: Mo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822354
+    m_Localized: Export CSV for Excel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822355
+    m_Localized: 'File saved: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822356
+    m_Localized: Output, pcs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822357
+    m_Localized: Defects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822358
+    m_Localized: Sold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822359
+    m_Localized: Lost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405248
+    m_Localized: Logistics, km
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405249
+    m_Localized: Downtime, h
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405250
+    m_Localized: Market share
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405251
+    m_Localized: 'Goals ({0} months, pass mark {1}):'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405252
+    m_Localized: all products
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405253
+    m_Localized: Start the mission
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405254
+    m_Localized: 'Current score: {0} of 100'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405255
+    m_Localized: Mission passed!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405256
+    m_Localized: Mission failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405257
+    m_Localized: Score {0} (pass mark {1})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405258
+    m_Localized: Stay on the floor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405259
+    m_Localized: 'Months left: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405260
+    m_Localized: "now {0} \u2192 {1} points"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405261
+    m_Localized: The mission is passed with a score of {0} or more.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405262
+    m_Localized: Produce at least {0} units ({1})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405263
+    m_Localized: Defects at most {0}%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405264
+    m_Localized: Shorten load paths on the floor by {0}%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405265
+    m_Localized: 'No warehouse overflow (overflow days: {0})'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405266
+    m_Localized: At most {0} returned defective units
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405267
+    m_Localized: Downtime from breakdowns and maintenance at most {0} h
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405268
+    m_Localized: Market share at least {0}% ({1})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405269
+    m_Localized: Win a federation tender and fulfil the contract on time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405270
+    m_Localized: The first shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405271
+    m_Localized: Build a shop and make your first doboks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405272
+    m_Localized: You have an empty shop and UZS 80 M. Paint cutting and sewing zones, place machines, hire a cutter, a seamstress and a laborer, order cotton and thread, set a plan and a price. The goal is at least 250 doboks in two months without excess defects.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405273
+    m_Localized: "Tip: drag the mouse to paint a zone, place each machine inside its zone facing an aisle. The Staff screen has an \u201CAssign operators\u201D button."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405274
+    m_Localized: Logistics and warehouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405275
+    m_Localized: Rearrange machines so loads travel less.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405276
+    m_Localized: 'The shop works, but machines stand at the far ends of their zones and laborers waste time walking. Move machines closer to storage and to each other, set up racks, the feed side and the transport batch. The goal: shorten load paths by 30% and avoid warehouse overflow without losing output.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405277
+    m_Localized: 'Tip: turn on the spaghetti diagram on the Shop floor screen, red cells show the busiest aisles. The Move tool relocates the selected machine.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405278
+    m_Localized: Quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405279
+    m_Localized: Cut defects and stop returns.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405280
+    m_Localized: 'The shop was built on the cheap: no QC table and no inspector, and customers return defective goods. Place a QC table, hire an inspector, turn on incoming inspection, choose what to do with detected defects, train people. The goal: defects at most 2.5% and no returns in two months.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405281
+    m_Localized: 'Tip: QC finds defects before they are sold, and incoming inspection keeps bad material out. Tired and inexperienced people make more mistakes.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405282
+    m_Localized: Equipment
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405283
+    m_Localized: The machines are worn out, keep them from breaking.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405284
+    m_Localized: 'You bought a shop with old machines: their condition is about 1%. Without a mechanic no planned maintenance happens, and a breakdown stops a machine for a long time. Hire a mechanic, set a maintenance interval, add IoT sensors and predictive maintenance if you can afford them. Molding and helmets unlock here. The goal: at most 2 hours of downtime from breakdowns and maintenance in three months.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405285
+    m_Localized: 'Tip: with one or two shifts the mechanic does maintenance between shifts with no downtime. An interval of 1 operation sends a machine to maintenance right away, then set the usual interval back.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793856
+    m_Localized: Market and rivals
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793857
+    m_Localized: "Win market share from Daebo and Ab\u0131das."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793858
+    m_Localized: "Rivals have entered the market: Daebo sells expensive quality goods, Ab\u0131das sells cheap. Buyers choose by price, quality and reputation. Manage prices and plans, invest in advertising, sponsor tournaments, sign an ambassador. The goal: at least 33% market share in the last month."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793859
+    m_Localized: 'Tip: when you run out of stock, sales go to the rivals. Watch lost sales on the Sales screen.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793860
+    m_Localized: Contracts and growth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793861
+    m_Localized: Win a federation tender and deliver on time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793862
+    m_Localized: 'The regional taekwondo federation has announced a tender for 200 doboks with delivery within two months. Bid in the first month, scale up production, take a loan if needed, certify your products, adopt digital modules. The goal: fulfil the contract with no delay.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793863
+    m_Localized: "Tip: bids are accepted until the end of the month and the best score wins \u2014 price, reputation and quality history. Contract deliveries come before retail."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793864
+    m_Localized: Three-year results
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793865
+    m_Localized: Ranking by capitalization. You can keep playing with no time limit.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793866
+    m_Localized: The company went bankrupt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793867
+    m_Localized: bankrupt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793868
+    m_Localized: Keep playing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793869
+    m_Localized: 'Report: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793870
+    m_Localized: Key figures
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793871
+    m_Localized: Back to decisions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793872
+    m_Localized: Save to a slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793873
+    m_Localized: Slot {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793874
+    m_Localized: Autosave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793875
+    m_Localized: empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793876
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793877
+    m_Localized: Load
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793878
+    m_Localized: Delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793879
+    m_Localized: Game saved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793880
+    m_Localized: "{0}, month {1}, capitalization {2} \xB7 {3}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793881
+    m_Localized: The game autosaves at the end of every month.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793882
+    m_Localized: Loading the game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793883
+    m_Localized: 'Replaying decisions: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793884
+    m_Localized: Could not load
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793885
+    m_Localized: Game data has changed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793886
+    m_Localized: This save was made with a different game balance, so the game may play out differently. Load anyway?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793887
+    m_Localized: The same factory with different digital modules, no graphics. The effect is the profit difference from the baseline on the same seeds.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793888
+    m_Localized: Seeds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793889
+    m_Localized: Months
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793890
+    m_Localized: Run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793891
+    m_Localized: "Running {0} simulations\u2026 This takes a few minutes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793892
+    m_Localized: 'Done. Tables for Excel: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793893
+    m_Localized: Scenario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376768
+    m_Localized: Profit gain, M/month
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376769
+    m_Localized: "{0} \xB1 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376770
+    m_Localized: ROI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376771
+    m_Localized: Payback, mo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376772
+    m_Localized: NPV
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376773
+    m_Localized: A. Baseline without modules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376774
+    m_Localized: B. IoT + predictive maintenance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376775
+    m_Localized: C0. Poor layout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376776
+    m_Localized: C. Digital twin (vs C0)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376777
+    m_Localized: D. AI cutting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376778
+    m_Localized: E. AI quality control
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376779
+    m_Localized: F. Demand forecast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376780
+    m_Localized: G. AI pricing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376781
+    m_Localized: H. All modules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376782
+    m_Localized: I. All modules + state programme
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376783
+    m_Localized: 'Market event: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376784
+    m_Localized: EVA foam is up {0} for {1} month(s).
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376785
+    m_Localized: Cotton is up {0} for {1} month(s).
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376786
+    m_Localized: 'Supplier force majeure: deliveries fail more often ({1} mo).'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376787
+    m_Localized: A bad batch of raw material is on the market, check your deliveries.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376788
+    m_Localized: 'Currency shock: imports cost {0} more for {1} months.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376789
+    m_Localized: 'Digital Uzbekistan programme: {0} of digital module costs are covered ({1} months).'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376790
+    m_Localized: 'Power restrictions: machines work {0} less ({1} mo).'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376791
+    m_Localized: 'Flu epidemic: people fall ill and machines work {0} less ({1} mo).'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376792
+    m_Localized: 'Sports boom: demand for equipment is up {0} for {1} months.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376793
+    m_Localized: 'Tender ({0}): {1}, {2} pcs, at most {3} per unit.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376794
+    m_Localized: 'Tender winner ({1}, {2}): {0} at {3} per unit.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376795
+    m_Localized: '{0} cut the price of {1} by {2}%: {3}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376796
+    m_Localized: '{0} raised the price of {1} by {2}%: {3}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376797
+    m_Localized: '{0} is expanding: a new {1}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376798
+    m_Localized: '{0} now spends {1} a month on advertising.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376799
+    m_Localized: '{0} signed an ambassador: {1}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376800
+    m_Localized: stock had piled up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376801
+    m_Localized: rivals sell cheaper
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376802
+    m_Localized: demand is weaker than expected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376803
+    m_Localized: the product sold out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376804
+    m_Localized: rivals charge more
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376805
+    m_Localized: costs went up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376806
+    m_Localized: no operators
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376807
+    m_Localized: no materials or parts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376808
+    m_Localized: breakdowns
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376809
+    m_Localized: maintenance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376810
+    m_Localized: No report for this month.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376811
+    m_Localized: 'Revenue for the month: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348288
+    m_Localized: 'Revenue for the month: {0} ({1} vs last month).'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348289
+    m_Localized: 'Net income: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348290
+    m_Localized: 'Net loss: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348291
+    m_Localized: '{0} good units were made, defect rate {1}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348292
+    m_Localized: 'Best seller: {0}, {1} units.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348293
+    m_Localized: '{0} sales were lost to stockouts.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348294
+    m_Localized: 'Most downtime: {0}, {1} h.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348295
+    m_Localized: 'Tenders won: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348296
+    m_Localized: Customers returned {0} defective units.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348297
+    m_Localized: 'Cash: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348298
+    m_Localized: "There is no product \u201C{0}\u201D."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348299
+    m_Localized: 'Not enough money: UZS {0:N0} needed, UZS {1:N0} in the account.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348300
+    m_Localized: The batch is empty.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348301
+    m_Localized: The price must be greater than zero.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348302
+    m_Localized: The plan can't be negative.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348303
+    m_Localized: "The product \u201C{0}\u201D isn't unlocked yet."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348304
+    m_Localized: No schedule given.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348305
+    m_Localized: "There is no supplier \u201C{0}\u201D."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348306
+    m_Localized: "The minimum batch from \u201C{0}\u201D is {1}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348307
+    m_Localized: The loan amount must be greater than zero.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348308
+    m_Localized: The loan term is 1 to {0} months.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348309
+    m_Localized: 'The bank won''t lend more: the debt limit is UZS {0:N0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348310
+    m_Localized: This module isn't active.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348311
+    m_Localized: There is no AI pricing module.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736896
+    m_Localized: "There is no machine \u201C{0}\u201D."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736897
+    m_Localized: There is no object #{0}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736898
+    m_Localized: There is no machine #{0}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736899
+    m_Localized: You can't rent any more extensions.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736900
+    m_Localized: The rectangle goes beyond the shop walls.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736901
+    m_Localized: The advertising budget can't be negative.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736902
+    m_Localized: "\u201C{0}\u201D is not the company's ambassador."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736903
+    m_Localized: Candidate #{0} is no longer on the market.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736904
+    m_Localized: Candidate #{0} is already being hired by another company.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736905
+    m_Localized: There is no employee #{0}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736906
+    m_Localized: The shift is 0, 1 or 2.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736907
+    m_Localized: This profession doesn't operate machines.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736908
+    m_Localized: The wage must be greater than zero.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736909
+    m_Localized: Overtime is 0 to {0} hours.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736910
+    m_Localized: The transport batch is 1 to {0}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736911
+    m_Localized: The maintenance interval is at least one operation.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125504
+    m_Localized: This unlocks in later campaign missions.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125505
+    m_Localized: The company went bankrupt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125506
+    m_Localized: Tender #{0} isn't accepting bids.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125507
+    m_Localized: The bid price must be greater than zero.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125508
+    m_Localized: 'The price is above the maximum: at most UZS {0:N0} per unit.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125509
+    m_Localized: A reputation of at least {0:0} is required, the company has {1:0}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125510
+    m_Localized: "A certificate for \u201C{0}\u201D is required."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125511
+    m_Localized: Tournament #{0} hasn't been announced or is already over.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125512
+    m_Localized: The company already sponsors this tournament.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125513
+    m_Localized: "There is no athlete \u201C{0}\u201D."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125514
+    m_Localized: The athlete already has a contract.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125515
+    m_Localized: This product already has a certificate or is still being checked.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125516
+    m_Localized: There is no module {0}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125517
+    m_Localized: The module is already active.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125518
+    m_Localized: Module {0} is needed first.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125519
+    m_Localized: The object goes beyond the shop walls.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125520
+    m_Localized: Objects can't be placed on an aisle.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319808
+    m_Localized: The spot is taken by another object.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319809
+    m_Localized: The object is not in its own zone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319810
+    m_Localized: Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319811
+    m_Localized: Zone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319812
+    m_Localized: Aisle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319813
+    m_Localized: Erase aisle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319814
+    m_Localized: Machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319815
+    m_Localized: Rack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319816
+    m_Localized: QC table
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319817
+    m_Localized: Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319818
+    m_Localized: No zone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319819
+    m_Localized: Cutting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319820
+    m_Localized: Sewing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319821
+    m_Localized: Molding
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319822
+    m_Localized: Electronics assembly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319823
+    m_Localized: Raw material storage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319824
+    m_Localized: Finished goods storage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319825
+    m_Localized: Receiving at the gate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319826
+    m_Localized: Quality control
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319827
+    m_Localized: Office
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319828
+    m_Localized: up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708416
+    m_Localized: down
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708417
+    m_Localized: left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708418
+    m_Localized: right
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708419
+    m_Localized: Machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708420
+    m_Localized: Rack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708421
+    m_Localized: QC table
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708422
+    m_Localized: Manager desk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708423
+    m_Localized: front
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708424
+    m_Localized: rear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708425
+    m_Localized: Scrap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902720
+    m_Localized: Keep in stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902721
+    m_Localized: Send back for repair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902722
+    m_Localized: Sell at a discount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902723
+    m_Localized: none
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902724
+    m_Localized: on Mondays
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902725
+    m_Localized: Mon and Wed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902726
+    m_Localized: every working day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902727
+    m_Localized: local
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902728
+    m_Localized: import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902729
+    m_Localized: local and import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902730
+    m_Localized: schools
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902731
+    m_Localized: clubs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902732
+    m_Localized: regional federation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902733
+    m_Localized: national federation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902734
+    m_Localized: active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902735
+    m_Localized: completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902736
+    m_Localized: terminated
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902737
+    m_Localized: "\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902738
+    m_Localized: regional
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097024
+    m_Localized: national
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097025
+    m_Localized: world
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097026
+    m_Localized: WT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097027
+    m_Localized: ITF
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097028
+    m_Localized: WAKO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097029
+    m_Localized: "\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097030
+    m_Localized: IoT sensors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097031
+    m_Localized: Predictive maintenance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097032
+    m_Localized: Digital twin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097033
+    m_Localized: AI cutting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097034
+    m_Localized: AI quality control
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097035
+    m_Localized: Demand forecast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097036
+    m_Localized: AI pricing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097037
+    m_Localized: Your factory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097038
+    m_Localized: Daebo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097039
+    m_Localized: "Ab\u0131das"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097040
+    m_Localized: dobok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097041
+    m_Localized: helmet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097042
+    m_Localized: hogu (chest protector)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291328
+    m_Localized: shin and forearm guards
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291329
+    m_Localized: electronic vest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291330
+    m_Localized: cotton fabric
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291331
+    m_Localized: polyester
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291332
+    m_Localized: EVA foam
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291333
+    m_Localized: PU foam
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291334
+    m_Localized: eco leather
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291335
+    m_Localized: PVC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291336
+    m_Localized: velcro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291337
+    m_Localized: elastic band
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291338
+    m_Localized: reinforced thread
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291339
+    m_Localized: sensor module
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291340
+    m_Localized: knife cutting table
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291341
+    m_Localized: band cutting machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291342
+    m_Localized: laser cutter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291343
+    m_Localized: straight-stitch machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291344
+    m_Localized: overlock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291345
+    m_Localized: automatic sewing unit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291346
+    m_Localized: hand press
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291347
+    m_Localized: thermo press
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291348
+    m_Localized: vacuum former
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291349
+    m_Localized: electronics bench
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291350
+    m_Localized: laborer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291351
+    m_Localized: cutter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291352
+    m_Localized: seamstress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291353
+    m_Localized: molder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291354
+    m_Localized: mechanic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291355
+    m_Localized: QC inspector
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291356
+    m_Localized: sales manager
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291357
+    m_Localized: EVA foam price spike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291358
+    m_Localized: cotton price spike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291359
+    m_Localized: supplier force majeure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291360
+    m_Localized: bad raw material batch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291361
+    m_Localized: currency shock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291362
+    m_Localized: Digital Uzbekistan programme
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291363
+    m_Localized: power restrictions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291364
+    m_Localized: flu epidemic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291365
+    m_Localized: sports boom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291366
+    m_Localized: Tashkent Cotton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291367
+    m_Localized: Fergana Cotton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679936
+    m_Localized: Polyester (local)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679937
+    m_Localized: Polyester (import)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679938
+    m_Localized: EVA Import A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679939
+    m_Localized: EVA Import B
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679940
+    m_Localized: PU Import A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679941
+    m_Localized: PU Import B
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679942
+    m_Localized: Eco leather (local)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679943
+    m_Localized: Eco leather (import)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679944
+    m_Localized: PVC (local)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679945
+    m_Localized: PVC (import)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679946
+    m_Localized: Velcro (import)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679947
+    m_Localized: Velcro (reseller)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679948
+    m_Localized: Elastic (local)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679949
+    m_Localized: Elastic (import)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679950
+    m_Localized: Thread (local)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679951
+    m_Localized: Thread (import)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679952
+    m_Localized: Sensors, Import A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679953
+    m_Localized: Sensors, Import B
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679954
+    m_Localized: Diyor Rakhimov
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068544
+    m_Localized: Malika Yusupova
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068545
+    m_Localized: Sardor Kodirov
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068546
+    m_Localized: Nigora Alieva
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068547
+    m_Localized: Bekzod Tursunov
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068548
+    m_Localized: Zarina Khamidova
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068549
+    m_Localized: Javokhir Nazarov
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068550
+    m_Localized: Kamola Saidova
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

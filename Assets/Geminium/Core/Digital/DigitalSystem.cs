@@ -66,11 +66,11 @@ namespace Geminium.Core.Digital
 
         public string CheckPurchase(Company company, DigitalModule module)
         {
-            if (!catalog.DigitalModules.Any(d => d.Module == module)) return $"Нет модуля {module}.";
+            if (!catalog.DigitalModules.Any(d => d.Module == module)) return CoreText.T("err.no_module", "Нет модуля {0}.", module);
             var owned = company.Digital.Find(module);
-            if (owned != null && owned.Active) return "Модуль уже работает.";
+            if (owned != null && owned.Active) return CoreText.T("err.module_active", "Модуль уже работает.");
             var requires = Def(module).Requires;
-            if (requires != DigitalModule.None && !company.Digital.Has(requires)) return $"Сначала нужен модуль {requires}.";
+            if (requires != DigitalModule.None && !company.Digital.Has(requires)) return CoreText.T("err.module_requires", "Сначала нужен модуль {0}.", requires);
             return null;
         }
 

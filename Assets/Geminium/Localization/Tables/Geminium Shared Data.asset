@@ -1,0 +1,2188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Geminium Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Geminium
+  m_TableCollectionNameGuidString: 2deaf3ba2e156db41a3372ea3f381cb9
+  m_Entries:
+  - m_Id: 330929007153152
+    m_Key: ui.apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932861718528
+    m_Key: ui.back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932903661568
+    m_Key: ui.cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932903661569
+    m_Key: ui.close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827392
+    m_Key: ui.empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827393
+    m_Key: ui.ok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827394
+    m_Key: unit.sum
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827395
+    m_Key: unit.millions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827396
+    m_Key: language.uz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827397
+    m_Key: language.ru
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827398
+    m_Key: language.en
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827399
+    m_Key: menu.tagline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021696
+    m_Key: menu.continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021697
+    m_Key: menu.campaign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021698
+    m_Key: menu.campaign_hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021699
+    m_Key: menu.free
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021700
+    m_Key: menu.free_hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021701
+    m_Key: menu.free_locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021702
+    m_Key: menu.load
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021703
+    m_Key: menu.load_hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021704
+    m_Key: menu.lab
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021705
+    m_Key: menu.language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021706
+    m_Key: menu.quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021707
+    m_Key: menu.mission_passed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021708
+    m_Key: menu.mission_best
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021709
+    m_Key: menu.mission_new
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021710
+    m_Key: menu.mission_locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021711
+    m_Key: menu.play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021712
+    m_Key: menu.seed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021713
+    m_Key: menu.rivals
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021714
+    m_Key: menu.rivals_scripted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021715
+    m_Key: menu.rivals_neural
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021716
+    m_Key: menu.no_model
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021717
+    m_Key: menu.start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021718
+    m_Key: menu.to_menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021719
+    m_Key: hud.month
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021720
+    m_Key: hud.month_short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021721
+    m_Key: hud.reputation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021722
+    m_Key: hud.reputation_label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021723
+    m_Key: hud.menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021724
+    m_Key: hud.news
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604608
+    m_Key: screen.floor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604609
+    m_Key: screen.staff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604610
+    m_Key: screen.supply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604611
+    m_Key: screen.warehouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604612
+    m_Key: screen.sales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604613
+    m_Key: screen.marketing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604614
+    m_Key: screen.finance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604615
+    m_Key: screen.digital
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604616
+    m_Key: screen.analytics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604617
+    m_Key: screen.mission
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604618
+    m_Key: floor.tools
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604619
+    m_Key: floor.zone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604620
+    m_Key: floor.machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604621
+    m_Key: floor.machine_choice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604622
+    m_Key: floor.facing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604623
+    m_Key: floor.rotate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604624
+    m_Key: floor.fit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604625
+    m_Key: floor.spaghetti
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604626
+    m_Key: floor.tools_hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604627
+    m_Key: floor.selected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604628
+    m_Key: floor.select_hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604629
+    m_Key: floor.condition
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604630
+    m_Key: floor.broken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604631
+    m_Key: floor.load
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604632
+    m_Key: floor.maintenance_counter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604633
+    m_Key: floor.of
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604634
+    m_Key: floor.operator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604635
+    m_Key: floor.no_operator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604636
+    m_Key: floor.operator_info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604637
+    m_Key: floor.downtime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604638
+    m_Key: floor.downtime_info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604639
+    m_Key: floor.maintenance_interval
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604640
+    m_Key: floor.assign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604641
+    m_Key: floor.feed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993216
+    m_Key: floor.move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993217
+    m_Key: floor.remove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993218
+    m_Key: floor.shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993219
+    m_Key: floor.takt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993220
+    m_Key: floor.takt_value
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993221
+    m_Key: floor.bottleneck
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187520
+    m_Key: floor.transport_queue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187521
+    m_Key: floor.expansions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187522
+    m_Key: floor.expand
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187523
+    m_Key: floor.schedule
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187524
+    m_Key: floor.days
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187525
+    m_Key: floor.shifts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187526
+    m_Key: floor.defect_policy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187527
+    m_Key: floor.transport_batch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187528
+    m_Key: staff.workers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187529
+    m_Key: staff.auto_assign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187530
+    m_Key: staff.assigned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187531
+    m_Key: staff.overtime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187532
+    m_Key: staff.profession
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187533
+    m_Key: staff.experience
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187534
+    m_Key: staff.wage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187535
+    m_Key: staff.morale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187536
+    m_Key: staff.fatigue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187537
+    m_Key: staff.train
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187538
+    m_Key: staff.absent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187539
+    m_Key: staff.hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187540
+    m_Key: staff.candidates
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187541
+    m_Key: staff.expected_wage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187542
+    m_Key: staff.stamina
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187543
+    m_Key: staff.hire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187544
+    m_Key: staff.worker_short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187545
+    m_Key: supply.exchange
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187546
+    m_Key: supply.material
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187547
+    m_Key: supply.price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187548
+    m_Key: supply.stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187549
+    m_Key: supply.suppliers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187550
+    m_Key: supply.suppliers_of
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187551
+    m_Key: supply.supplier_info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187552
+    m_Key: supply.quote
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187553
+    m_Key: supply.order
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187554
+    m_Key: supply.schedule
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187555
+    m_Key: supply.current_schedule
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187556
+    m_Key: supply.cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576128
+    m_Key: supply.pending
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576129
+    m_Key: supply.pending_item
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576130
+    m_Key: supply.quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576131
+    m_Key: supply.input_qc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576132
+    m_Key: warehouse.capacity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576133
+    m_Key: warehouse.cells
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576134
+    m_Key: warehouse.overflow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576135
+    m_Key: warehouse.racks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576136
+    m_Key: warehouse.hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576137
+    m_Key: warehouse.materials
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576138
+    m_Key: warehouse.quantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576139
+    m_Key: warehouse.quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576140
+    m_Key: warehouse.products
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576141
+    m_Key: warehouse.good
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576142
+    m_Key: warehouse.defective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576143
+    m_Key: sales.products
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576144
+    m_Key: sales.ai_prices
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576145
+    m_Key: sales.last_month
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576146
+    m_Key: sales.price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576147
+    m_Key: sales.plan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576148
+    m_Key: sales.reference_price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576149
+    m_Key: sales.tenders
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964736
+    m_Key: sales.no_tenders
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964737
+    m_Key: sales.tender_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964738
+    m_Key: sales.tender_info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964739
+    m_Key: sales.bid_price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964740
+    m_Key: sales.bid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964741
+    m_Key: sales.rebid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964742
+    m_Key: sales.bid_placed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964743
+    m_Key: sales.contracts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964744
+    m_Key: sales.product
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964745
+    m_Key: sales.level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964746
+    m_Key: sales.delivered
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964747
+    m_Key: sales.deadline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964748
+    m_Key: sales.status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964749
+    m_Key: marketing.ads
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964750
+    m_Key: marketing.budget
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964751
+    m_Key: marketing.ads_hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964752
+    m_Key: marketing.tournaments
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964753
+    m_Key: marketing.month
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964754
+    m_Key: marketing.cost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964755
+    m_Key: marketing.sponsor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964756
+    m_Key: marketing.sponsoring
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964757
+    m_Key: marketing.ambassadors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964758
+    m_Key: marketing.athlete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964759
+    m_Key: marketing.rating
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964760
+    m_Key: marketing.fee
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964761
+    m_Key: marketing.sign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964762
+    m_Key: marketing.release
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964763
+    m_Key: marketing.certification
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964764
+    m_Key: marketing.certification_hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964765
+    m_Key: marketing.no_certificate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964766
+    m_Key: marketing.certificate_valid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964767
+    m_Key: marketing.certificate_pending
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964768
+    m_Key: marketing.certificate_failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964769
+    m_Key: marketing.certify
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964770
+    m_Key: finance.balance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964771
+    m_Key: finance.cash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964772
+    m_Key: finance.debt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964773
+    m_Key: finance.credit_rating
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964774
+    m_Key: finance.negative_warning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964775
+    m_Key: finance.pnl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964776
+    m_Key: finance.pnl_none
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964777
+    m_Key: finance.revenue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964778
+    m_Key: finance.contract_revenue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547648
+    m_Key: finance.cogs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547649
+    m_Key: finance.wages
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547650
+    m_Key: finance.rent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547651
+    m_Key: finance.energy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547652
+    m_Key: finance.other
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547653
+    m_Key: finance.depreciation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547654
+    m_Key: finance.interest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547655
+    m_Key: finance.tax
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547656
+    m_Key: finance.net_income
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547657
+    m_Key: finance.capitalization
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547658
+    m_Key: finance.loans
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547659
+    m_Key: finance.principal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547660
+    m_Key: finance.rate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547661
+    m_Key: finance.term
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547662
+    m_Key: finance.remaining
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547663
+    m_Key: finance.months
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547664
+    m_Key: finance.loan_offer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433728
+    m_Key: finance.amount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433729
+    m_Key: finance.take_loan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433730
+    m_Key: digital.subsidy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433731
+    m_Key: digital.costs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822336
+    m_Key: digital.requires
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822337
+    m_Key: digital.buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822338
+    m_Key: digital.enable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822339
+    m_Key: digital.active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822340
+    m_Key: digital.disable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822341
+    m_Key: digital.auto_pricing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822342
+    m_Key: digital.twin_none
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822343
+    m_Key: digital.twin_move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822344
+    m_Key: digital.IotSensors.effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822345
+    m_Key: digital.PredictiveMaintenance.effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822346
+    m_Key: digital.DigitalTwin.effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822347
+    m_Key: digital.AiCutting.effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822348
+    m_Key: digital.AiQuality.effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822349
+    m_Key: digital.DemandForecast.effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822350
+    m_Key: digital.AiPricing.effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822351
+    m_Key: analytics.empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822352
+    m_Key: analytics.kpi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822353
+    m_Key: analytics.month
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822354
+    m_Key: analytics.export
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822355
+    m_Key: analytics.exported
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822356
+    m_Key: kpi.produced
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822357
+    m_Key: kpi.defect_pct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822358
+    m_Key: kpi.sold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822359
+    m_Key: kpi.lost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405248
+    m_Key: kpi.logistics_km
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405249
+    m_Key: kpi.downtime_h
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405250
+    m_Key: kpi.share_pct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405251
+    m_Key: mission.goals
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405252
+    m_Key: mission.all_products
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405253
+    m_Key: mission.start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405254
+    m_Key: mission.progress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405255
+    m_Key: mission.passed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405256
+    m_Key: mission.failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405257
+    m_Key: mission.score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405258
+    m_Key: mission.continue_play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405259
+    m_Key: mission.months_left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405260
+    m_Key: mission.goal_now
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405261
+    m_Key: mission.pass_hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405262
+    m_Key: goal.ProducedUnits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405263
+    m_Key: goal.MaxDefectSharePct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405264
+    m_Key: goal.LogisticsReductionPct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405265
+    m_Key: goal.NoWarehouseOverflow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405266
+    m_Key: goal.MaxReturnedUnits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405267
+    m_Key: goal.MaxDowntimeHours
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405268
+    m_Key: goal.MinMarketSharePct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405269
+    m_Key: goal.FederationContractOnTime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405270
+    m_Key: mission.m1_first_shop.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405271
+    m_Key: mission.m1_first_shop.short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405272
+    m_Key: mission.m1_first_shop.brief
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405273
+    m_Key: mission.m1_first_shop.tip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405274
+    m_Key: mission.m2_logistics.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405275
+    m_Key: mission.m2_logistics.short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405276
+    m_Key: mission.m2_logistics.brief
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405277
+    m_Key: mission.m2_logistics.tip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405278
+    m_Key: mission.m3_quality.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405279
+    m_Key: mission.m3_quality.short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405280
+    m_Key: mission.m3_quality.brief
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405281
+    m_Key: mission.m3_quality.tip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405282
+    m_Key: mission.m4_equipment.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405283
+    m_Key: mission.m4_equipment.short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405284
+    m_Key: mission.m4_equipment.brief
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405285
+    m_Key: mission.m4_equipment.tip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793856
+    m_Key: mission.m5_market.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793857
+    m_Key: mission.m5_market.short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793858
+    m_Key: mission.m5_market.brief
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793859
+    m_Key: mission.m5_market.tip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793860
+    m_Key: mission.m6_contracts.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793861
+    m_Key: mission.m6_contracts.short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793862
+    m_Key: mission.m6_contracts.brief
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793863
+    m_Key: mission.m6_contracts.tip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793864
+    m_Key: final.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793865
+    m_Key: final.hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793866
+    m_Key: final.bankrupt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793867
+    m_Key: final.bankrupt_short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793868
+    m_Key: final.continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793869
+    m_Key: report.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793870
+    m_Key: report.numbers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793871
+    m_Key: report.continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793872
+    m_Key: save.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793873
+    m_Key: save.slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793874
+    m_Key: save.autosave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793875
+    m_Key: save.empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793876
+    m_Key: save.save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793877
+    m_Key: save.load
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793878
+    m_Key: save.delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793879
+    m_Key: save.done
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793880
+    m_Key: save.describe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793881
+    m_Key: save.autosave_hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793882
+    m_Key: load.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793883
+    m_Key: load.progress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793884
+    m_Key: load.failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793885
+    m_Key: load.data_changed_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793886
+    m_Key: load.data_changed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793887
+    m_Key: lab.hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793888
+    m_Key: lab.seeds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793889
+    m_Key: lab.months
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793890
+    m_Key: lab.run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793891
+    m_Key: lab.running
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793892
+    m_Key: lab.done
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793893
+    m_Key: lab.scenario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376768
+    m_Key: lab.delta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376769
+    m_Key: lab.delta_value
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376770
+    m_Key: lab.roi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376771
+    m_Key: lab.payback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376772
+    m_Key: lab.npv
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376773
+    m_Key: scenario.a_baseline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376774
+    m_Key: scenario.b_predictive_maintenance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376775
+    m_Key: scenario.c0_naive_layout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376776
+    m_Key: scenario.c_digital_twin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376777
+    m_Key: scenario.d_ai_cutting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376778
+    m_Key: scenario.e_ai_quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376779
+    m_Key: scenario.f_demand_forecast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376780
+    m_Key: scenario.g_ai_pricing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376781
+    m_Key: scenario.h_all_modules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376782
+    m_Key: scenario.i_all_modules_subsidy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376783
+    m_Key: news.event
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376784
+    m_Key: news.event.eva_price_spike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376785
+    m_Key: news.event.cotton_price_spike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376786
+    m_Key: news.event.supplier_force_majeure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376787
+    m_Key: news.event.bad_raw_batch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376788
+    m_Key: news.event.currency_shock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376789
+    m_Key: news.event.digital_uzbekistan_program
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376790
+    m_Key: news.event.power_restrictions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376791
+    m_Key: news.event.flu_epidemic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376792
+    m_Key: news.event.sports_boom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376793
+    m_Key: news.tender
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376794
+    m_Key: news.tender_won
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376795
+    m_Key: news.bot_price_down
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376796
+    m_Key: news.bot_price_up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376797
+    m_Key: news.bot_expand
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376798
+    m_Key: news.bot_ads
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376799
+    m_Key: news.ambassador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376800
+    m_Key: reason.overstock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376801
+    m_Key: reason.rivals_cheaper
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376802
+    m_Key: reason.weak_demand
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376803
+    m_Key: reason.shortage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376804
+    m_Key: reason.rivals_pricier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376805
+    m_Key: reason.costs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376806
+    m_Key: downtime.no_operator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376807
+    m_Key: downtime.no_materials
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376808
+    m_Key: downtime.broken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376809
+    m_Key: downtime.maintenance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376810
+    m_Key: summary.none
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376811
+    m_Key: summary.revenue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348288
+    m_Key: summary.revenue_change
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348289
+    m_Key: summary.profit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348290
+    m_Key: summary.loss
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348291
+    m_Key: summary.output
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348292
+    m_Key: summary.best
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348293
+    m_Key: summary.lost_sales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348294
+    m_Key: summary.downtime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348295
+    m_Key: summary.tenders
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348296
+    m_Key: summary.returns
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348297
+    m_Key: summary.cash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348298
+    m_Key: err.no_product
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348299
+    m_Key: err.not_enough_cash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348300
+    m_Key: err.empty_batch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348301
+    m_Key: err.price_positive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348302
+    m_Key: err.plan_negative
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348303
+    m_Key: err.product_locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348304
+    m_Key: err.no_schedule
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348305
+    m_Key: err.no_supplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348306
+    m_Key: err.min_batch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348307
+    m_Key: err.loan_positive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348308
+    m_Key: err.loan_term
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348309
+    m_Key: err.max_debt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348310
+    m_Key: err.module_inactive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348311
+    m_Key: err.no_ai_pricing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736896
+    m_Key: err.no_machine_def
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736897
+    m_Key: err.no_object
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736898
+    m_Key: err.no_machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736899
+    m_Key: err.max_expansions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736900
+    m_Key: err.rect_outside
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736901
+    m_Key: err.ad_negative
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736902
+    m_Key: err.not_ambassador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736903
+    m_Key: err.candidate_gone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736904
+    m_Key: err.candidate_reserved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736905
+    m_Key: err.no_worker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736906
+    m_Key: err.shift_range
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736907
+    m_Key: err.not_operator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736908
+    m_Key: err.wage_positive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736909
+    m_Key: err.overtime_range
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736910
+    m_Key: err.transport_batch_range
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736911
+    m_Key: err.maintenance_interval
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125504
+    m_Key: err.locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125505
+    m_Key: err.bankrupt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125506
+    m_Key: err.tender_closed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125507
+    m_Key: err.bid_positive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125508
+    m_Key: err.bid_above_max
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125509
+    m_Key: err.reputation_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125510
+    m_Key: err.certificate_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125511
+    m_Key: err.no_tournament
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125512
+    m_Key: err.already_sponsor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125513
+    m_Key: err.no_athlete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125514
+    m_Key: err.athlete_taken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125515
+    m_Key: err.certificate_busy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125516
+    m_Key: err.no_module
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125517
+    m_Key: err.module_active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125518
+    m_Key: err.module_requires
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125519
+    m_Key: err.object_outside
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125520
+    m_Key: err.object_on_aisle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319808
+    m_Key: err.cell_taken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319809
+    m_Key: err.wrong_zone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319810
+    m_Key: enum.FloorTool.Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319811
+    m_Key: enum.FloorTool.Zone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319812
+    m_Key: enum.FloorTool.Aisle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319813
+    m_Key: enum.FloorTool.EraseAisle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319814
+    m_Key: enum.FloorTool.Machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319815
+    m_Key: enum.FloorTool.Rack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319816
+    m_Key: enum.FloorTool.QcTable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319817
+    m_Key: enum.FloorTool.Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319818
+    m_Key: enum.ZoneType.None
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319819
+    m_Key: enum.ZoneType.Cutting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319820
+    m_Key: enum.ZoneType.Sewing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319821
+    m_Key: enum.ZoneType.Molding
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319822
+    m_Key: enum.ZoneType.ElectronicsAssembly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319823
+    m_Key: enum.ZoneType.RawStorage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319824
+    m_Key: enum.ZoneType.FinishedStorage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319825
+    m_Key: enum.ZoneType.Receiving
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319826
+    m_Key: enum.ZoneType.QualityControl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319827
+    m_Key: enum.ZoneType.Office
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319828
+    m_Key: enum.Facing.North
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708416
+    m_Key: enum.Facing.South
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708417
+    m_Key: enum.Facing.West
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708418
+    m_Key: enum.Facing.East
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708419
+    m_Key: enum.FloorObjectKind.Machine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708420
+    m_Key: enum.FloorObjectKind.Rack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708421
+    m_Key: enum.FloorObjectKind.QcTable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708422
+    m_Key: enum.FloorObjectKind.Desk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708423
+    m_Key: enum.FeedSide.Front
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708424
+    m_Key: enum.FeedSide.Rear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708425
+    m_Key: enum.DefectPolicy.Scrap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902720
+    m_Key: enum.DefectPolicy.Store
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902721
+    m_Key: enum.DefectPolicy.Repair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902722
+    m_Key: enum.DefectPolicy.Discount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902723
+    m_Key: enum.DeliveryFrequency.None
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902724
+    m_Key: enum.DeliveryFrequency.Weekly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902725
+    m_Key: enum.DeliveryFrequency.TwiceWeekly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902726
+    m_Key: enum.DeliveryFrequency.Daily
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902727
+    m_Key: enum.MaterialOrigin.Local
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902728
+    m_Key: enum.MaterialOrigin.Import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902729
+    m_Key: enum.MaterialOrigin.LocalAndImport
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902730
+    m_Key: enum.TenderLevel.School
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902731
+    m_Key: enum.TenderLevel.Club
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902732
+    m_Key: enum.TenderLevel.Regional
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902733
+    m_Key: enum.TenderLevel.National
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902734
+    m_Key: enum.ContractStatus.Active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902735
+    m_Key: enum.ContractStatus.Completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902736
+    m_Key: enum.ContractStatus.Terminated
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902737
+    m_Key: enum.TournamentLevel.None
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902738
+    m_Key: enum.TournamentLevel.Regional
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097024
+    m_Key: enum.TournamentLevel.National
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097025
+    m_Key: enum.TournamentLevel.World
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097026
+    m_Key: enum.CertificationBody.WT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097027
+    m_Key: enum.CertificationBody.ITF
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097028
+    m_Key: enum.CertificationBody.WAKO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097029
+    m_Key: enum.DigitalModule.None
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097030
+    m_Key: enum.DigitalModule.IotSensors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097031
+    m_Key: enum.DigitalModule.PredictiveMaintenance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097032
+    m_Key: enum.DigitalModule.DigitalTwin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097033
+    m_Key: enum.DigitalModule.AiCutting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097034
+    m_Key: enum.DigitalModule.AiQuality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097035
+    m_Key: enum.DigitalModule.DemandForecast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097036
+    m_Key: enum.DigitalModule.AiPricing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097037
+    m_Key: name.player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097038
+    m_Key: name.daebo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097039
+    m_Key: name.abidas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097040
+    m_Key: name.dobok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097041
+    m_Key: name.helmet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097042
+    m_Key: name.hogu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291328
+    m_Key: name.shin_forearm_guards
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291329
+    m_Key: name.e_vest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291330
+    m_Key: name.cotton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291331
+    m_Key: name.polyester
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291332
+    m_Key: name.eva_foam
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291333
+    m_Key: name.pu_foam
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291334
+    m_Key: name.eco_leather
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291335
+    m_Key: name.pvc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291336
+    m_Key: name.velcro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291337
+    m_Key: name.elastic_band
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291338
+    m_Key: name.reinforced_thread
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291339
+    m_Key: name.sensor_module
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291340
+    m_Key: name.cutting_knife_table
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291341
+    m_Key: name.cutting_band
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291342
+    m_Key: name.cutting_laser
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291343
+    m_Key: name.sewing_straight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291344
+    m_Key: name.sewing_overlock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291345
+    m_Key: name.sewing_automatic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291346
+    m_Key: name.molding_hand_press
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291347
+    m_Key: name.molding_thermo_press
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291348
+    m_Key: name.molding_vacuum
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291349
+    m_Key: name.electronics_bench
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291350
+    m_Key: name.laborer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291351
+    m_Key: name.cutter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291352
+    m_Key: name.seamstress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291353
+    m_Key: name.molder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291354
+    m_Key: name.mechanic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291355
+    m_Key: name.qc_inspector
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291356
+    m_Key: name.sales_manager
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291357
+    m_Key: name.eva_price_spike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291358
+    m_Key: name.cotton_price_spike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291359
+    m_Key: name.supplier_force_majeure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291360
+    m_Key: name.bad_raw_batch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291361
+    m_Key: name.currency_shock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291362
+    m_Key: name.digital_uzbekistan_program
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291363
+    m_Key: name.power_restrictions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291364
+    m_Key: name.flu_epidemic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291365
+    m_Key: name.sports_boom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291366
+    m_Key: name.cotton_tashkent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291367
+    m_Key: name.cotton_fergana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679936
+    m_Key: name.polyester_local
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679937
+    m_Key: name.polyester_import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679938
+    m_Key: name.eva_import_a
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679939
+    m_Key: name.eva_import_b
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679940
+    m_Key: name.pu_import_a
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679941
+    m_Key: name.pu_import_b
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679942
+    m_Key: name.eco_leather_local
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679943
+    m_Key: name.eco_leather_import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679944
+    m_Key: name.pvc_local
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679945
+    m_Key: name.pvc_import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679946
+    m_Key: name.velcro_import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679947
+    m_Key: name.velcro_trader
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679948
+    m_Key: name.elastic_local
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679949
+    m_Key: name.elastic_import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679950
+    m_Key: name.thread_local
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679951
+    m_Key: name.thread_import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679952
+    m_Key: name.sensor_import_a
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679953
+    m_Key: name.sensor_import_b
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679954
+    m_Key: name.athlete_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068544
+    m_Key: name.athlete_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068545
+    m_Key: name.athlete_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068546
+    m_Key: name.athlete_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068547
+    m_Key: name.athlete_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068548
+    m_Key: name.athlete_6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068549
+    m_Key: name.athlete_7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068550
+    m_Key: name.athlete_8
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 285588345711755288
+  references:
+    version: 2
+    RefIds:
+    - rid: 285588345711755288
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1793771053021

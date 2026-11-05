@@ -12,13 +12,28 @@ namespace Geminium.Game
     // Отрисовка цеха выбранной компании (TODO 2.8): клетки — текстурой (зоны, проходы, тепловая карта),
     // объекты — прямоугольниками, разнорабочие — кружками на маршрутах. Камера, выбор объекта, правая панель
     // и инструменты планировки. Все правки идут командами — по тем же правилам, что у ботов.
-    // Отладочный инструмент: тексты не идут через локализацию.
+    // Им пользуются отладочная сцена (своя панель справа на IMGUI, тексты без локализации) и игровой интерфейс
+    // (Geminium.UI): тогда DrawDebugPanel выключен, инструменты и выбор задаёт интерфейс, ответы приходят в Submitted.
+    public enum FloorTool { Select, Zone, Aisle, EraseAisle, Machine, Rack, QcTable, Move }
+
     public sealed class FloorView : MonoBehaviour
     {
-        private enum Tool { Select, Zone, Aisle, EraseAisle, Machine, Rack, QcTable, Move }
+        // Экранные области панелей (пиксели), куда цех не заходит: по умолчанию — разметка отладочной сцены.
+        public float InsetLeft = 380, InsetRight = 300, InsetTop = 60, InsetBottom = 0;
+        public bool DrawDebugPanel = true;
 
-        // Экранные области панелей (пиксели): верхняя строка и сводка слева — DebugSimulationRunner, справа — эта панель.
-        private const float TopBarHeight = 60, LeftPanelWidth = 380, RightPanelWidth = 300;
+        // Мышь над интерфейсом (экранные координаты от левого нижнего угла) — цех клики не принимает.
+        public System.Func<Vector2, bool> PointerOverUi;
+        // Клавиатура занята интерфейсом (ввод в поле) — камера и поворот не слушают клавиши.
+        public System.Func<bool> KeyboardCaptured;
+        // Ответ на команду из цеха: null — принята, иначе текст ошибки.
+        public event System.Action<string> Submitted;
+
+        public FloorTool Tool { get; set; }
+        public ZoneType ZoneBrush { get; set; } = ZoneType.Cutting;
+        public string MachineBrush { get; set; }
+        public Facing Facing { get; set; } = Facing.North;
+        public FloorObject Selected { get => selected; set => selected = value; }
 
         private static readonly Color[] ZoneColors =
         {
@@ -43,14 +58,10 @@ namespace Geminium.Game
         private bool drawnSpaghetti;
         private long drawnWeek = -1;
         private FloorObject selected;
-        private Tool tool;
-        private ZoneType zoneBrush = ZoneType.Cutting;
-        private int machineBrush;
-        private Facing facing = Facing.North;
         private Vector2Int? dragStart;
         private string message;
 
-        private Company Company => World != null && CompanyIndex < World.Companies.Count ? World.Companies[CompanyIndex] : null;
+        public Company Company => World != null && CompanyIndex < World.Companies.Count ? World.Companies[CompanyIndex] : null;
 
         private void Start() => EnsureCreated();
 
@@ -92,7 +103,7 @@ namespace Geminium.Game
         private void UpdateCamera(FactoryFloor floor)
         {
             if (!cam.orthographic) cam.orthographic = true;
-            var keyboard = Keyboard.current;
+            var keyboard = KeyboardCaptured != null && KeyboardCaptured() ? null : Keyboard.current;
             if (drawnWidth < 0 || (keyboard != null && keyboard.fKey.wasPressedThisFrame)) FitCamera(floor);
             var mouse = Mouse.current;
             float speed = cam.orthographicSize * Time.unscaledDeltaTime;
@@ -103,10 +114,10 @@ namespace Geminium.Game
                 if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) move.y -= 1;
                 if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) move.x -= 1;
                 if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) move.x += 1;
-                if (keyboard.rKey.wasPressedThisFrame) facing = (Facing)(((int)facing + 1) % 4);
+                if (keyboard.rKey.wasPressedThisFrame) Facing = (Facing)(((int)Facing + 1) % 4);
             }
             cam.transform.position += move * speed * 2;
-            if (mouse == null) return;
+            if (mouse == null || OverPanel(mouse.position.ReadValue())) return;
             float scroll = mouse.scroll.ReadValue().y;
             if (Mathf.Abs(scroll) > 0.01f) cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - Mathf.Sign(scroll) * 1.5f, 4, 40);
             if (mouse.rightButton.isPressed)
@@ -116,16 +127,22 @@ namespace Geminium.Game
             }
         }
 
-        // Весь цех в свободной части экрана: между панелями слева и справа, под верхней строкой.
+        // Показать весь цех (как клавиша F).
+        public void FitToView()
+        {
+            if (Company != null && cam != null) FitCamera(Company.Floor);
+        }
+
+        // Весь цех в свободной части экрана: между панелями слева и справа, сверху и снизу.
         private void FitCamera(FactoryFloor floor)
         {
-            float freeWidth = Mathf.Max(100, Screen.width - LeftPanelWidth - RightPanelWidth);
-            float freeHeight = Mathf.Max(100, Screen.height - TopBarHeight);
+            float freeWidth = Mathf.Max(100, Screen.width - InsetLeft - InsetRight);
+            float freeHeight = Mathf.Max(100, Screen.height - InsetTop - InsetBottom);
             float pixelsPerCell = Mathf.Min(freeWidth / (floor.Width + 2), freeHeight / (floor.Height + 2));
             cam.orthographicSize = Screen.height / (2 * pixelsPerCell);
             // Центр свободной части экрана (пиксели от левого нижнего угла) должен совпасть с центром цеха.
-            float shiftX = (LeftPanelWidth + freeWidth / 2 - Screen.width / 2f) / pixelsPerCell;
-            float shiftY = (freeHeight / 2 - Screen.height / 2f) / pixelsPerCell;
+            float shiftX = (InsetLeft + freeWidth / 2 - Screen.width / 2f) / pixelsPerCell;
+            float shiftY = (InsetBottom + freeHeight / 2 - Screen.height / 2f) / pixelsPerCell;
             cam.transform.position = new Vector3(floor.Width / 2f - shiftX, floor.Height / 2f - shiftY, -10);
         }
 
@@ -311,32 +328,41 @@ namespace Geminium.Game
             int x0 = Mathf.Min(start.x, cell.x), y0 = Mathf.Min(start.y, cell.y);
             int w = Mathf.Abs(start.x - cell.x) + 1, h = Mathf.Abs(start.y - cell.y) + 1;
 
-            if (!EditMode || tool == Tool.Select)
+            if (!EditMode || Tool == FloorTool.Select)
             {
                 selected = company.Floor.ObjectAt(cell.x, cell.y);
                 return;
             }
-            var machines = World.Catalog.Machines;
+            string machineId = MachineBrush ?? World.Catalog.Machines[0].Id;
             CompanyCommand command = null;
-            switch (tool)
+            switch (Tool)
             {
-                case Tool.Zone: command = new PaintZoneCommand(x0, y0, w, h, zoneBrush); break;
-                case Tool.Aisle: command = new SetAisleCommand(x0, y0, w, h, true); break;
-                case Tool.EraseAisle: command = new SetAisleCommand(x0, y0, w, h, false); break;
-                case Tool.Machine: command = PlaceObjectCommand.Machine(machines[machineBrush % machines.Count].Id, cell.x, cell.y, facing); break;
-                case Tool.Rack: command = new PlaceObjectCommand(FloorObjectKind.Rack, null, cell.x, cell.y, facing); break;
-                case Tool.QcTable: command = new PlaceObjectCommand(FloorObjectKind.QcTable, null, cell.x, cell.y, facing); break;
-                case Tool.Move:
-                    if (selected != null) command = new MoveObjectCommand(selected.Id, cell.x, cell.y, facing);
+                case FloorTool.Zone: command = new PaintZoneCommand(x0, y0, w, h, ZoneBrush); break;
+                case FloorTool.Aisle: command = new SetAisleCommand(x0, y0, w, h, true); break;
+                case FloorTool.EraseAisle: command = new SetAisleCommand(x0, y0, w, h, false); break;
+                case FloorTool.Machine: command = PlaceObjectCommand.Machine(machineId, cell.x, cell.y, Facing); break;
+                case FloorTool.Rack: command = new PlaceObjectCommand(FloorObjectKind.Rack, null, cell.x, cell.y, Facing); break;
+                case FloorTool.QcTable: command = new PlaceObjectCommand(FloorObjectKind.QcTable, null, cell.x, cell.y, Facing); break;
+                case FloorTool.Move:
+                    if (selected != null) command = new MoveObjectCommand(selected.Id, cell.x, cell.y, Facing);
                     break;
             }
-            if (command != null) message = company.Controller.Submit(command) ?? "Принято.";
+            if (command != null) Submit(command);
         }
 
-        private static bool OverPanel(Vector2 screen)
+        // Подать команду от имени компании цеха; ответ — в Submitted и в отладочную панель.
+        public string Submit(CompanyCommand command)
         {
-            float top = Screen.height - screen.y; // IMGUI считает от верха
-            return top < TopBarHeight || screen.x < LeftPanelWidth || screen.x > Screen.width - RightPanelWidth;
+            string error = Company.Controller.Submit(command);
+            message = error ?? "Принято.";
+            Submitted?.Invoke(error);
+            return error;
+        }
+
+        private bool OverPanel(Vector2 screen)
+        {
+            if (PointerOverUi != null) return PointerOverUi(screen);
+            return screen.y < InsetBottom || screen.y > Screen.height - InsetTop || screen.x < InsetLeft || screen.x > Screen.width - InsetRight;
         }
 
         // ---------- Правая панель ----------
@@ -344,7 +370,7 @@ namespace Geminium.Game
         private void OnGUI()
         {
             var company = Company;
-            if (company == null) return;
+            if (company == null || !DrawDebugPanel) return;
             GUILayout.BeginArea(new Rect(Screen.width - 290, 60, 280, Screen.height - 70), GUI.skin.box);
             if (EditMode) DrawToolbar(company);
             GUILayout.Space(6);
@@ -354,12 +380,16 @@ namespace Geminium.Game
 
         private void DrawToolbar(Company company)
         {
-            GUILayout.Label("Инструменты (R — поворот: " + facing + ")");
+            GUILayout.Label("Инструменты (R — поворот: " + Facing + ")");
             string[] names = { "Выбор", "Зона", "Проход", "Убрать проход", "Станок", "Стеллаж", "Стол ОТК", "Переместить" };
-            tool = (Tool)GUILayout.SelectionGrid((int)tool, names, 2);
-            if (tool == Tool.Zone && GUILayout.Button("Зона: " + zoneBrush)) zoneBrush = (ZoneType)(((int)zoneBrush + 1) % 10);
-            if (tool == Tool.Machine && GUILayout.Button("Станок: " + World.Catalog.Machines[machineBrush % World.Catalog.Machines.Count].Id))
-                machineBrush++;
+            Tool = (FloorTool)GUILayout.SelectionGrid((int)Tool, names, 2);
+            if (Tool == FloorTool.Zone && GUILayout.Button("Зона: " + ZoneBrush)) ZoneBrush = (ZoneType)(((int)ZoneBrush + 1) % 10);
+            var machines = World.Catalog.Machines;
+            if (Tool == FloorTool.Machine && GUILayout.Button("Станок: " + (MachineBrush ?? machines[0].Id)))
+            {
+                int index = machines.ToList().FindIndex(m => m.Id == MachineBrush);
+                MachineBrush = machines[(index + 1) % machines.Count].Id;
+            }
             if (message != null) GUILayout.Label(message);
         }
 
@@ -386,11 +416,11 @@ namespace Geminium.Game
                 var op = company.Workers.FirstOrDefault(w => w.AssignedObjectId == selected.Id);
                 if (op != null) GUILayout.Label($"Оператор №{op.Id}: опыт {op.Experience:0}, усталость {op.Fatigue:0}, мораль {op.Morale:0}");
                 if (EditMode && GUILayout.Button("Подача: " + selected.Feed))
-                    message = company.Controller.Submit(new SetFeedSideCommand(selected.Id, selected.Feed == FeedSide.Front ? FeedSide.Rear : FeedSide.Front));
+                    Submit(new SetFeedSideCommand(selected.Id, selected.Feed == FeedSide.Front ? FeedSide.Rear : FeedSide.Front));
             }
             if (EditMode && GUILayout.Button("Убрать объект"))
             {
-                message = company.Controller.Submit(new RemoveObjectCommand(selected.Id)) ?? "Принято.";
+                Submit(new RemoveObjectCommand(selected.Id));
                 selected = null;
             }
         }

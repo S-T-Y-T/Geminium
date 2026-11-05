@@ -1,0 +1,21 @@
+{
+    "name": "Geminium.UI",
+    "rootNamespace": "Geminium.UI",
+    "references": [
+        "Geminium.Core",
+        "Geminium.Game",
+        "Geminium.ML",
+        "Unity.Localization",
+        "Unity.InferenceEngine",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

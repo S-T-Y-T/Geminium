@@ -107,7 +107,7 @@ namespace Geminium.Core
         {
             if (company == null) throw new ArgumentNullException(nameof(company));
             if (command == null) throw new ArgumentNullException(nameof(command));
-            if (company.IsBankrupt) return "Компания обанкротилась.";
+            if (company.IsBankrupt) return CoreText.T("err.bankrupt", "Компания обанкротилась.");
 
             string error = Rules.Check(command, this) ?? command.Validate(company, this);
             if (error != null) return error;

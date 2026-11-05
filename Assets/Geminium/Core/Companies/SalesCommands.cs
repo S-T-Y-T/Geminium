@@ -30,7 +30,7 @@ namespace Geminium.Core.Companies
         public SetAdBudgetCommand(long monthlyBudget) { MonthlyBudget = monthlyBudget; }
 
         public override string Validate(Company company, GameWorld world) =>
-            MonthlyBudget < 0 ? "Бюджет рекламы не может быть отрицательным." : null;
+            MonthlyBudget < 0 ? CoreText.T("err.ad_negative", "Бюджет рекламы не может быть отрицательным.") : null;
 
         internal override void Apply(Company company, GameWorld world) => company.Sales.AdBudget = MonthlyBudget;
     }
@@ -73,7 +73,7 @@ namespace Geminium.Core.Companies
         public ReleaseAmbassadorCommand(string athleteId) { AthleteId = athleteId; }
 
         public override string Validate(Company company, GameWorld world) =>
-            company.Sales.Ambassadors.Contains(AthleteId) ? null : $"«{AthleteId}» не амбассадор компании.";
+            company.Sales.Ambassadors.Contains(AthleteId) ? null : CoreText.T("err.not_ambassador", "«{0}» не амбассадор компании.", AthleteId);
 
         internal override void Apply(Company company, GameWorld world) => world.Marketing.Release(company, AthleteId);
     }

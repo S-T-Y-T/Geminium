@@ -5,7 +5,10 @@
         "Geminium.Core",
         "Geminium.Game",
         "Geminium.ML",
-        "Unity.InferenceEngine"
+        "Unity.InferenceEngine",
+        "Geminium.UI",
+        "Unity.Localization",
+        "Unity.Localization.Editor"
     ],
     "includePlatforms": [
         "Editor"

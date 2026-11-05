@@ -15,8 +15,8 @@ namespace Geminium.Core.Companies
 
         public override string Validate(Company company, GameWorld world)
         {
-            if (!world.Staff.Candidates.Any(c => c.Id == CandidateId)) return $"Кандидата №{CandidateId} уже нет на рынке.";
-            return world.Staff.IsReservedByOther(CandidateId, this) ? $"Кандидата №{CandidateId} уже нанимает другая компания." : null;
+            if (!world.Staff.Candidates.Any(c => c.Id == CandidateId)) return CoreText.T("err.candidate_gone", "Кандидата №{0} уже нет на рынке.", CandidateId);
+            return world.Staff.IsReservedByOther(CandidateId, this) ? CoreText.T("err.candidate_reserved", "Кандидата №{0} уже нанимает другая компания.", CandidateId) : null;
         }
 
         internal override void OnAccepted(Company company, GameWorld world) => world.Staff.Reserve(CandidateId, this);
@@ -36,7 +36,7 @@ namespace Geminium.Core.Companies
         internal override void Apply(Company company, GameWorld world) => world.Staff.Fire(company, company.FindWorker(WorkerId));
 
         internal static string CheckWorker(Company company, int workerId) =>
-            company.FindWorker(workerId) == null ? $"Нет сотрудника №{workerId}." : null;
+            company.FindWorker(workerId) == null ? CoreText.T("err.no_worker", "Нет сотрудника №{0}.", workerId) : null;
     }
 
     // Закрепить сотрудника за станком (или снять: ObjectId = −1) и поставить в смену.
@@ -57,11 +57,11 @@ namespace Geminium.Core.Companies
         {
             string error = FireCommand.CheckWorker(company, WorkerId);
             if (error != null) return error;
-            if (Shift < 0 || Shift > 2) return "Смена — 0, 1 или 2.";
+            if (Shift < 0 || Shift > 2) return CoreText.T("err.shift_range", "Смена — 0, 1 или 2.");
             if (ObjectId < 0) return null;
-            if (company.Floor.FindObject(ObjectId)?.Kind != FloorObjectKind.Machine) return $"Нет станка №{ObjectId}.";
+            if (company.Floor.FindObject(ObjectId)?.Kind != FloorObjectKind.Machine) return CoreText.T("err.no_machine", "Нет станка №{0}.", ObjectId);
             var profession = world.Catalog.Profession(company.FindWorker(WorkerId).ProfessionId);
-            return profession.OperatedZone == ProductionZone.None ? "Эта профессия не работает на станках." : null;
+            return profession.OperatedZone == ProductionZone.None ? CoreText.T("err.not_operator", "Эта профессия не работает на станках.") : null;
         }
 
         internal override void Apply(Company company, GameWorld world)
@@ -84,7 +84,7 @@ namespace Geminium.Core.Companies
         }
 
         public override string Validate(Company company, GameWorld world) =>
-            FireCommand.CheckWorker(company, WorkerId) ?? (Wage <= 0 ? "Зарплата должна быть больше нуля." : null);
+            FireCommand.CheckWorker(company, WorkerId) ?? (Wage <= 0 ? CoreText.T("err.wage_positive", "Зарплата должна быть больше нуля.") : null);
 
         internal override void Apply(Company company, GameWorld world) => world.Staff.SetWage(company.FindWorker(WorkerId), Wage);
     }
@@ -109,7 +109,7 @@ namespace Geminium.Core.Companies
         public SetOvertimeCommand(int hours) { Hours = hours; }
 
         public override string Validate(Company company, GameWorld world) =>
-            Hours < 0 || Hours > world.Catalog.Staff.MaxOvertimeHours ? $"Переработки — от 0 до {world.Catalog.Staff.MaxOvertimeHours} часов." : null;
+            Hours < 0 || Hours > world.Catalog.Staff.MaxOvertimeHours ? CoreText.T("err.overtime_range", "Переработки — от 0 до {0} часов.", world.Catalog.Staff.MaxOvertimeHours) : null;
 
         internal override void Apply(Company company, GameWorld world) => company.OvertimeHours = Hours;
     }
@@ -145,7 +145,7 @@ namespace Geminium.Core.Companies
 
         public override string Validate(Company company, GameWorld world) =>
             Units < 1 || Units > world.Catalog.Production.MaxTransportBatch
-                ? $"Транспортная партия — от 1 до {world.Catalog.Production.MaxTransportBatch}."
+                ? CoreText.T("err.transport_batch_range", "Транспортная партия — от 1 до {0}.", world.Catalog.Production.MaxTransportBatch)
                 : null;
 
         internal override void Apply(Company company, GameWorld world) => company.TransportBatch = Units;
@@ -165,8 +165,8 @@ namespace Geminium.Core.Companies
 
         public override string Validate(Company company, GameWorld world)
         {
-            if (company.Floor.FindObject(ObjectId)?.Kind != FloorObjectKind.Machine) return $"Нет станка №{ObjectId}.";
-            return Operations < 1 ? "Интервал ТО — не меньше одной операции." : null;
+            if (company.Floor.FindObject(ObjectId)?.Kind != FloorObjectKind.Machine) return CoreText.T("err.no_machine", "Нет станка №{0}.", ObjectId);
+            return Operations < 1 ? CoreText.T("err.maintenance_interval", "Интервал ТО — не меньше одной операции.") : null;
         }
 
         internal override void Apply(Company company, GameWorld world) =>

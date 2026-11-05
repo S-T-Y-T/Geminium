@@ -4,6 +4,7 @@ using System.Linq;
 using Geminium.Core.Companies;
 using Geminium.Core.Data;
 using Geminium.Core.Lab;
+using Geminium.Core.News;
 
 namespace Geminium.Core.Modes
 {
@@ -55,12 +56,14 @@ namespace Geminium.Core.Modes
         public Company Player { get; }
         public MissionDef Mission { get; }          // null — свободный режим
         public MissionSystem MissionTracker { get; }
+        public NewsSystem News { get; }             // лента новостей ИИ-ядра (факты для «голоса»)
         public int Months { get; }                  // срок партии; после него свободный режим можно продолжать
 
         public bool IsFinished => World.Simulation.MonthIndex >= Months;
 
-        private GameSession(GameSetup setup, GameWorld world, Company player, MissionDef mission, MissionSystem tracker, int months)
+        private GameSession(GameSetup setup, GameWorld world, Company player, MissionDef mission, MissionSystem tracker, NewsSystem news, int months)
         {
+            News = news;
             Setup = setup;
             World = world;
             Player = player;
@@ -98,8 +101,10 @@ namespace Geminium.Core.Modes
                 foreach (var tender in mission.Tenders) world.Tenders.AddScripted(tender);
                 world.Simulation.AddSystem(tracker = new MissionSystem(world, player, mission));
             }
+            var news = new NewsSystem(world);
+            world.Simulation.AddSystem(news);
             world.Simulation.Step();
-            return new GameSession(setup, world, player, mission, tracker, mission?.Months ?? catalog.FreeModeMonths);
+            return new GameSession(setup, world, player, mission, tracker, news, mission?.Months ?? catalog.FreeModeMonths);
         }
 
         // Рейтинг «игрок против ботов» (GDD 4.2): по капитализации последнего отчёта, банкроты — в конце.

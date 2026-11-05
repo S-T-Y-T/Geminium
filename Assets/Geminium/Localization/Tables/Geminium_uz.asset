@@ -1,0 +1,2183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Geminium_uz
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: uz
+  m_SharedData: {fileID: 11400000, guid: 2deaf3ba2e156db41a3372ea3f381cb9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 330929007153152
+    m_Localized: "Q\xF6lla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932861718528
+    m_Localized: Orqaga
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932903661568
+    m_Localized: "Bekor qili\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932903661569
+    m_Localized: "Yopi\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827392
+    m_Localized: "Hozir\xE7a b\xF6\u015F."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827393
+    m_Localized: "Tu\u015Funarli"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827394
+    m_Localized: "s\xF6m"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827395
+    m_Localized: "{0:N1} mln s\xF6m"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827396
+    m_Localized: "\xD6zbek\xE7a"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827397
+    m_Localized: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827398
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932928827399
+    m_Localized: Taekvondo ekipirovkasi fabrikasi trenajyori
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021696
+    m_Localized: "Davom ettiri\u015F ({0})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021697
+    m_Localized: "\xD6quv kampaniyasi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021698
+    m_Localized: "Oltita top\u015Firiq: har biri fabrikaning bir qismini \xF6rgatadi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021699
+    m_Localized: Erkin rejim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021700
+    m_Localized: "Daebo va Ab\u0131das bilan u\xE7 yillik raqobat. Eng qimmat kompaniya \u011Folib b\xF6ladi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021701
+    m_Localized: "Kampaniyadan keyin o\xE7iladi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021702
+    m_Localized: "\xD6yinni yukla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021703
+    m_Localized: Har oy oxirida avtomatik saqlanadi.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021704
+    m_Localized: Ssenariylar laboratoriyasi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021705
+    m_Localized: Til
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021706
+    m_Localized: "\xC7iqi\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021707
+    m_Localized: "\xF6tildi, eng yax\u015Fi ball {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021708
+    m_Localized: "\xF6tilmagan, eng yax\u015Fi ball {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021709
+    m_Localized: "yangi top\u015Firiq"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021710
+    m_Localized: "oldingisidan keyin o\xE7iladi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021711
+    m_Localized: "\xD6yna\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021712
+    m_Localized: Dunyo raqami (seed)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021713
+    m_Localized: Botlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021714
+    m_Localized: qoidalar asosida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021715
+    m_Localized: "\xF6qitilgan neyrotarmoq"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021716
+    m_Localized: "Neyrotarmoq modeli ulanmagan \u2014 botlar qoidalar asosida \xF6ynaydi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021717
+    m_Localized: "Bo\u015Fla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021718
+    m_Localized: "Bo\u015F menyuga"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021719
+    m_Localized: '{1} oydan {0}-oy'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021720
+    m_Localized: '{0}-oy'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021721
+    m_Localized: "Obr\xF6 {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021722
+    m_Localized: "Obr\xF6"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021723
+    m_Localized: Menyu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932933021724
+    m_Localized: Yangiliklar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604608
+    m_Localized: Sex
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604609
+    m_Localized: Xodimlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604610
+    m_Localized: "Ta\u02BCminot"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604611
+    m_Localized: Ombor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604612
+    m_Localized: Sotuv
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604613
+    m_Localized: Marketing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604614
+    m_Localized: Moliya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604615
+    m_Localized: "Raqamla\u015Ftiri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604616
+    m_Localized: Tahlil
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604617
+    m_Localized: "Top\u015Firiq"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604618
+    m_Localized: Asboblar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604619
+    m_Localized: Zona
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604620
+    m_Localized: Dastgoh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604621
+    m_Localized: '{0}, {1}-daraja, {2}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604622
+    m_Localized: "Kiri\u015F tomoni: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604623
+    m_Localized: "Buri\u015F (R)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604624
+    m_Localized: Butun sex (F)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604625
+    m_Localized: Haftalik spagetti diagrammasi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604626
+    m_Localized: "Zonalar va y\xF6laklar si\xE7qon\xE7ani tortib \xE7iziladi, obyektlar bosi\u015F bilan q\xF6yiladi. Kamera: WASD, si\xE7qon\xE7a \u011Fildiragi, \xF6ng tugma."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604627
+    m_Localized: Tanlangan obyekt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604628
+    m_Localized: "\xABTanla\u015F\xBB asbobini oling va sexdagi obyektni bosing."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604629
+    m_Localized: Holati
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604630
+    m_Localized: buzilgan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604631
+    m_Localized: Haftalik yuklama
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604632
+    m_Localized: TXdan keyingi operatsiyalar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604633
+    m_Localized: '{0} / {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604634
+    m_Localized: Operator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604635
+    m_Localized: "y\xF6q"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604636
+    m_Localized: "{0} \u2116{1}, tajriba {2}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604637
+    m_Localized: "Oylik bekor turi\u015F, soat"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604638
+    m_Localized: "odam y\xF6q {0} \xB7 i\u015F y\xF6q {1} \xB7 ta\u02BCmir {2} \xB7 TX {3}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604639
+    m_Localized: "TX har \u2026 operatsiyada"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604640
+    m_Localized: "Biriktiri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932945604641
+    m_Localized: "Uzati\u015F: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993216
+    m_Localized: "K\xF6\xE7iri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993217
+    m_Localized: "Olib ta\u015Fla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993218
+    m_Localized: Sex umuman
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993219
+    m_Localized: Takt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993220
+    m_Localized: mahsulotga {0} daqiqa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932953993221
+    m_Localized: Tor joy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187520
+    m_Localized: "Ta\u015Fi\u015Fni kutayotgan yuklar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187521
+    m_Localized: "Q\xF6\u015Fim\xE7a binolar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187522
+    m_Localized: "Q\xF6\u015Fim\xE7a bino ijaraga oli\u015F (oyiga {0})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187523
+    m_Localized: "I\u015F grafigi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187524
+    m_Localized: haftada {0} kun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187525
+    m_Localized: '{0} smena'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187526
+    m_Localized: Topilgan nuqson
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187527
+    m_Localized: Transport partiyasi, dona
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187528
+    m_Localized: Xodimlar ({0})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187529
+    m_Localized: "Operatorlarni joyla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187530
+    m_Localized: 'Dastgohlarga biriktirildi: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187531
+    m_Localized: "Q\xF6\u015Fim\xE7a i\u015F, kuniga soat"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187532
+    m_Localized: Xodim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187533
+    m_Localized: Tajriba
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187534
+    m_Localized: "I\u015F haqi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187535
+    m_Localized: Kayfiyat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187536
+    m_Localized: "\xC7ar\xE7oq"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187537
+    m_Localized: "\xD6qiti\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187538
+    m_Localized: kelmagan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187539
+    m_Localized: "\xAB+5%\xBB \u2014 i\u015F haqini o\u015Firi\u015F, \xAB\xD6qiti\u015F\xBB \u2014 {0} turadigan kurs (+tajriba), \xAB\u2715\xBB \u2014 i\u015Fdan b\xF6\u015Fati\u015F. \u25CF \u2014 dastgohda i\u015Flaydi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187540
+    m_Localized: Mehnat bozori
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187541
+    m_Localized: "Kutilayotgan i\u015F haqi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187542
+    m_Localized: "\xC7idamlilik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187543
+    m_Localized: "I\u015Fga oli\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187544
+    m_Localized: "\u2116{0}, tajriba {1} {2}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187545
+    m_Localized: "Xoma\u015Fyo birjasi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187546
+    m_Localized: "Xoma\u015Fyo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187547
+    m_Localized: Birja narxi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187548
+    m_Localized: Omborda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187549
+    m_Localized: "Yetkazib beruv\xE7ilar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187550
+    m_Localized: "Yetkazib beruv\xE7ilar: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187551
+    m_Localized: "{0} \xB7 i\u015Fon\xE7lilik {1} \xB7 sifat {2}\u2013{3} \xB7 partiya {4} dan \xB7 muddat {5} kun"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187552
+    m_Localized: "Siz u\xE7un narx: birligiga {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187553
+    m_Localized: Bir marta buyurtma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187554
+    m_Localized: Muntazam
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187555
+    m_Localized: "Muntazam yetkazib beri\u015F: {0} \u2014 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932958187556
+    m_Localized: "Bekor qili\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576128
+    m_Localized: "Kutilayotgan yetkazib beri\u015Flar ({0})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576129
+    m_Localized: "{0}: {1} \u2014 {2}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576130
+    m_Localized: "Kiri\u015F nazorati"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576131
+    m_Localized: "Xoma\u015Fyo partiyalarini tek\u015Firi\u015F va yomonlarini qaytari\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576132
+    m_Localized: "Si\u011Fim"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576133
+    m_Localized: Kataklar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576134
+    m_Localized: "{0} birlik si\u011Fmadi \u2014 har kuni jarima."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576135
+    m_Localized: Sexdagi javonlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576136
+    m_Localized: "Darvoza yonidagi maydon\xE7a va javonlar, har bir javon \u2014 {0} katak."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576137
+    m_Localized: "Xoma\u015Fyo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576138
+    m_Localized: Miqdor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576139
+    m_Localized: Sifat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576140
+    m_Localized: Mahsulot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576141
+    m_Localized: Yaroqli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576142
+    m_Localized: Nuqsonli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576143
+    m_Localized: "\xC7akana savdo (B2C)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576144
+    m_Localized: "Narxlarni SI moduli q\xF6yadi (uni \xABRaqamla\u015Ftiri\u015F\xBB ekranida \xF6\xE7iri\u015F mumkin)."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576145
+    m_Localized: "\xD6tgan oy: sotildi {0}, boy berildi {1}, bozor ulu\u015Fi {2}. Omborda {3}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576146
+    m_Localized: Narx
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576147
+    m_Localized: Reja/oy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576148
+    m_Localized: 'Bozorning mezon narxi: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932966576149
+    m_Localized: Tenderlar (B2B)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964736
+    m_Localized: "Bu oy tender y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964737
+    m_Localized: '{0}: {1}, {2} dona'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964738
+    m_Localized: "Eng yuqori narx donasiga {0}, natijadan keyin {1} oy i\xE7ida yetkazi\u015F."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964739
+    m_Localized: Sizning narxingiz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964740
+    m_Localized: "Ariza beri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964741
+    m_Localized: "Arizani \xF6zgartiri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964742
+    m_Localized: "Ariza berildi: donasiga {0}. Natijalar \u2014 oy oxirida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964743
+    m_Localized: "\u015Eartnomalar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964744
+    m_Localized: Mahsulot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964745
+    m_Localized: Daraja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964746
+    m_Localized: Yetkazildi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964747
+    m_Localized: Muddat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964748
+    m_Localized: Holat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964749
+    m_Localized: Reklama
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964750
+    m_Localized: Oylik byudjet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964751
+    m_Localized: "Samara byudjetdan sekinroq \xF6sadi: oyiga taxminan {0} effektning u\xE7dan ikki qismini beradi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964752
+    m_Localized: Turnirlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964753
+    m_Localized: Oy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964754
+    m_Localized: Homiylik
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964755
+    m_Localized: "Homiylik qili\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964756
+    m_Localized: siz homiysiz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964757
+    m_Localized: Ambassadorlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964758
+    m_Localized: "Sport\xE7i"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964759
+    m_Localized: Reyting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964760
+    m_Localized: Oylik gonorar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964761
+    m_Localized: "Imzola\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964762
+    m_Localized: "Bekor qili\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964763
+    m_Localized: "Sertifikatla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964764
+    m_Localized: "Tek\u015Firuv {0} turadi va 2\u20133 oy davom etadi, ombordagi mahsulotning \xF6rta\xE7a sifati {1} dan past b\xF6lmasligi kerak."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964765
+    m_Localized: "sertifikat y\xF6q"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964766
+    m_Localized: "{0}, {1}-oyga\xE7a amal qiladi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964767
+    m_Localized: "tek\u015Firuv {0}-oyga\xE7a"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964768
+    m_Localized: "tek\u015Firuvdan \xF6tmadi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964769
+    m_Localized: "Sertifikatla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964770
+    m_Localized: Balans
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964771
+    m_Localized: Hisobdagi pul
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964772
+    m_Localized: Kredit qarzi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964773
+    m_Localized: Kredit reytingi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964774
+    m_Localized: "Balans ketma-ket {0} oy minusda. Ketma-ket ikki oy \u2014 bankrotlik."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964775
+    m_Localized: Foyda va zararlar, {0}-oy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964776
+    m_Localized: "Foyda va zararlar \u2014 birin\xE7i oydan keyin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964777
+    m_Localized: "Tu\u015Fum"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932974964778
+    m_Localized: "\u015Fu jumladan \u015Fartnomalardan"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547648
+    m_Localized: Sotilgan mahsulot tannarxi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547649
+    m_Localized: "I\u015F haqi va ijtimoiy soliq"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547650
+    m_Localized: Ijara va ombor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547651
+    m_Localized: Elektr energiyasi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547652
+    m_Localized: "Bo\u015Fqa: TX, marketing, jarimalar, qaytari\u015Flar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547653
+    m_Localized: Amortizatsiya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547654
+    m_Localized: Foizlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547655
+    m_Localized: "Foyda soli\u011Fi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547656
+    m_Localized: Sof foyda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547657
+    m_Localized: Kapitalizatsiya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547658
+    m_Localized: Kreditlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547659
+    m_Localized: Summa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547660
+    m_Localized: Stavka
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547661
+    m_Localized: Muddat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547662
+    m_Localized: "Qaytari\u015F kerak"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547663
+    m_Localized: '{0} oy'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330932987547664
+    m_Localized: "Bank yillik {0} bilan beradi, qarz {1} dan o\u015Fmasligi kerak."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433728
+    m_Localized: Summa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433729
+    m_Localized: "Kredit oli\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433730
+    m_Localized: "\xABRaqamli \xD6zbekiston\xBB davlat dasturi joriy eti\u015F narxining {0} ini qoplaydi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933071433731
+    m_Localized: "Joriy eti\u015F {0}, litsenziya oyiga {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822336
+    m_Localized: 'Kerakli modul: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822337
+    m_Localized: "Joriy eti\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822338
+    m_Localized: "Qayta yoqi\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822339
+    m_Localized: "i\u015Flayapti"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822340
+    m_Localized: "\xD6\xE7iri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822341
+    m_Localized: "Narxlarni avtomatik q\xF6yi\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822342
+    m_Localized: "Egizak yuklar y\xF6lini sezilarli qisqartiradigan k\xF6\xE7iri\u015Flarni topmadi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822343
+    m_Localized: "{0} \u2116{1}: y\xF6l har mahsulotga {2} katak qisqaradi, k\xF6\xE7iri\u015F {3}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822344
+    m_Localized: "Har bir dastgohning aniq holati \u2014 taxminiy baho \xF6rniga."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822345
+    m_Localized: "TX dastgoh holatiga qarab (55% dan o\u015Fmaganda), operatsiyalar soniga qarab emas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822346
+    m_Localized: "Joyla\u015Fuv u\xE7un \xABagar \u015Funday b\xF6lsa\xBB: k\xF6\xE7iri\u015Flarni taklif qiladi, dastgohni k\xF6\xE7iri\u015F 5 baravar arzon."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822347
+    m_Localized: "Bi\xE7i\u015Fda mato \xE7iqindisi 12% \xF6rniga 4%."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822348
+    m_Localized: "Kamera har bir mahsulotni tek\u015Firadi va nazorat\xE7isiz nuqsonning 97% ini topadi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822349
+    m_Localized: "Mavsumni hisobga olgan talab prognozi asosida i\u015Flab \xE7iqari\u015F rejasi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822350
+    m_Localized: "Har oy \u2014 eng katta kutilgan marjali narx."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822351
+    m_Localized: "Grafiklar birin\xE7i oydan keyin paydo b\xF6ladi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822352
+    m_Localized: "Oylik k\xF6rsatki\xE7lar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822353
+    m_Localized: Oy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822354
+    m_Localized: "Excel u\xE7un CSV yuklab oli\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822355
+    m_Localized: 'Fayl saqlandi: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822356
+    m_Localized: "I\u015Flab \xE7iqari\u015F, dona"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822357
+    m_Localized: Nuqson
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822358
+    m_Localized: Sotildi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933079822359
+    m_Localized: Boy berildi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405248
+    m_Localized: Logistika, km
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405249
+    m_Localized: "Bekor turi\u015F, soat"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405250
+    m_Localized: "Bozor ulu\u015Fi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405251
+    m_Localized: "Maqsadlar (muddat {0} oy, \xF6ti\u015F balli {1}):"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405252
+    m_Localized: "bar\xE7a mahsulotlar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405253
+    m_Localized: "Top\u015Firiqni bo\u015Fla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405254
+    m_Localized: 'Joriy ball: 100 dan {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405255
+    m_Localized: "Top\u015Firiq bajarildi!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405256
+    m_Localized: "Top\u015Firiq bajarilmadi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405257
+    m_Localized: "Ball {0} (\xF6ti\u015F balli {1})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405258
+    m_Localized: "Sexda qoli\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405259
+    m_Localized: 'Qolgan oylar: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405260
+    m_Localized: "hozir {0} \u2192 {1} ball"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405261
+    m_Localized: "Ball {0} dan past b\xF6lmasa, top\u015Firiq bajarilgan hisoblanadi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405262
+    m_Localized: "Kamida {0} dona i\u015Flab \xE7iqari\u015F ({1})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405263
+    m_Localized: "Nuqson {0}% dan o\u015Fmasin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405264
+    m_Localized: "Sexdagi yuklar y\xF6lini {0}% ga qisqartiri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405265
+    m_Localized: "Ombor to\u015Fib ketmasin (to\u015Fgan kunlar: {0})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405266
+    m_Localized: "Qaytarilgan nuqsonli mahsulot {0} dan o\u015Fmasin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405267
+    m_Localized: "Buzili\u015F va TX tufayli bekor turi\u015F {0} soatdan o\u015Fmasin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405268
+    m_Localized: "Bozor ulu\u015Fi kamida {0}% ({1})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405269
+    m_Localized: "Federatsiya tenderida \u011Folib \xE7iqi\u015F va \u015Fartnomani \xF6z vaqtida yopi\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405270
+    m_Localized: "Birin\xE7i sex"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405271
+    m_Localized: "Sex quring va birin\xE7i doboklarni \xE7iqaring."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405272
+    m_Localized: "Sizda b\xF6\u015F sex va 80 mln s\xF6m bor. Bi\xE7i\u015F va tiki\u015F zonalarini b\xF6yang, dastgohlarni q\xF6ying, bi\xE7uv\xE7i, tikuv\xE7i va yordam\xE7i i\u015F\xE7ini i\u015Fga oling, paxta va ip buyurtma qiling, reja va narxni belgilang. Maqsad \u2014 ikki oyda ortiq\xE7a nuqsonsiz kamida 250 ta dobok \xE7iqari\u015F."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405273
+    m_Localized: "Maslahat: zonani si\xE7qon\xE7ani tortib \xE7izing, dastgohni \xF6z zonasi i\xE7iga y\xF6lakka qaratib q\xF6ying. \xABXodimlar\xBB ekranida \xABOperatorlarni joyla\u015F\xBB tugmasi bor."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405274
+    m_Localized: Logistika va ombor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405275
+    m_Localized: "Yuklar kamroq ta\u015Fili\u015Fi u\xE7un dastgohlarni k\xF6\xE7iring."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405276
+    m_Localized: "Sex i\u015Flayapti, lekin dastgohlar zonalarning uzoq \xE7etida turibdi va yordam\xE7i i\u015F\xE7ilar vaqtni y\xF6lga sarflaydi. Dastgohlarni omborga va bir-biriga yaqinroq k\xF6\xE7iring, javonlar, uzati\u015F tomoni va transport partiyasini sozlang. Maqsad \u2014 yuklar y\xF6lini 30% ga qisqartiri\u015F va i\u015Flab \xE7iqari\u015Fni y\xF6qotmasdan omborni to\u015Firmaslik."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405277
+    m_Localized: "Maslahat: \xABSex\xBB ekranida spagetti diagrammasini yoqing \u2014 qizil kataklar eng band y\xF6laklarni k\xF6rsatadi. \xABK\xF6\xE7iri\u015F\xBB asbobi tanlangan dastgohni k\xF6\xE7iradi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405278
+    m_Localized: Sifat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405279
+    m_Localized: "Nuqsonni kamaytiring va qaytari\u015Flarni y\xF6qoting."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405280
+    m_Localized: "Sex tejamkor yi\u011Filgan: sifat nazorati stoli va nazorat\xE7i y\xF6q, xaridorlar esa nuqsonli mahsulotni qaytarmoqda. Sifat nazorati stolini q\xF6ying, nazorat\xE7ini i\u015Fga oling, xoma\u015Fyo kiri\u015F nazoratini yoqing, topilgan nuqson bilan nima qili\u015Fni tanlang, odamlarni \xF6qiting. Maqsad \u2014 ikki oyda nuqson 2,5% dan o\u015Fmasligi va birorta ham qaytari\u015F b\xF6lmasligi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405281
+    m_Localized: "Maslahat: sifat nazorati nuqsonni sotuvdan oldin topadi, kiri\u015F nazorati esa yomon xoma\u015Fyoni sexga kirgizmaydi. \xC7ar\xE7agan va tajribasiz odamlar k\xF6proq xato qiladi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405282
+    m_Localized: Uskunalar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405283
+    m_Localized: "Dastgohlar eskirgan \u2014 ularning buzili\u015Figa y\xF6l q\xF6ymang."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405284
+    m_Localized: "Siz eski dastgohli sex sotib oldingiz: ularning holati taxminan 1%. Sozlov\xE7isiz rejali TX qilinmaydi, buzili\u015F esa dastgohni uzoq vaqtga t\xF6xtatadi. Sozlov\xE7ini i\u015Fga oling, TX reglamentini belgilang, pul yetsa IoT dat\xE7iklari va ba\u015Foratli TXni ulang. Bu top\u015Firiqda qolipla\u015F va dubul\u011Falar o\xE7iladi. Maqsad \u2014 u\xE7 oyda buzili\u015F va TX tufayli bekor turi\u015F 2 soatdan o\u015Fmasligi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933092405285
+    m_Localized: "Maslahat: bir-ikki smenada sozlov\xE7i TXni smenalar orasida, bekor turi\u015Fsiz qiladi. \xABHar 1 operatsiyada TX\xBB reglamenti dastgohni darhol TXga yuboradi \u2014 keyin odatiysini qaytaring."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793856
+    m_Localized: "Bozor va raqobat\xE7ilar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793857
+    m_Localized: "Daebo va Ab\u0131dasdan bozor ulu\u015Fini yutib oling."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793858
+    m_Localized: "Bozorga raqobat\xE7ilar \xE7iqdi: Daebo qimmat va sifatli, Ab\u0131das esa arzon sotadi. Xaridorlar narx, sifat va obr\xF6ga qarab tanlaydi. Narxlar va rejani bo\u015Fqaring, reklamaga sarmoya kiriting, turnirlarga homiylik qiling, ambassador bilan \u015Fartnoma imzolang. Maqsad \u2014 oxirgi oyda bozor ulu\u015Fi kamida 33%."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793859
+    m_Localized: "Maslahat: mahsulot yetmasa, sotuv raqobat\xE7ilarga ketadi. \xABSotuv\xBB ekranida boy berilgan sotuvlarni kuzating."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793860
+    m_Localized: "\u015Eartnomalar va \xF6si\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793861
+    m_Localized: "Federatsiya tenderida \u011Folib \xE7iqing va \u015Fartnomani \xF6z vaqtida bajaring."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793862
+    m_Localized: "Mintaqaviy taekvondo federatsiyasi ikki oyda yetkazib beri\u015F \u015Farti bilan 200 ta dobokka tender e\u02BClon qildi. Birin\xE7i oyda ariza bering, i\u015Flab \xE7iqari\u015Fni o\u015Firing, kerak b\xF6lsa kredit oling, mahsulotni sertifikatlang, raqamla\u015Ftiri\u015F modullarini joriy eting. Maqsad \u2014 \u015Fartnomani ke\xE7iktirmasdan yopi\u015F."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793863
+    m_Localized: "Maslahat: arizalar oy oxiriga\xE7a qabul qilinadi, eng yuqori ball \u011Folib b\xF6ladi \u2014 narx, obr\xF6, sifat tarixi. \u015Eartnoma b\xF6yi\xE7a yetkazib beri\u015Flar \xE7akana savdodan oldin ketadi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793864
+    m_Localized: "U\xE7 yil yakunlari"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793865
+    m_Localized: "Kapitalizatsiya b\xF6yi\xE7a reyting. \xD6yinni muddatsiz davom ettiri\u015F mumkin."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793866
+    m_Localized: "Kompaniya bankrot b\xF6ldi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793867
+    m_Localized: bankrot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793868
+    m_Localized: "Davom ettiri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793869
+    m_Localized: 'Hisobot: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793870
+    m_Localized: Asosiy raqamlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793871
+    m_Localized: Qarorlarga
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793872
+    m_Localized: "Slotga saqla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793873
+    m_Localized: '{0}-slot'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793874
+    m_Localized: "Avtosaqla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793875
+    m_Localized: "b\xF6\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793876
+    m_Localized: "Saqla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793877
+    m_Localized: "Yukla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793878
+    m_Localized: "\xD6\xE7iri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793879
+    m_Localized: "\xD6yin saqlandi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793880
+    m_Localized: "{0}, {1}-oy, kapitalizatsiya {2} \xB7 {3}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793881
+    m_Localized: "Avtosaqla\u015F \u2014 har oy oxirida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793882
+    m_Localized: "\xD6yin yuklanmoqda"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793883
+    m_Localized: 'Qarorlar takrorlanmoqda: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793884
+    m_Localized: "Yuklab b\xF6lmadi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793885
+    m_Localized: "\xD6yin ma\u02BClumotlari \xF6zgardi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793886
+    m_Localized: "Saqla\u015F bo\u015Fqa balans bilan qilingan, \xF6yin avvalgidan bo\u015Fqa\xE7a keti\u015Fi mumkin. Baribir yuklansinmi?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793887
+    m_Localized: "Raqamla\u015Ftiri\u015Fning turli modullari bilan \xF6\u015Fa fabrika, grafikasiz. Samara \u2014 \xF6\u015Fa seedlarda baza bilan foyda farqi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793888
+    m_Localized: Seed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793889
+    m_Localized: Oylar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793890
+    m_Localized: "I\u015Fga tu\u015Firi\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793891
+    m_Localized: "Hisoblanmoqda: {0} ta progon\u2026 Bir ne\xE7a daqiqa oladi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793892
+    m_Localized: "Tayyor. Excel u\xE7un jadvallar: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933100793893
+    m_Localized: Ssenariy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376768
+    m_Localized: "Foyda \xF6si\u015Fi, mln/oy"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376769
+    m_Localized: "{0} \xB1 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376770
+    m_Localized: ROI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376771
+    m_Localized: "Qoplani\u015F, oy"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376772
+    m_Localized: NPV
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376773
+    m_Localized: A. Modulsiz baza
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376774
+    m_Localized: "B. IoT + ba\u015Foratli TX"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376775
+    m_Localized: "C0. Yomon joyla\u015Fuv"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376776
+    m_Localized: C. Raqamli egizak (C0 ga nisbatan)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376777
+    m_Localized: "D. SI-bi\xE7i\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376778
+    m_Localized: E. SI sifat nazorati
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376779
+    m_Localized: F. Talab prognozi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376780
+    m_Localized: "G. SI narx belgila\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376781
+    m_Localized: "H. Bar\xE7a modullar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376782
+    m_Localized: "I. Bar\xE7a modullar + davlat dasturi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376783
+    m_Localized: 'Bozorda voqea: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376784
+    m_Localized: "EVA k\xF6pik {1} oyga {0} ga qimmatla\u015Fdi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376785
+    m_Localized: "Paxta {1} oyga {0} ga qimmatla\u015Fdi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376786
+    m_Localized: "Yetkazib beruv\xE7ilarda fors-major: yetkazib beri\u015Flar tez-tez buzilmoqda ({1} oy)."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376787
+    m_Localized: "Bozorga yomon xoma\u015Fyo partiyasi tu\u015Fdi \u2014 yetkazib beri\u015Flarni tek\u015Firing."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376788
+    m_Localized: 'Valyuta zarbasi: import {1} oyga {0} ga qimmatroq.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376789
+    m_Localized: "\xABRaqamli \xD6zbekiston\xBB davlat dasturi: raqamli modullarni joriy eti\u015F narxining {0} i qoplanadi ({1} oy)."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376790
+    m_Localized: "Elektr \xE7eklovlari: dastgohlar {0} kamroq i\u015Flaydi ({1} oy)."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376791
+    m_Localized: "Gripp epidemiyasi: odamlar kasal, dastgohlar {0} kamroq i\u015Flaydi ({1} oy)."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376792
+    m_Localized: "Sport yuksali\u015Fi: ekipirovkaga talab {1} oyga {0} ga \xF6sdi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376793
+    m_Localized: "Tender ({0}): {1}, {2} dona, donasi {3} dan o\u015Fmasin."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376794
+    m_Localized: "Tender \u011Folibi ({1}, {2}) \u2014 {0}: donasi {3}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376795
+    m_Localized: "{0} {1} narxini {2}% ga tu\u015Firdi: {3}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376796
+    m_Localized: "{0} {1} narxini {2}% ga o\u015Firdi: {3}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376797
+    m_Localized: "{0} sexni kengaytirmoqda: yangi dastgoh \u2014 {1}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376798
+    m_Localized: '{0} reklamaga oyiga {1} sarflamoqda.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376799
+    m_Localized: "{0} ambassador bilan \u015Fartnoma imzoladi: {1}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376800
+    m_Localized: "omborda mahsulot yi\u011Filib qoldi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376801
+    m_Localized: "raqobat\xE7ilar arzonroq sotmoqda"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376802
+    m_Localized: talab kutilganidan past
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376803
+    m_Localized: xaridorlarga mahsulot yetmadi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376804
+    m_Localized: "raqobat\xE7ilar qimmatroq sotmoqda"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376805
+    m_Localized: "xarajatlar \xF6sdi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376806
+    m_Localized: "operatorlar y\xF6q"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376807
+    m_Localized: "xoma\u015Fyo va yarim tayyor mahsulot y\xF6q"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376808
+    m_Localized: "buzili\u015Flar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376809
+    m_Localized: TX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376810
+    m_Localized: "Bu oy u\xE7un hisobot y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933113376811
+    m_Localized: "Oylik tu\u015Fum \u2014 {0}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348288
+    m_Localized: "Oylik tu\u015Fum \u2014 {0} (\xF6tgan oyga nisbatan {1})."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348289
+    m_Localized: "Sof foyda \u2014 {0}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348290
+    m_Localized: "Zarar \u2014 {0}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348291
+    m_Localized: "{0} ta yaroqli mahsulot \xE7iqarildi, nuqson {1}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348292
+    m_Localized: "Eng yax\u015Fi sotilgan mahsulot \u2014 {0}: {1} dona."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348293
+    m_Localized: "{0} ta sotuv boy berildi \u2014 mahsulot yetmadi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348294
+    m_Localized: "Eng k\xF6p bekor turi\u015F \u2014 {0}: {1} soat."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348295
+    m_Localized: 'Yutilgan tenderlar: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348296
+    m_Localized: Xaridorlar {0} ta nuqsonli mahsulotni qaytardi.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348297
+    m_Localized: Hisobda {0}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348298
+    m_Localized: "\xAB{0}\xBB mahsuloti y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348299
+    m_Localized: "Pul yetmaydi: {0:N0} s\xF6m kerak, hisobda {1:N0}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348300
+    m_Localized: "Paket b\xF6\u015F."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348301
+    m_Localized: "Narx noldan katta b\xF6li\u015Fi kerak."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348302
+    m_Localized: "Reja manfiy b\xF6li\u015Fi mumkin emas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348303
+    m_Localized: "\xAB{0}\xBB mahsuloti hali o\xE7ilmagan."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348304
+    m_Localized: "I\u015F grafigi berilmagan."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348305
+    m_Localized: "\xAB{0}\xBB yetkazib beruv\xE7isi y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348306
+    m_Localized: "\xAB{0}\xBB u\xE7un eng kam partiya \u2014 {1}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348307
+    m_Localized: "Kredit summasi noldan katta b\xF6li\u015Fi kerak."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348308
+    m_Localized: "Kredit muddati \u2014 1 dan {0} oyga\xE7a."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348309
+    m_Localized: "Bank ortiq bermaydi: qarz \xE7egarasi {0:N0} s\xF6m."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348310
+    m_Localized: "Bu modul i\u015Flamayapti."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933134348311
+    m_Localized: "SI narx belgila\u015F moduli y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736896
+    m_Localized: "\xAB{0}\xBB dastgohi y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736897
+    m_Localized: "\u2116{0} obyekt y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736898
+    m_Localized: "\u2116{0} dastgoh y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736899
+    m_Localized: "Bo\u015Fqa q\xF6\u015Fim\xE7a bino ijaraga olib b\xF6lmaydi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736900
+    m_Localized: "T\xF6rtbur\xE7ak sex devoridan \xE7iqib ketadi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736901
+    m_Localized: "Reklama byudjeti manfiy b\xF6li\u015Fi mumkin emas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736902
+    m_Localized: "\xAB{0}\xBB kompaniya ambassadori emas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736903
+    m_Localized: "\u2116{0} nomzod endi bozorda y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736904
+    m_Localized: "\u2116{0} nomzodni bo\u015Fqa kompaniya i\u015Fga olmoqda."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736905
+    m_Localized: "\u2116{0} xodim y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736906
+    m_Localized: "Smena \u2014 0, 1 yoki 2."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736907
+    m_Localized: "Bu kasb egasi dastgohda i\u015Flamaydi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736908
+    m_Localized: "I\u015F haqi noldan katta b\xF6li\u015Fi kerak."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736909
+    m_Localized: "Q\xF6\u015Fim\xE7a i\u015F \u2014 0 dan {0} soatga\xE7a."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736910
+    m_Localized: "Transport partiyasi \u2014 1 dan {0} ga\xE7a."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933142736911
+    m_Localized: "TX orali\u011Fi kamida bir operatsiya."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125504
+    m_Localized: "Bu kampaniyaning keyingi top\u015Firiqlarida o\xE7iladi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125505
+    m_Localized: "Kompaniya bankrot b\xF6ldi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125506
+    m_Localized: "\u2116{0} tender ariza qabul qilmaydi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125507
+    m_Localized: "Ariza narxi noldan katta b\xF6li\u015Fi kerak."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125508
+    m_Localized: "Narx \xE7egaradan yuqori: birligiga {0:N0} s\xF6mdan o\u015Fmasin."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125509
+    m_Localized: "Kamida {0:0} obr\xF6 kerak, kompaniyada {1:0}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125510
+    m_Localized: "\xAB{0}\xBB u\xE7un sertifikat kerak."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125511
+    m_Localized: "\u2116{0} turnir e\u02BClon qilinmagan yoki allaqa\xE7on \xF6tgan."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125512
+    m_Localized: "Kompaniya bu turnirga allaqa\xE7on homiylik qilmoqda."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125513
+    m_Localized: "\xAB{0}\xBB sport\xE7isi y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125514
+    m_Localized: "Sport\xE7ining allaqa\xE7on \u015Fartnomasi bor."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125515
+    m_Localized: "Bu mahsulot u\xE7un sertifikat allaqa\xE7on bor yoki tek\u015Firuv davom etmoqda."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125516
+    m_Localized: "{0} moduli y\xF6q."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125517
+    m_Localized: "Modul allaqa\xE7on i\u015Flayapti."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125518
+    m_Localized: Avval {0} moduli kerak.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125519
+    m_Localized: "Obyekt sex devoridan \xE7iqib ketadi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933151125520
+    m_Localized: "Obyektni y\xF6lakka q\xF6yib b\xF6lmaydi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319808
+    m_Localized: "Joy bo\u015Fqa obyekt bilan band."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319809
+    m_Localized: "Obyekt \xF6z zonasida emas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319810
+    m_Localized: "Tanla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319811
+    m_Localized: Zona
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319812
+    m_Localized: "Y\xF6lak"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319813
+    m_Localized: "Y\xF6lakni olib ta\u015Fla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319814
+    m_Localized: Dastgoh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319815
+    m_Localized: Javon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319816
+    m_Localized: Sifat nazorati stoli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319817
+    m_Localized: "K\xF6\xE7iri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319818
+    m_Localized: Zonasiz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319819
+    m_Localized: "Bi\xE7i\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319820
+    m_Localized: "Tiki\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319821
+    m_Localized: "Qolipla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319822
+    m_Localized: "Elektronika yi\u011Fi\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319823
+    m_Localized: "Xoma\u015Fyo ombori"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319824
+    m_Localized: Tayyor mahsulot ombori
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319825
+    m_Localized: "Darvoza yonida tu\u015Firi\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319826
+    m_Localized: Sifat nazorati
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319827
+    m_Localized: Ofis
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933155319828
+    m_Localized: yuqoriga
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708416
+    m_Localized: pastga
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708417
+    m_Localized: "\xE7apga"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708418
+    m_Localized: "\xF6ngga"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708419
+    m_Localized: Dastgoh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708420
+    m_Localized: Javon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708421
+    m_Localized: Sifat nazorati stoli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708422
+    m_Localized: Menejer stoli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708423
+    m_Localized: oldidan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708424
+    m_Localized: orqadan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933163708425
+    m_Localized: "Utilizatsiya qili\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902720
+    m_Localized: "Omborda saqla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902721
+    m_Localized: "Tiki\u015Fga qaytari\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902722
+    m_Localized: "Arzonla\u015Ftirib soti\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902723
+    m_Localized: "y\xF6q"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902724
+    m_Localized: "du\u015Fanba kunlari"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902725
+    m_Localized: "du\u015Fanba va \xE7or\u015Fanba"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902726
+    m_Localized: "har i\u015F kuni"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902727
+    m_Localized: mahalliy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902728
+    m_Localized: import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902729
+    m_Localized: mahalliy va import
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902730
+    m_Localized: maktablar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902731
+    m_Localized: klublar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902732
+    m_Localized: mintaqaviy federatsiya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902733
+    m_Localized: milliy federatsiya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902734
+    m_Localized: bajarilmoqda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902735
+    m_Localized: bajarildi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902736
+    m_Localized: bekor qilindi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902737
+    m_Localized: "\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933167902738
+    m_Localized: mintaqaviy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097024
+    m_Localized: milliy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097025
+    m_Localized: jahon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097026
+    m_Localized: WT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097027
+    m_Localized: ITF
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097028
+    m_Localized: WAKO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097029
+    m_Localized: "\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097030
+    m_Localized: "IoT dat\xE7iklari"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097031
+    m_Localized: "Ba\u015Foratli TX"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097032
+    m_Localized: Raqamli egizak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097033
+    m_Localized: "SI-bi\xE7i\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097034
+    m_Localized: SI sifat nazorati
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097035
+    m_Localized: Talab prognozi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097036
+    m_Localized: "SI narx belgila\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097037
+    m_Localized: Sizning fabrikangiz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097038
+    m_Localized: Daebo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097039
+    m_Localized: "Ab\u0131das"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097040
+    m_Localized: dobok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097041
+    m_Localized: "dubul\u011Fa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933172097042
+    m_Localized: xogu (tana himoyasi)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291328
+    m_Localized: boldir va bilak himoyalari
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291329
+    m_Localized: elektron jilet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291330
+    m_Localized: paxta mato
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291331
+    m_Localized: poliester
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291332
+    m_Localized: "EVA k\xF6pik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291333
+    m_Localized: "PU k\xF6pik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291334
+    m_Localized: "eko \xE7arm"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291335
+    m_Localized: PVX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291336
+    m_Localized: "yopi\u015Fqoq lenta"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291337
+    m_Localized: rezina tasma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291338
+    m_Localized: mustahkam ip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291339
+    m_Localized: sensor moduli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291340
+    m_Localized: "pi\xE7oqli bi\xE7i\u015F stoli"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291341
+    m_Localized: "lentali bi\xE7i\u015F dastgohi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291342
+    m_Localized: "lazerli bi\xE7i\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291343
+    m_Localized: "t\xF6\u011Fri \xE7okli tikuv ma\u015Finasi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291344
+    m_Localized: overlok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291345
+    m_Localized: tikuv avtomati
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291346
+    m_Localized: "q\xF6l pressi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291347
+    m_Localized: termopress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291348
+    m_Localized: "vakuumli qolipla\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291349
+    m_Localized: elektronika montaj stoli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291350
+    m_Localized: "yordam\xE7i i\u015F\xE7i"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291351
+    m_Localized: "bi\xE7uv\xE7i"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291352
+    m_Localized: "tikuv\xE7i"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291353
+    m_Localized: "qoliplov\xE7i"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291354
+    m_Localized: "sozlov\xE7i"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291355
+    m_Localized: "sifat nazorat\xE7isi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291356
+    m_Localized: sotuv menejeri
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291357
+    m_Localized: "EVA k\xF6pikning qimmatla\u015Fuvi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291358
+    m_Localized: "paxtaning qimmatla\u015Fuvi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291359
+    m_Localized: "yetkazib beruv\xE7ilarda fors-major"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291360
+    m_Localized: "yomon xoma\u015Fyo partiyasi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291361
+    m_Localized: valyuta zarbasi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291362
+    m_Localized: "\xABRaqamli \xD6zbekiston\xBB davlat dasturi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291363
+    m_Localized: "elektr \xE7eklovlari"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291364
+    m_Localized: gripp epidemiyasi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291365
+    m_Localized: "sport yuksali\u015Fi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291366
+    m_Localized: "To\u015Fkent paxtasi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933176291367
+    m_Localized: "Far\u011Fona paxtasi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679936
+    m_Localized: Poliester (mahalliy)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679937
+    m_Localized: Poliester (import)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679938
+    m_Localized: EVA-import A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679939
+    m_Localized: EVA-import B
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679940
+    m_Localized: PU-import A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679941
+    m_Localized: PU-import B
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679942
+    m_Localized: "Eko \xE7arm (mahalliy)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679943
+    m_Localized: "Eko \xE7arm (import)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679944
+    m_Localized: PVX (mahalliy)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679945
+    m_Localized: PVX (import)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679946
+    m_Localized: "Yopi\u015Fqoq lenta (import)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679947
+    m_Localized: "Yopi\u015Fqoq lenta (vosita\xE7i)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679948
+    m_Localized: Rezina tasma (mahalliy)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679949
+    m_Localized: Rezina tasma (import)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679950
+    m_Localized: Ip (mahalliy)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679951
+    m_Localized: Ip (import)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679952
+    m_Localized: "Dat\xE7iklar, import A"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679953
+    m_Localized: "Dat\xE7iklar, import B"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933184679954
+    m_Localized: Diyor Rahimov
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068544
+    m_Localized: Malika Yusupova
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068545
+    m_Localized: Sardor Qodirov
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068546
+    m_Localized: Nigora Aliyeva
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068547
+    m_Localized: Bekzod Tursunov
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068548
+    m_Localized: Zarina Hamidova
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068549
+    m_Localized: Javohir Nazarov
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330933193068550
+    m_Localized: Kamola Saidova
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

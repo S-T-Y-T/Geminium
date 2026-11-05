@@ -85,11 +85,11 @@ namespace Geminium.Core.Factory
             for (int cx = x; cx < x + w; cx++)
             for (int cy = y; cy < y + h; cy++)
             {
-                if (!InBounds(cx, cy)) return "Объект выходит за стены цеха.";
+                if (!InBounds(cx, cy)) return CoreText.T("err.object_outside", "Объект выходит за стены цеха.");
                 int i = Index(cx, cy);
-                if (aisles[i]) return "Объект нельзя ставить на проход.";
-                if (occupants[i] >= 0 && occupants[i] != ignoreObjectId) return "Место занято другим объектом.";
-                if (!zoneAllowed(zones[i])) return "Объект стоит не в своей зоне.";
+                if (aisles[i]) return CoreText.T("err.object_on_aisle", "Объект нельзя ставить на проход.");
+                if (occupants[i] >= 0 && occupants[i] != ignoreObjectId) return CoreText.T("err.cell_taken", "Место занято другим объектом.");
+                if (!zoneAllowed(zones[i])) return CoreText.T("err.wrong_zone", "Объект стоит не в своей зоне.");
             }
             return null;
         }

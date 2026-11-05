@@ -31,7 +31,7 @@ namespace Geminium.Core.Companies
         public DisableDigitalModuleCommand(DigitalModule module) { Module = module; }
 
         public override string Validate(Company company, GameWorld world) =>
-            company.Digital.Has(Module) ? null : "Этот модуль не работает.";
+            company.Digital.Has(Module) ? null : CoreText.T("err.module_inactive", "Этот модуль не работает.");
 
         internal override void Apply(Company company, GameWorld world) => world.Digital.Disable(company, Module);
     }
@@ -44,7 +44,7 @@ namespace Geminium.Core.Companies
         public SetAutoPricingCommand(bool enabled) { Enabled = enabled; }
 
         public override string Validate(Company company, GameWorld world) =>
-            company.Digital.Find(DigitalModule.AiPricing) == null ? "Нет модуля ИИ-ценообразования." : null;
+            company.Digital.Find(DigitalModule.AiPricing) == null ? CoreText.T("err.no_ai_pricing", "Нет модуля ИИ-ценообразования.") : null;
 
         internal override void Apply(Company company, GameWorld world) => company.Digital.AutoPricing = Enabled;
     }
